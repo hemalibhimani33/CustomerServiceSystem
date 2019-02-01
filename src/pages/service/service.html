@@ -1,0 +1,92 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Service</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!--<ion-content class="service-content" padding>
+  <div class="service-box">
+
+    <form>
+        <button ion-button block>ORDER SERVICE</button>
+        <button ion-button block>VIEW SERVICE</button>
+
+    </form>
+  </div>
+</ion-content>
+-->
+<ion-content class="service-content" padding>
+  <div padding>
+    <ion-segment [(ngModel)]="service">
+      <ion-segment-button value="orderservice">
+        Order Service
+      </ion-segment-button>
+      <ion-segment-button value="viewservice">
+        View Service
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+   <div [ngSwitch]="service">
+      <ion-card>
+
+          <ion-list *ngSwitchCase="'viewservice'">
+
+          <button ion-item (click)="create()" full>
+            <ion-icon name="cart" item-start></ion-icon>
+            Shopping
+          </button>
+
+          <button ion-item >
+            <ion-icon name="medical" item-start></ion-icon>
+            Hospital
+          </button>
+
+          <button ion-item>
+            <ion-icon name="cafe" item-start></ion-icon>
+            Cafe
+          </button>
+
+          <button ion-item>
+            <ion-icon name="paw" item-start></ion-icon>
+            Dog Park
+          </button>
+
+          <button ion-item>
+            <ion-icon name="planet" item-start></ion-icon>
+            Space
+          </button>
+
+      </ion-list>
+    </ion-card>
+  </div>
+
+     <!-- <ion-list *ngSwitchCase="'kittens'">
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="img/thumbnail-kitten-1.jpg">
+          </ion-thumbnail>
+          <h2>Luna</h2>
+        </ion-item>
+        ...
+      </ion-list>
+    </div> -->
+     <div [ngSwitch]="service">
+     <ion-card>
+      <ion-list *ngSwitchCase="'orderservice'">
+        <ion-item *ngFor="let person of people">
+            <button ion-item>
+                <ion-avatar item-left>
+                <img src="{{person.image}}">
+                </ion-avatar>
+                 <h1>{{person.service_name}}</h1>
+            </button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+     </div>
+</ion-content>
+
+
