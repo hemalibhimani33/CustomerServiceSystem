@@ -47,23 +47,29 @@ export class RestProvider {
          };
 
          debugger;
-    return this.http.post('192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
+    return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
 
              .subscribe(data => {
                        console.log(data['_body']);
+                      // console.log(data);
+                        // if(responseCode=200){
+                        //     // this.nav.push('ServicePage');
+                        // }else{
+                        //     //unsuccessfull login
+                        // }
                       }, error => {
                       console.log(error);// Error getting the data
                      });
   }
 
-  ValidateUser(email,password):Observable<any>{
-    let loginParameter=new HttpParams()
-                .set('email',email)
-                .set('password',password)
-    return this.httpClient.get<any>("/api/User/Signin/",{
-          params:loginParameter
-      });
-  }
+  // ValidateUser(email,password):Observable<any>{
+  //   let loginParameter=new HttpParams()
+  //               .set('email',email)
+  //               .set('password',password)
+  //   return this.httpClient.get<any>("/api/User/Signin/",{
+  //         params:loginParameter
+  //     });
+  // }
 
 
   RegisterUser(username,email,password,number){
@@ -108,6 +114,10 @@ export class RestProvider {
     debugger;
     var headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+     headers.append('Access-Control-Allow-Origin' , '*');
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers.append('Accept','application/json');
+    headers.append('content-type','application/json');
      if (this.data) {
         return Promise.resolve(this.data);
       }

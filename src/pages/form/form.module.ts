@@ -7,6 +7,12 @@ import { HttpClient } from '@angular/common/http';
   declarations: [
     FormPage,
   ],
+  exports: [
+    FormPage,
+  ],
+  entryComponents: [
+    FormPage,
+],
   imports: [
     IonicPageModule.forChild(FormPage),
   ],

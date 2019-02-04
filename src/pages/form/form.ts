@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController, IonicPage } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
@@ -10,31 +10,22 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class FormPage {
   debugger;
-  character;
+  name:any;
 
-  // constructor( public platform: Platform,
-  //   public params: NavParams,
-  //   public viewCtrl: ViewController
-  // ) {
-  //   var characters = [
-  //     {
-  //       name: 'Gollum',
-  //     },
-  //     {
-  //       name: 'Frodo',
-  //     },
-  //     {
-  //       name: 'Samwise Gamgee',
-  //     }
-  //   ];
-  //   this.character = characters[this.params.get('charNum')];
-  // }
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+    debugger;
+    // console.log('Navigation Parameter : '+navParams);
+    // this.name = navParams.get('name');
+  }
 
 public event = {
     month: '1990-02-19',
     timeStarts: '07:43',
     timeEnds: '1990-02-20'
   }
-
+  ionViewDidLoad() {
+  }
 
 }

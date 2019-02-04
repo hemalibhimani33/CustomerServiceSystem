@@ -14,7 +14,7 @@ import { FormPage } from '../../pages/form/form';
 
 
 export class ServicePage {
-  public postList: any;
+
   public people: any;
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public  restProvider: RestProvider , public modalCtrl: ModalController
@@ -33,24 +33,20 @@ export class ServicePage {
     });
   }
 
-//   getPosts(){
-//     this.restProvider.getPost().subscribe((data) => {
-//         this.postList = data;
-//     });
-// }
 
 
-   public create() {
+   public create(vname) {
      debugger;
-    this.nav.push('FormPage');
+     vname = vname || 'No Name Found';
+    this.nav.push(FormPage,{name:vname});
   }
 
 
-  openModal(characterNum) {
+  // openModal(characterNum) {
 
-    let modal = this.modalCtrl.create(FormPage , characterNum);
-    modal.present();
-  }
+  //   let modal = this.modalCtrl.create(FormPage , characterNum);
+  //   modal.present();
+  // }
 
 }
 

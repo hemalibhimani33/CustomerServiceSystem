@@ -50,7 +50,7 @@ constructor(public nav: NavController , private auth: AuthService, private alert
     p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
     //password_ctrl: this.formBuilder.group({
      p_number: ['', Validators.compose([Validators.required])],
-      p_password: ['', Validators.compose([Validators.required])],
+      p_password: ['', [Validators.required, Validators.minLength(6)]],
       p_confirm_password: ['', Validators.compose([Validators.required])]
     //}, this.matchPassword)
 

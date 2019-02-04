@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { FormPage } from '../pages/form/form';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { RestProvider } from '../providers/rest/rest';
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

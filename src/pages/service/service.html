@@ -34,7 +34,7 @@
 
           <ion-list *ngSwitchCase="'viewservice'">
 
-          <button ion-item (click)="create()" full>
+          <button ion-item >
             <ion-icon name="cart" item-start></ion-icon>
             Shopping
           </button>
@@ -77,11 +77,11 @@
      <ion-card>
       <ion-list *ngSwitchCase="'orderservice'">
         <ion-item *ngFor="let person of people">
-            <button ion-item>
+            <button ion-item (click)="create(person.service_name)" full>
                 <ion-avatar item-left>
                 <img src="{{person.image}}">
                 </ion-avatar>
-                 <h1>{{person.service_name}}</h1>
+                 <h1 >{{person.service_name}}</h1>
             </button>
         </ion-item>
       </ion-list>
