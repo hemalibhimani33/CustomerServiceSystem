@@ -11,5 +11,6 @@ import { FormPage } from '../form/form';
   imports: [
     IonicPageModule.forChild(ServicePage),
   ],
+
 })
 export class ServicePageModule {}

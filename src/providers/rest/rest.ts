@@ -1,11 +1,11 @@
 import * as CryptoJS from 'crypto-js';
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { NavController, AlertController, IonicPage } from 'ionic-angular';
+import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
 //import { environment } from '../../../environments/environment';
 //import { CryptoJS } from 'crypto-js';
-import {map} from 'rxjs/operators'
+//import {map} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 //import { Common } from '../../shared/common';
 import { RegisterPage } from '../../pages/register/register';
@@ -29,7 +29,7 @@ const options = {
 
 export class RestProvider {
    data: Observable<any>;
-  constructor( public httpClient:HttpClient, public http: HttpClient) {
+  constructor(public httpClient:HttpClient, public http: HttpClient) {
 
    }
 
@@ -39,7 +39,11 @@ export class RestProvider {
   LoginUser(email,password){
 
     var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin' , '*');
+   headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+   headers.append('Accept','application/json');
+   headers.append('content-type','application/json');
 
         var newUser =	{
            "email":email ,
@@ -48,18 +52,38 @@ export class RestProvider {
 
          debugger;
     return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
+    .subscribe(HttpErrorResponse => {
+      debugger;
+      //console.log(data['_body']);
+      //var response = JSON.parse(data['_body']);
+                            if(HttpErrorResponse === 500){
+                              debugger;
+                              // this.nav.push('LoginPage');
+                            }else{
+                              debugger;
+                              //this.nav.push('ServicePage');
+                            }
+     }, error => {
+     console.log(error);// Error getting the data
+    });
+    // .subscribe(data => {
+    //                     debugger;
+    //                    console.log(data['_body']);
 
-             .subscribe(data => {
-                       console.log(data['_body']);
-                      // console.log(data);
-                        // if(responseCode=200){
-                        //     // this.nav.push('ServicePage');
-                        // }else{
-                        //     //unsuccessfull login
-                        // }
-                      }, error => {
-                      console.log(error);// Error getting the data
-                     });
+    //                     //var response = JSON.parse(data['_body']);
+    //                     //console.log(response)
+    //                   // console.log(data);
+    //                     // if(response.status === 500){
+    //                     //    this.nav.push('LoginPage');
+    //                     // }else{
+    //                     //   this.nav.push('ServicePage');
+    //                     // }
+    //                    }, error => {
+    //                   console.log(error);// Error getting the data
+    //                  });
+
+
+
   }
 
   // ValidateUser(email,password):Observable<any>{
@@ -98,20 +122,11 @@ export class RestProvider {
                               console.log(error);// Error getting the data
                              });
       }
-      private extractData(res: Response) {
-        debugger;
-        let body = res.json();
-              return body || {};
-          }
-    private handleErrorObservable (error: Response | any) {
-            debugger;
-        console.error(error.message || error);
-        return Observable.throw(error.message || error);
-          }
+
 
 
   load() {
-    debugger;
+    //debugger;
     var headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
      headers.append('Access-Control-Allow-Origin' , '*');
@@ -122,7 +137,7 @@ export class RestProvider {
         return Promise.resolve(this.data);
       }
       return new Promise(resolve => {
-        debugger;
+        //debugger;
       this.httpClient.get('http://192.168.32.56:1337/service/index')
         .map((res:Response) => res)
         .subscribe(data => {
@@ -131,6 +146,16 @@ export class RestProvider {
            });
     });
   }
+  private extractData(res: Response) {
+    debugger;
+    let body = res.json();
+          return body || {};
+      }
+private handleErrorObservable (error: Response | any) {
+        debugger;
+    console.error(error.message || error);
+    return Observable.throw(error.message || error);
+      }
 
   //getApiUrl : string = "https://192.168.32.56:1337/service/index";
 

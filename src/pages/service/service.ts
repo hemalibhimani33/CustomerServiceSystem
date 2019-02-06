@@ -5,11 +5,13 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 import { FormPage } from '../../pages/form/form';
+
+
 @IonicPage()
 @Component({
   selector: 'page-service',
   templateUrl: 'service.html',
-  providers: [ RestProvider ]
+  providers: [ RestProvider, ]
 })
 
 
@@ -17,18 +19,18 @@ export class ServicePage {
 
   public people: any;
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
-    , public formBuilder: FormBuilder , public  restProvider: RestProvider , public modalCtrl: ModalController
+    , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
    ) {
-     debugger;
+     //debugger;
     this.loadPeople();
     //this.getPosts();
    }
 
    loadPeople(){
-     debugger;
+     //debugger;
     this.restProvider.load()
     .then(data => {
-      debugger;
+      //debugger;
       this.people = data;
     });
   }
@@ -36,9 +38,9 @@ export class ServicePage {
 
 
    public create(vname) {
-     debugger;
-     vname = vname || 'No Name Found';
-    this.nav.push(FormPage,{name:vname});
+    // debugger;
+     //vname = vname || 'No Name Found';
+     this.nav.push('FormPage',{firstname: vname});
   }
 
 

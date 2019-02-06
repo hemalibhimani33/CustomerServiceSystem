@@ -9,7 +9,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
-import { FormPage } from '../pages/form/form';
+
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { FormPage } from '../pages/form/form';
   entryComponents: [
     MyApp
   ],
+
   providers: [
     StatusBar,
     SplashScreen,
@@ -34,5 +35,6 @@ import { FormPage } from '../pages/form/form';
     RestProvider,
 
   ]
+
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { ServicePage } from '../service/service';
 
 @IonicPage()
 @Component({
@@ -13,11 +14,11 @@ export class FormPage {
   name:any;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,public formBuilder: FormBuilder
   ) {
     debugger;
     // console.log('Navigation Parameter : '+navParams);
-    // this.name = navParams.get('name');
+     this.name = navParams.get('firstname');
   }
 
 public event = {
