@@ -3,6 +3,7 @@ import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
+
 //import { environment } from '../../../environments/environment';
 //import { CryptoJS } from 'crypto-js';
 //import {map} from 'rxjs/operators'
@@ -51,20 +52,33 @@ export class RestProvider {
          };
 
          debugger;
+        // return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser))
+        //  .map((res:Response) => res);
+        //  .subscribe(data => {
+        //   console.log(this.data);
+        //    debugger;
+        //     // resolve(data);
+        //     });
+
+
     return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
-    .subscribe(HttpErrorResponse => {
+    .map((res: Response) => res)
+    .subscribe(data => {
       debugger;
-      //console.log(data['_body']);
+      console.log(data['_body']);
+     //this.nav.push('ServicePage');
       //var response = JSON.parse(data['_body']);
-                            if(HttpErrorResponse === 500){
-                              debugger;
-                              // this.nav.push('LoginPage');
-                            }else{
-                              debugger;
-                              //this.nav.push('ServicePage');
-                            }
+                            // if(data === 500){
+                            //   debugger;
+                            //   // this.nav.push('LoginPage');
+                            // }else{
+                            //   debugger;
+                            //   //this.nav.push('ServicePage');
+                            // }
      }, error => {
+       debugger;
      console.log(error);// Error getting the data
+     //this.nav.push('LoginPage');
     });
     // .subscribe(data => {
     //                     debugger;
@@ -83,8 +97,9 @@ export class RestProvider {
     //                  });
 
 
-
   }
+
+
 
   // ValidateUser(email,password):Observable<any>{
   //   let loginParameter=new HttpParams()
@@ -122,9 +137,7 @@ export class RestProvider {
                               console.log(error);// Error getting the data
                              });
       }
-
-
-
+      
   load() {
     //debugger;
     var headers = new Headers();
