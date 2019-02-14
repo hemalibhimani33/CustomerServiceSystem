@@ -1,25 +1,36 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
 
-@IonicPage()
+import { FormPage } from '../../pages/form/form';
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AuthService } from '../../providers/auth-service/auth-service';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { RestProvider } from  './../../providers/rest/rest';
+import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  username = '';
-  email = '';
-  constructor(private nav: NavController, private auth: AuthService) {
-    debugger;
-    let info = this.auth.getUserInfo();
-    this.username = info['name'];
-    this.email = info['email'];
-  }
+  public people: any;
 
-  public logout() {
-    this.auth.logout().subscribe(succ => {
-      this.nav.setRoot('LoginPage')
-    });
+  constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+    , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
+    {
+    debugger;
+    this.loadPeople();
   }
+  loadPeople(){
+    debugger;
+   this.restProvider.load()
+   .then(data => {
+     debugger;
+     this.people = data;
+   });
+ }
+  public sub() {
+
+    this.nav.push(FormPage);
+ }
+
 }

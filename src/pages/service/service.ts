@@ -22,8 +22,7 @@ export class ServicePage {
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
    ) {
      //debugger;
-    this.loadPeople();
-    //this.getPosts();
+   // this.loadPeople();
    }
 
    loadPeople(){
@@ -34,21 +33,10 @@ export class ServicePage {
       this.people = data;
     });
   }
+ public create(vname) {
 
-
-
-   public create(vname) {
-    // debugger;
-     //vname = vname || 'No Name Found';
      this.nav.push('FormPage',{firstname: vname});
   }
-
-
-  // openModal(characterNum) {
-
-  //   let modal = this.modalCtrl.create(FormPage , characterNum);
-  //   modal.present();
-  // }
 
 }
 

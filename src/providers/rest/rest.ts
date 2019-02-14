@@ -137,9 +137,30 @@ export class RestProvider {
                               console.log(error);// Error getting the data
                              });
       }
-      
+      load2() {
+        debugger;
+        var headers = new Headers();
+         headers.append('Content-Type', 'application/x-www-form-urlencoded');
+         headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        headers.append('Accept','application/json');
+        headers.append('content-type','application/json');
+         if (this.data) {
+            return Promise.resolve(this.data);
+          }
+          return new Promise(resolve => {
+            debugger;
+          this.httpClient.get('http://192.168.32.56:1337/Servicecategory/category')
+            .map((res:Response) => res)
+            .subscribe(data => {
+              debugger;
+                resolve(data);
+               });
+        });
+      }
+
   load() {
-    //debugger;
+    debugger;
     var headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
      headers.append('Access-Control-Allow-Origin' , '*');
@@ -150,8 +171,8 @@ export class RestProvider {
         return Promise.resolve(this.data);
       }
       return new Promise(resolve => {
-        //debugger;
-      this.httpClient.get('http://192.168.32.56:1337/service/index')
+        debugger;
+      this.httpClient.get('http://192.168.32.56:1337/service/view')
         .map((res:Response) => res)
         .subscribe(data => {
           debugger;

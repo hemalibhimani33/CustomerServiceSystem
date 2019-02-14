@@ -1,17 +1,92 @@
 <ion-header>
-  <ion-navbar color="dark">
-    <ion-title>
-      Member Area
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar align-title="center">
+    <ion-title align="center" style="color:black;">Service</ion-title>
+
   </ion-navbar>
 </ion-header>
+<ion-content>
+<ion-grid>
+    <ion-list>
 
-<ion-content class="home" padding>
-  <h3>Welcome hemali, {{username}}!</h3>
-  Your Email is: {{email}}
+        <ion-item *ngFor="let person of people">
+            <button ion-item (click)="sub()" full>
+                <ion-avatar item-left>
+                <img src="{{person.image}}">
+                </ion-avatar>
+                 <h1>{{person.service}}</h1>
+            </button>
+        </ion-item>
+      </ion-list>
+    </ion-grid>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-item *ngFor="let person of people">
+        <button ion-item (click)="sub()" full>
+        <div>
+            <ion-avatar item-left>
+                <img src="{{person.image}}">
+                </ion-avatar>
+        </div>
+        <div align="center">
+            <h1>{{person.service}}</h1>
+        </div>
+      </button>
+    </ion-item>
+      </ion-col>
+      <ion-col size="2">
+          <button ion-item (click)="sub()" full>
+              <div>
+                  <img class="full-image" src="assets/imgs/fintech.jpg"/>
+              </div>
+              <div align="center">
+                  beautician
+              </div>
+            </button>
+      </ion-col>
+      <ion-col size="2">
+          <button ion-item (click)="sub()" full>
+              <div>
+                <img class="full-image" src="assets/imgs/fintech.jpg"/>
+              </div>
+              <div align="center">
+                beautician
+              </div>
+            </button>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+        <ion-col size="3">
+            <button ion-item (click)="sub()" full>
+            <div>
+              <img class="full-image" src="assets/imgs/fintech.jpg"/>
+            </div>
+            <div align="center">
+              beautician
+            </div>
+          </button>
+          </ion-col>
+          <ion-col size="2">
+              <button ion-item (click)="sub()" full>
+                  <div>
+                    <img class="full-image" src="assets/imgs/fintech.jpg"/>
+                  </div>
+                  <div align="center">
+                    beautician
+                  </div>
+                </button>
+            </ion-col>
+            <ion-col size="2">
+                <button ion-item (click)="sub()" full>
+                    <div>
+                      <img class="full-image" src="assets/imgs/fintech.jpg"/>
+                    </div>
+                    <div align="center">
+                      beautician
+                    </div>
+                  </button>
+            </ion-col>
+    </ion-row>
+  </ion-grid> -->
 </ion-content>

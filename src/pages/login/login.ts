@@ -3,6 +3,7 @@ import { AlertController, IonicPage, Loading, LoadingController, NavController} 
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
+import { TabsPage } from '../tab/tab';
 
 @IonicPage()
 @Component({
@@ -55,7 +56,7 @@ login(){
       //this.showPopup("Success", "login.");
       debugger;
       this.restProvider.LoginUser(this.MyForm.controls.p_email.value,this.MyForm.controls.p_password.value)
-
+debugger;
       this.nav.push('ServicePage');
       console.log(this.MyForm.value);
       console.log(this.formdata);

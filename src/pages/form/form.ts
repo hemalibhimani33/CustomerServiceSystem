@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+
+
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { ServicePage } from '../service/service';
+import { RestProvider } from  './../../providers/rest/rest';
+import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -10,22 +13,23 @@ import { ServicePage } from '../service/service';
   templateUrl: 'form.html',
 })
 export class FormPage {
-  debugger;
-  name:any;
-
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,public formBuilder: FormBuilder
+  //debugger;
+ // name:any;
+ public people2 : any;
+  constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+    , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
     debugger;
-    // console.log('Navigation Parameter : '+navParams);
-     this.name = navParams.get('firstname');
+    this.loadPeople2();
   }
-
-public event = {
-    month: '1990-02-19',
-    timeStarts: '07:43',
-    timeEnds: '1990-02-20'
-  }
+  loadPeople2(){
+    debugger;
+   this.restProvider.load2()
+   .then(data => {
+     debugger;
+     this.people2 = data;
+   });
+ }
   ionViewDidLoad() {
   }
 
