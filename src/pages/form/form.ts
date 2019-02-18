@@ -16,15 +16,18 @@ export class FormPage {
   //debugger;
  // name:any;
  public people2 : any;
+ public id: any = {};
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
+    debugger;
+    this.id = navParams.get('id');
     debugger;
     this.loadPeople2();
   }
   loadPeople2(){
     debugger;
-   this.restProvider.load2()
+   this.restProvider.load2(this.id)
    .then(data => {
      debugger;
      this.people2 = data;

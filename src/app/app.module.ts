@@ -75,7 +75,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    FormPage,
+    //FormPage,
     TabsPage
   ],
   imports: [
@@ -90,7 +90,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    FormPage,
+    //FormPage,
     TabsPage
   ],
   providers: [

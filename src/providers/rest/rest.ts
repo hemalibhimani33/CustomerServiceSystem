@@ -137,7 +137,7 @@ export class RestProvider {
                               console.log(error);// Error getting the data
                              });
       }
-      load2() {
+      load2(id) {
         debugger;
         var headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -145,12 +145,13 @@ export class RestProvider {
         headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
         headers.append('Accept','application/json');
         headers.append('content-type','application/json');
-         if (this.data) {
+
+                 if (this.data) {
             return Promise.resolve(this.data);
           }
           return new Promise(resolve => {
             debugger;
-          this.httpClient.get('http://192.168.32.56:1337/Servicecategory/category')
+          this.httpClient.get('http://192.168.32.56:1337/Servicecategory/subcategory/' + (id))
             .map((res:Response) => res)
             .subscribe(data => {
               debugger;
