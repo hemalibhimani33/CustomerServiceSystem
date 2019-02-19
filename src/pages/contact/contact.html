@@ -1,17 +1,43 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Contact
+  <ion-navbar align-title="center">
+    <ion-title align="center" style="color:black; ">
+    Profile
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <div>
+    <ion-list>
+        <button ion-item (click)="signup()" full>
+            <h6 >Sign UP</h6>
+          </button>
+          <button ion-item>
+              <h6 >About APP</h6>
+            </button>
+            <button ion-item>
+                <h6 >Login</h6>
+              </button>
+     </ion-list>
+    </div>
 </ion-content>
+
+
+
+  <!-- <ion-grid>
+      <ion-list>
+
+          <ion-item *ngFor="let person of people">
+              <button ion-item (click)="sub(person.id)" full id={{person.id}}>
+                  <ion-avatar item-left>
+                  <img src="{{person.image}}">
+                  </ion-avatar>
+                   <h1 >{{person.service}}</h1>
+              </button>
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+      <ion-grid>
+    <ion-row *ngFor="let row of grid">
+    </ion-row>
+  </ion-grid> -->

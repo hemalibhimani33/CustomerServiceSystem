@@ -7,20 +7,24 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
   public people: any;
-
-  //images: Array<string>;
+  galleryType = 'regular';
+  image: Array<string>;
   grid: Array<Array<string>>;
 
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
     debugger;
+    //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
+    //this.ionViewLoaded();
+   // this.ionViewLoaded();
     this.loadPeople();
   }
   loadPeople(){
@@ -39,25 +43,25 @@ debugger;
 //   debugger;
 //       this.nav.push(FormPage);
 //    }
-// ionViewLoaded() {
+ionViewLoaded() {
+debugger;
+  let rowNum = 0; //counter to iterate over the rows in the grid
 
-//   let rowNum = 0; //counter to iterate over the rows in the grid
+  for (let i = 0; i < 5; i+=2) { //iterate images
 
-//   for (let i = 0; i < this.images.length; i+=2) { //iterate images
+    this.grid[rowNum] = Array(2); //declare two elements per row
 
-//     this.grid[rowNum] = Array(2); //declare two elements per row
+    if (this.image[i]) { //check file URI exists
+      this.grid[rowNum][0] = this.people[i] //insert image
+    }
 
-//     if (this.images[i]) { //check file URI exists
-//       this.grid[rowNum][0] = this.images[i] //insert image
-//     }
+    if (this.image[i+1]) { //repeat for the second image
+      this.grid[rowNum][1] = this.people[i]
+    }
 
-//     if (this.images[i+1]) { //repeat for the second image
-//       this.grid[rowNum][1] = this.images[i+1]
-//     }
+    rowNum++; //go on to the next row
+  }
 
-//     rowNum++; //go on to the next row
-//   }
-
-// }
+}
 
 }
