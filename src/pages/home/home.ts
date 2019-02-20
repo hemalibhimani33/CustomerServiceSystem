@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { environment } from '../../local/local';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class HomePage {
   galleryType = 'regular';
   image: Array<string>;
   grid: Array<Array<string>>;
+  public homePage : string = null;
+
 
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
@@ -25,6 +28,7 @@ export class HomePage {
     //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
     //this.ionViewLoaded();
    // this.ionViewLoaded();
+   this.homePage = 'http://localhost:8100/';
     this.loadPeople();
   }
   loadPeople(){
