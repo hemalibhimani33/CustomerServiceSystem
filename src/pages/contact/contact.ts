@@ -12,16 +12,16 @@ import { RegisterPage } from '../register/register';
   templateUrl: 'contact.html'
 })
 export class ContactPage {
-
+  public registerPage = RegisterPage;
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
-      debugger;
-      console.log('hemali');
+
 
   }
-  public signup() {
+  public signup(): any{
     debugger;
         this.nav.push(RegisterPage);
+
      }
 }
