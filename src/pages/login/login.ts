@@ -3,7 +3,7 @@ import { AlertController, IonicPage, Loading, LoadingController, NavController} 
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
-import { TabsPage } from '../tab/tab';
+//import { TabsPage } from '../tab/tab';
 
 @IonicPage()
 @Component({

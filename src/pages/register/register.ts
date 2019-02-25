@@ -122,9 +122,7 @@ register(){
 
    debugger;
     this.showPopup("Success", "Account created.");
-
-
-
+   // this.nav.push('LoginPage');
 
    console.log(this.myForm.value);
     console.log(this.formdata);

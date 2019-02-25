@@ -3,9 +3,9 @@
 // import { FormPage } from '../form/form';
 // import { ServicePage } from '../service/service';
 
-// @Component({
-//   templateUrl: 'tab.html'
-// })
+// // @Component({
+// //   templateUrl: 'tab.html'
+// // })
 // export class TabsPage {
 
 //   tab1Root = ServicePage;

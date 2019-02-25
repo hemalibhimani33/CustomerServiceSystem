@@ -19,7 +19,7 @@ export class HomePage {
   image: Array<string>;
   grid: Array<Array<string>>;
   public homePage : string = null;
-
+  searchTerm: string = '';
 
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
@@ -39,6 +39,22 @@ export class HomePage {
      this.people = data;
    });
  }
+ getPeople(ev: any){
+   debugger;
+   this.loadPeople();
+   let serVal = ev.target.value;
+   if(serVal && serVal.trim()!="")
+   {
+     this.people = this.people.filter((person)=>{return (person.service.toLowercase().indexOf(serVal.toLowerCase())) > -1;
+    })
+   }
+ }
+
+ setFilteredItems() {
+
+  this.people = this.restProvider.filterItems(this.searchTerm);
+
+}
   public sub(id) {
 debugger;
     this.nav.push('FormPage' , {id : id});
@@ -47,25 +63,9 @@ debugger;
 //   debugger;
 //       this.nav.push(FormPage);
 //    }
-ionViewLoaded() {
-debugger;
-  let rowNum = 0; //counter to iterate over the rows in the grid
+ionViewDidLoad() {
 
-  for (let i = 0; i < 5; i+=2) { //iterate images
-
-    this.grid[rowNum] = Array(2); //declare two elements per row
-
-    if (this.image[i]) { //check file URI exists
-      this.grid[rowNum][0] = this.people[i] //insert image
-    }
-
-    if (this.image[i+1]) { //repeat for the second image
-      this.grid[rowNum][1] = this.people[i]
-    }
-
-    rowNum++; //go on to the next row
-  }
+  this.setFilteredItems();
 
 }
-
 }

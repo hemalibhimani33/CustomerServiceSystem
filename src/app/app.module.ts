@@ -69,6 +69,8 @@ import { FormPage } from '../pages/form/form';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
+import { LoginPage } from '../pages/login/login';
+
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { RegisterPage } from '../pages/register/register';
     ContactPage,
     HomePage,
     RegisterPage,
+    LoginPage,
     //FormPage,
     TabsPage
   ],
@@ -93,6 +96,8 @@ import { RegisterPage } from '../pages/register/register';
     ContactPage,
     HomePage,
     RegisterPage,
+    LoginPage,
+
     //FormPage,
     TabsPage
   ],

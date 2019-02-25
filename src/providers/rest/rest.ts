@@ -30,9 +30,20 @@ const options = {
 
 export class RestProvider {
    data: Observable<any>;
+   public people: any;
   constructor(public httpClient:HttpClient, public http: HttpClient) {
+    debugger;
+   // this.people = [{service: 'Beauty'}]
 
    }
+
+   filterItems(searchTerm){
+
+    return this.people.filter((person) => {
+        return person.service.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });
+
+}
 
 
   ngOnDestroy(): void {}
