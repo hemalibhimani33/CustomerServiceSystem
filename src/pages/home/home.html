@@ -23,7 +23,7 @@
   </ion-row>
 </ion-grid> -->
 <!-- <ion-searchbar placeholder="Search for Services" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar> -->
-<ion-searchbar  placeholder="Search for Services"  (ionInput)="getPeople($event)"></ion-searchbar>
+<ion-searchbar  placeholder="Search for Services"  (ionInput)="getPeople($event)" show-cancel="true" ></ion-searchbar>
 <ion-grid >
     <ion-row >
       <ion-col col-6 col-md-4 col-xl-3  *ngFor="let person of people" >

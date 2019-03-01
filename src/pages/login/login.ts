@@ -3,7 +3,7 @@ import { AlertController, IonicPage, Loading, LoadingController, NavController} 
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
-//import { TabsPage } from '../tab/tab';
+import { ServicePage } from '../service/service';
 
 @IonicPage()
 @Component({
@@ -62,15 +62,37 @@ login(event){
       }
     }
     else {
-      this.createSuccess = true;
-      this.showPopup("Success", "login.");
+      //this.createSuccess = true;
+     // this.showPopup("Success", "login.");
       debugger;
       // event.preventDefault()
   //const target = event.target
   const email = this.MyForm.controls.p_email.value
   const password = this.MyForm.controls.p_password.value
   debugger;
-   this.restProvider.LoginUser(email, password);
+   this.restProvider.LoginUser(email, password)
+   .subscribe(
+    data => {
+      this.auth.setCookie('token',data.token,1);
+      this.nav.push(ServicePage);
+    },
+
+    error =>  {this.showPopup("failure", "invalid information");}
+    // if (error.status === '200'){
+    //   //this.nav.push(ServicePage);
+    // }else{
+     // console.log(error);
+
+    // error => {
+    //   if(error.status === 200){
+    //     debugger;
+    //     this.nav.push(ServicePage);
+    //   }else{
+    //     this.showPopup("failure", "invalid information");
+    //   }
+    // }
+
+);
 
   //  .subscribe(data => {
   //  // this.setCookie('token',data.token,1);

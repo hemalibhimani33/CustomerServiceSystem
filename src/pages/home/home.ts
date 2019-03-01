@@ -39,6 +39,7 @@ export class HomePage {
     // });
 
   }
+
   loadPeople(){
     debugger;
    this.restProvider.load()

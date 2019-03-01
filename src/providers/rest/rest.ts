@@ -3,7 +3,7 @@ import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 // import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
-//import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 
 //import { environment } from '../../../environments/environment';
 //import { CryptoJS } from 'crypto-js';
@@ -16,6 +16,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+import { ServicePage } from '../../pages/service/service';
 
 
 //export type HandleError = <T> (operation?: string, result?: T) => (error: HttpErrorResponse) => Observable<T>;
@@ -29,7 +30,7 @@ const options = {
 interface myData {
 
   token: string
-  error: string
+  email: string
   }
 
 @Injectable()
@@ -70,20 +71,20 @@ export class RestProvider {
 
          debugger;
 
-    return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
-    .map((res:any) => res.json())
+    return this.http.post<myData>('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options);
+   // .map((res:any) => res.json())
     // .subscribe((data) => {
     //   console.log(data);
     //  },
     // (error) => {console.log(error)});
-            .subscribe(
-                data => console.log(data),
-                error => console.log(error),
-                // if (error.status === '200'){
-                //   //this.nav.push(ServicePage);
-                // }else{
-                 // console.log(error);
-            );
+            // .subscribe(
+            //     data => console.log(data),
+            //     error => console.log(error),
+
+
+
+
+            // );
 
 
 

@@ -72,6 +72,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
+import { ServicePage } from '../pages/service/service';
+
 //import { SearchPipe } from '../pipes/search/search';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -86,6 +88,7 @@ import { CookieService } from 'ngx-cookie-service';
     LoginPage,
     //FormPage,
     TabsPage,
+    ServicePage,
 
   ],
   imports: [
@@ -104,7 +107,8 @@ import { CookieService } from 'ngx-cookie-service';
     LoginPage,
 
     //FormPage,
-    TabsPage
+    TabsPage,
+    ServicePage
   ],
   providers: [
     StatusBar,
