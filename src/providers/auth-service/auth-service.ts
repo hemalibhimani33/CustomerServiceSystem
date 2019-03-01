@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { RestProvider } from '../rest/rest';
+//import { CookieService } from 'ngx-cookie-service';
+import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
+
 
 export class User {
   name: string;
@@ -16,6 +20,10 @@ export class User {
 export class AuthService {
   currentUser: User;
   debugger;
+  //constructor(public nav: NavController,public  restProvider: RestProvider, private cookieService: CookieService) { }
+
+
+
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");

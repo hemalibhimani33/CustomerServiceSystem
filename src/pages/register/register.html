@@ -35,9 +35,9 @@
             <ion-input placeholder="Email" type="email" [(ngModel)]="formdata.p_email" name="p_email" formControlName="p_email"></ion-input>
             </ion-item>
 
-            <!-- <ion-item *ngIf="!myForm.controls.p_email.valid  && (submitAttempt)">
+            <div *ngIf="!myForm.controls.p_email.valid  && (createSuccess)">
             <p>Please enter a valid Email address.</p>
-            </ion-item> -->
+            </div>
 
             <ion-item>
               <ion-label>

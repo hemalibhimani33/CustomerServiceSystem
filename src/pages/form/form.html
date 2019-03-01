@@ -10,7 +10,7 @@
     <!-- <ion-searchbar animated></ion-searchbar> -->
     <ion-grid>
         <ion-list>
-
+          <ion-searchbar  placeholder="Search for Services" (ionInput)="get($event)"></ion-searchbar>
             <ion-item *ngFor="let person2 of people2">
                 <button ion-item>
                     <ion-thumbnail item-left>

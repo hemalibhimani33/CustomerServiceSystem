@@ -1,15 +1,15 @@
 import * as CryptoJS from 'crypto-js';
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
+// import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
+//import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 
 //import { environment } from '../../../environments/environment';
 //import { CryptoJS } from 'crypto-js';
 //import {map} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 //import { Common } from '../../shared/common';
-import { RegisterPage } from '../../pages/register/register';
 import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/do';
 
@@ -26,27 +26,33 @@ const options = {
 };
 //const options = {Headers, HttpParams, responseType: 'text' as 'text'};
 
+interface myData {
+
+  token: string
+  error: string
+  }
+
 @Injectable()
 
 export class RestProvider {
    data: Observable<any>;
    public people: any;
   constructor(public httpClient:HttpClient, public http: HttpClient) {
-    debugger;
-   // this.people = [{service: 'Beauty'}]
+   // debugger;
+   // this.people = [{service: 'person.service'}]
 
    }
 
-   filterItems(searchTerm){
+//    filterItems(searchTerm){
 
-    return this.people.filter((person) => {
-        return person.service.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
+//     return this.people.filter((person) => {
+//         return person.service.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+//     });
 
-}
+// }
 
 
-  ngOnDestroy(): void {}
+  //ngOnDestroy(): void {}
 
   LoginUser(email,password){
 
@@ -63,49 +69,22 @@ export class RestProvider {
          };
 
          debugger;
-        // return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser))
-        //  .map((res:Response) => res);
-        //  .subscribe(data => {
-        //   console.log(this.data);
-        //    debugger;
-        //     // resolve(data);
-        //     });
-
 
     return this.http.post('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options)
-    .map((res: Response) => res)
-    .subscribe(data => {
-      debugger;
-      console.log(data['_body']);
-     //this.nav.push('ServicePage');
-      //var response = JSON.parse(data['_body']);
-                            // if(data === 500){
-                            //   debugger;
-                            //   // this.nav.push('LoginPage');
-                            // }else{
-                            //   debugger;
-                            //   //this.nav.push('ServicePage');
-                            // }
-     }, error => {
-       debugger;
-     console.log(error);// Error getting the data
-     //this.nav.push('LoginPage');
-    });
-    // .subscribe(data => {
-    //                     debugger;
-    //                    console.log(data['_body']);
+    .map((res:any) => res.json())
+    // .subscribe((data) => {
+    //   console.log(data);
+    //  },
+    // (error) => {console.log(error)});
+            .subscribe(
+                data => console.log(data),
+                error => console.log(error),
+                // if (error.status === '200'){
+                //   //this.nav.push(ServicePage);
+                // }else{
+                 // console.log(error);
+            );
 
-    //                     //var response = JSON.parse(data['_body']);
-    //                     //console.log(response)
-    //                   // console.log(data);
-    //                     // if(response.status === 500){
-    //                     //    this.nav.push('LoginPage');
-    //                     // }else{
-    //                     //   this.nav.push('ServicePage');
-    //                     // }
-    //                    }, error => {
-    //                   console.log(error);// Error getting the data
-    //                  });
 
 
   }

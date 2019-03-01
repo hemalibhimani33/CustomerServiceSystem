@@ -5,6 +5,7 @@
 // import { SplashScreen } from '@ionic-native/splash-screen';
 // import { StatusBar } from '@ionic-native/status-bar';
  import { HttpModule } from '@angular/http';
+ import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 
 
 
@@ -57,6 +58,7 @@
 
 
 import { NgModule, ErrorHandler } from '@angular/core';
+import {Injectable, Injector} from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -70,6 +72,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
+//import { SearchPipe } from '../pipes/search/search';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -81,7 +85,8 @@ import { LoginPage } from '../pages/login/login';
     RegisterPage,
     LoginPage,
     //FormPage,
-    TabsPage
+    TabsPage,
+
   ],
   imports: [
     BrowserModule,
@@ -104,6 +109,7 @@ import { LoginPage } from '../pages/login/login';
   providers: [
     StatusBar,
     SplashScreen,
+    CookieService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     RestProvider,

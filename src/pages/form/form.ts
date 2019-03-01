@@ -17,6 +17,7 @@ export class FormPage {
  // name:any;
  public people2 : any;
  public id: any = {};
+ private list: string[];
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
@@ -33,6 +34,34 @@ export class FormPage {
      this.people2 = data;
    });
  }
+ get(ev: any){
+  debugger;
+  this.setFilteredItems2();
+  let val = ev.target.value;
+
+  if (val && val.trim() != '') {
+
+     var list1:any = [];
+
+    /* for(let i=0;i<this.people.length;i++)
+     {
+        if(this.people[0])
+     }*/
+
+   var list:any = this.people2.filter((person) => {
+     return (person.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
+   });
+   this.people2 = list ;
+ //  console.log(typeof(list));
+   console.log(this.people2);
+ }
+}
+setFilteredItems2() {
+
+  this.list = this.people2;
+
+}
+
   ionViewDidLoad() {
   }
 

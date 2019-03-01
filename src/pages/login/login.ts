@@ -9,6 +9,7 @@ import { RestProvider } from  './../../providers/rest/rest';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+
 })
 export class LoginPage {
 
@@ -39,28 +40,62 @@ isMatching(group: FormGroup){
 ionViewDidEnter(){
 
 }
+// ngOnInit() {
+//   this.MyForm = this.formBuilder.group(
+//     {
+//       email: ['', [Validators.required, Validators.email]],
+//       password: ['', [Validators.required, Validators.minLength(6)]]
+//     }
+//   );
+// }
+
 public createAccount() {
   this.nav.push('RegisterPage');
 }
-login(){
+login(event){
   //this.createSuccess = true;
 
     if(!this.MyForm.valid){
       this.createSuccess = false ;
-      error => {
-        this.showPopup("Error",error);
+      if(!this.MyForm.controls.p_email.valid){
+      this.showPopup("failure", "invalid email");
       }
     }
     else {
       this.createSuccess = true;
-      //this.showPopup("Success", "login.");
+      this.showPopup("Success", "login.");
       debugger;
-      this.restProvider.LoginUser(this.MyForm.controls.p_email.value,this.MyForm.controls.p_password.value)
-debugger;
-      this.nav.push('ServicePage');
-      console.log(this.MyForm.value);
-      console.log(this.formdata);
+      // event.preventDefault()
+  //const target = event.target
+  const email = this.MyForm.controls.p_email.value
+  const password = this.MyForm.controls.p_password.value
+  debugger;
+   this.restProvider.LoginUser(email, password);
+
+  //  .subscribe(data => {
+  //  // this.setCookie('token',data.token,1);
+
+  //    console.log(data);
+  //   // if(data.token)
+  //   // {
+  //   // this.router.navigate(['admin']);
+  //   // }
+  // },
+  // error => {
+  //   console.log(error);
+  // }
+
+  // );
+
+      //this.auth.loginuser(event);
+      //this.restProvider.LoginUser(this.MyForm.controls.p_email.value,this.MyForm.controls.p_password.value)
+      debugger;
+     // this.nav.push('ServicePage');
+     // console.log(this.MyForm.value);
+     // console.log(this.formdata);
     }
+   // this.nav.push('ServicePage');
+
 
   }
   showPopup(title, text) {

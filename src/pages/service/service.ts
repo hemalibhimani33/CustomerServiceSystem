@@ -18,9 +18,7 @@ import { FormPage } from '../../pages/form/form';
 export class ServicePage {
 
   public people: any;
-  constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
-    , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
-   ) {
+  constructor(public nav: NavController ,public  restProvider: RestProvider ) {
      //debugger;
    // this.loadPeople();
    }

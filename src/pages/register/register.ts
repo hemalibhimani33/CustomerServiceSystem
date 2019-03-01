@@ -110,10 +110,14 @@ register(){
 
   if(!this.myForm.valid){
     this.createSuccess = false ;
-    error => {
-      this.showPopup("Error",error);
-
+    if(!this.myForm.controls.p_email.valid){
+      this.showPopup("failure", "Enter Valid email address.");
+    }else if(this.myForm.controls.p_surname.valid){
+      this.showPopup("failure", "Enter Valid username information.");
+    }else{
+      this.showPopup("failure","enter valid information");
     }
+
   }
   else {
     this.createSuccess = true;
