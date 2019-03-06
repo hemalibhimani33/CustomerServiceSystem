@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { RestProvider } from '../rest/rest';
-//import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
+import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 
 export class User {
@@ -20,6 +21,10 @@ export class User {
 export class AuthService {
   currentUser: User;
   debugger;
+  constructor(public httpClient:HttpClient, public http: HttpClient, private cookieService: CookieService) {
+
+
+  }
   //constructor(public nav: NavController,public  restProvider: RestProvider, private cookieService: CookieService) { }
   setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -37,11 +42,14 @@ export class AuthService {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
+        debugger;
         return c.substring(name.length, c.length);
       }
     }
     return "";
   }
+
+
 
 
   public login(credentials) {

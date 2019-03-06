@@ -1,3 +1,4 @@
+
 page-login {
 
   .login-content {
@@ -60,6 +61,7 @@ page-login {
   }
 
   #button {
+    //margin-top: 90px;
     background-color: rgb(235, 235, 117);
     padding: 2px 4px;
     font: 13px sans-serif;
@@ -72,5 +74,9 @@ page-login {
   float: left;
   color: #000
   }
+  #button2 {
+
+    color: black;
+    }
 
 }

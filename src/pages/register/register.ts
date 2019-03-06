@@ -142,7 +142,7 @@ showPopup(title, text) {
         text: 'OK',
         handler: data => {
           if (this.createSuccess) {
-            this.nav.popToRoot();
+            this.nav.pop();
           }
         }
       }

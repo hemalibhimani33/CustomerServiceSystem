@@ -9,15 +9,20 @@
 <ion-content>
   <div>
     <ion-list>
-        <button ion-item (click)="signup()" full>
+        <!-- <button ion-item (click)="signup()" full>
             <h6><b>Sign UP</b></h6>
-          </button>
-          <button ion-item>
+          </button> -->
+            <button ion-item>
               <h6><b>About APP</b></h6>
             </button>
-            <button ion-item (click)="loginn()" full>
-                <h6><b>Login</b></h6>
-              </button>
+            <div  *ngIf="!clicked">
+            <button ion-item (click)="loginn()" full><b>Login/SignUp</b> </button>
+            </div>
+
+            <div  *ngIf="clicked">
+              <button ion-item (click)="logout()" full><b>Logout</b> </button>
+              </div>
+
      </ion-list>
     </div>
 </ion-content>

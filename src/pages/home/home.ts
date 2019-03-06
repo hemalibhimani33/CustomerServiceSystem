@@ -21,6 +21,7 @@ export class HomePage {
   //grid: Array<Array<string>>;
   public homePage : string = null;
   private list: string[];
+public shouldShowCancel: any = [];
 
   constructor(private http: Http,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)

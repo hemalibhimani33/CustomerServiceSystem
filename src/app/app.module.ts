@@ -84,7 +84,7 @@ import { CookieService } from 'ngx-cookie-service';
     AboutPage,
     ContactPage,
     HomePage,
-    RegisterPage,
+    //RegisterPage,
     LoginPage,
     //FormPage,
     TabsPage,
@@ -103,7 +103,7 @@ import { CookieService } from 'ngx-cookie-service';
     AboutPage,
     ContactPage,
     HomePage,
-    RegisterPage,
+   // RegisterPage,
     LoginPage,
 
     //FormPage,

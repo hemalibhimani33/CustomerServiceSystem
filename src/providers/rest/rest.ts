@@ -27,7 +27,7 @@ const options = {
 };
 //const options = {Headers, HttpParams, responseType: 'text' as 'text'};
 
-interface myData {
+ export interface myData {
 
   token: string
   email: string
@@ -39,18 +39,11 @@ export class RestProvider {
    data: Observable<any>;
    public people: any;
   constructor(public httpClient:HttpClient, public http: HttpClient) {
-   // debugger;
-   // this.people = [{service: 'person.service'}]
+
 
    }
 
-//    filterItems(searchTerm){
 
-//     return this.people.filter((person) => {
-//         return person.service.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-//     });
-
-// }
 
 
   //ngOnDestroy(): void {}
@@ -80,10 +73,6 @@ export class RestProvider {
             // .subscribe(
             //     data => console.log(data),
             //     error => console.log(error),
-
-
-
-
             // );
 
 
@@ -108,7 +97,7 @@ export class RestProvider {
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         debugger;
-      password = CryptoJS.MD5(password).toString();
+     // password = CryptoJS.MD5(password).toString();
           var newUser =	{
                   "username":username ,
                    "email":email ,
