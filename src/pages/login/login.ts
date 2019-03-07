@@ -8,9 +8,10 @@ import { ContactPage } from '../contact/contact';
 import { myData } from './../../providers/rest/rest'
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
+import { v } from '@angular/core/src/render3';
+//import { myData } from '../../providers/rest/rest';
 //import { v } from '../variable';
 //import { v } from '@angular/core/src/render3';
-
 
 @IonicPage()
 @Component({
@@ -32,7 +33,7 @@ data: string;
 mydata : myData[] = [];
 v : ContactPage;
 
-private loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
+//public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
 
 constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
@@ -71,14 +72,14 @@ public createAccount() {
 //   return this.loggedIn.asObservable();
 // }
 
-private getUserAvailability():boolean{
-    if(this.auth.getCookie("token")!=""){
-        return true;
-    }else{
-      return false;
-    }
+// public getUserAvailability():boolean{
+//     if(this.auth.getCookie("token")!=""){
+//         return true;
+//     }else{
+//       return false;
+//     }
 
-}
+// }
 login(event){
   //this.createSuccess = true;
 
@@ -93,8 +94,7 @@ login(event){
       this.createSuccess = true;
      // this.showPopup("Success", "login.");
       debugger;
-      // event.preventDefault()
-  //const target = event.target
+
   const email = this.MyForm.controls.p_email.value
   const password = this.MyForm.controls.p_password.value
   debugger;
@@ -105,15 +105,27 @@ login(event){
       console.log(data.token);
 
      this.auth.setCookie('token',data.token,1);
-     debugger;
-    //this.data = this.auth.getCookie("token");
-     // this.cookieService.setCook('token',JSON.stringify(this.mydata));
-      //       this.ng4LoadingSpinnerService.hide();
+    // debugger;
+    this.data = this.auth.getCookie("token");
+     // this.cookieService.set('token',JSON.stringify(this.mydata));
+
       debugger;
-      // this.loggedIn.next(true);
-      //       this.router.navigate(['/home']);
-     this.nav.push(ServicePage);
-    //this.v.clicked = true;
+       //this.loggedIn.next(true);
+    if(this.data != ""){
+      setTimeout(() => {
+        window.location.reload();
+      }, 0.1);
+      //this.ng4LoadingSpinnerService.hide();
+
+
+      //this.nav.pop();
+     // this.showPopup("success", "login successfully");
+
+    }
+    // window.location.reload();
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 0.1);
     },
 
     error =>  {
@@ -124,34 +136,21 @@ login(event){
      this.showPopup("failure", "invalid information");}
      //this.nav.push(ContactPage);}
      // this.showPopup("failure", "invalid information");}
-    // if (error.status === '200'){
-    //   //this.nav.push(ServicePage);
-    // }else{
-     // console.log(error);
 
-    // error => {
-    //   if(error.status === 200){
-    //     debugger;
-    //     this.nav.push(ServicePage);
-    //   }else{
-    //     this.showPopup("failure", "invalid information");
-    //   }
-    // }
 
 );
 
 
-      //this.auth.loginuser(event);
-      //this.restProvider.LoginUser(this.MyForm.controls.p_email.value,this.MyForm.controls.p_password.value)
+
       debugger;
      // this.nav.push('ServicePage');
-     // console.log(this.MyForm.value);
-     // console.log(this.formdata);
+
     }
    // this.nav.push('ServicePage');
 
 
   }
+
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
       title: title,

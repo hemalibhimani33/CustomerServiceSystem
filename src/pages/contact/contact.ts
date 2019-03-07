@@ -25,30 +25,48 @@ export class ContactPage {
 
   private loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
 
-
   constructor(private cookieService:CookieService, public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
-      //this.data = navParams.get('data');
-    }
-  // public signup(): any{
-  //   debugger;
-  //       this.nav.push(RegisterPage);
+      debugger;
 
-  //    }
-  private getUserAvailability():boolean{
-    if(this.cookieService.get("token")!=""){
-        return true;
-    }else{
-      return false;
+
+
+
+      this.data = this.auth.getCookie("token");
+      if(this.data != ""){
+        this.clicked = true;
+      }else{
+      this.clicked = false;
+
+      }
+
     }
+
+  private getUserAvailability():boolean{
+    if(this.auth.getCookie("token")!=""){
+      return true;
+  }else{
+    return false;
+  }
   }
   public logout(): any{
-    this.clicked = false;
+   // this.clicked = false;
    // this.ionViewWillEnter();
 
     //this.cookieService.delete('token');
-   // this.cookieService.delete('token');
+    // this.data = this.auth.getCookie("token");
+    // console.log(this.data);
+    // this.auth.delete('token');
+    //     console.log(this.data);
+    debugger;
+    this.data = this.auth.getCookie("token");
+    this.auth.setCookie('token',this.data,-1);    //localStorage.removeItem("token");
+   // this.data = this.auth.getCookie("token");
+
+   // console.log(this.data);
+
+        this.clicked = false;
    // this.loggedIn.next(false);
   // this.clicked = false;
    // this.nav.push(ContactPage);
@@ -57,22 +75,15 @@ export class ContactPage {
 //   ionViewWillEnter(){
 //     this.myDefaultMethodToFetchData();
 // }
-myDefaultMethodToFetchData(){
-  this.clicked = false;
-}
+// myDefaultMethodToFetchData(){
+//   this.clicked = false;
+// }
 
      public loginn(): any{
       debugger;
-      this.clicked = true;
-          this.nav.push(LoginPage);
-
-
-
-        //   if(this.data !=""){
-        //     this.clicked = true;
-        // }else{
-        //   this.clicked = false;
-        // }
+  //  this.clicked = true;
+      this.nav.push(LoginPage);
+     console.log( localStorage.getItem('clicked'));
 
        }
 
