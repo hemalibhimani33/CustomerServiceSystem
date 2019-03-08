@@ -14,7 +14,7 @@
     <ion-col></ion-col>
   </ion-row> -->
   <div class="login-box">
-    <form  [formGroup]="MyForm">
+    <form  [formGroup]="MyForm" *ngIf="!put">
       <ion-row>
         <ion-col>
             <div class="title"><h1><b>Sign In</b></h1></div>
@@ -55,6 +55,7 @@
           <!-- <button ion-button id="button1" icon-only clear>Forgot Password ?</button> -->
 
           <button ion-button id="button" (click)="login()" full><b>Login</b></button>
+
           <button ion-button id="button2"color="primary" (click)="createAccount()" icon-only clear>Not a member? Register</button>
         </ion-col>
       </ion-row>
@@ -67,5 +68,6 @@
       </ion-row>
     -->
     </form>
+    <ion-spinner name="circles" *ngIf="put" ></ion-spinner>
   </div>
 </ion-content>

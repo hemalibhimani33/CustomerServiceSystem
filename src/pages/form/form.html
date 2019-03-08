@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title align="center" style="color:black;">
-      All Services
+     {{service}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,9 +10,10 @@
     <!-- <ion-searchbar animated></ion-searchbar> -->
     <ion-grid>
         <ion-list>
-          <ion-searchbar  placeholder="Search for Services" (ionInput)="get($event)"></ion-searchbar>
+          <ion-searchbar  placeholder="Search for Services" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="get($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
+
             <ion-item *ngFor="let person2 of people2">
-                <button ion-item>
+                <button ion-item (click)="orderService()">
                     <ion-thumbnail item-left>
                     <img src="{{person2.image}}">
                     </ion-thumbnail>

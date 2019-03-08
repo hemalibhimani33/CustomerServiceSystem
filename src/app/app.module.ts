@@ -76,6 +76,7 @@ import { ServicePage } from '../pages/service/service';
 
 //import { SearchPipe } from '../pipes/search/search';
 import { CookieService } from 'ngx-cookie-service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 @NgModule({
@@ -88,7 +89,7 @@ import { CookieService } from 'ngx-cookie-service';
     LoginPage,
     //FormPage,
     TabsPage,
-    ServicePage,
+    //ServicePage,
 
   ],
   imports: [
@@ -109,12 +110,13 @@ import { CookieService } from 'ngx-cookie-service';
 
     //FormPage,
     TabsPage,
-    ServicePage
+   // ServicePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     CookieService,
+    Ng4LoadingSpinnerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     RestProvider,

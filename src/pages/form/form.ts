@@ -18,14 +18,34 @@ export class FormPage {
  public people2 : any;
  public id: any = {};
  private list: string[];
+ public shouldShowCancel: any = [];
+public service: any = {};
+public data: any = {};
+
+
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
     debugger;
     this.id = navParams.get('id');
+    this.service = navParams.get('name');
+    console.log(this.service);
+
     debugger;
     this.loadPeople2();
   }
+
+orderService(){
+  this.data = this.auth.getCookie("token");
+  if(this.data != ""){
+    this.nav.push('ServicePage');
+  }else{
+    this.showPopup("failure", "login requires for order service");
+  }
+
+}
+
+
   loadPeople2(){
     debugger;
    this.restProvider.load2(this.id)
@@ -33,6 +53,11 @@ export class FormPage {
      debugger;
      this.people2 = data;
    });
+ }
+ onClear(ev)
+ {
+     this.loadPeople2();
+     ev.stopPropagation();
  }
  get(ev: any){
   debugger;
@@ -48,8 +73,8 @@ export class FormPage {
         if(this.people[0])
      }*/
 
-   var list:any = this.people2.filter((person) => {
-     return (person.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
+   var list:any = this.people2.filter((person2) => {
+     return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
    });
    this.people2 = list ;
  //  console.log(typeof(list));
@@ -64,5 +89,21 @@ setFilteredItems2() {
 
   ionViewDidLoad() {
   }
+  showPopup(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
 
+              this.nav.popToRoot();
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

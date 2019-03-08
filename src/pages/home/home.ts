@@ -1,3 +1,4 @@
+//import { FormPage } from './../form/form';
 import { Component } from '@angular/core';
 
 import { FormPage } from '../../pages/form/form';
@@ -8,7 +9,6 @@ import { RestProvider } from  './../../providers/rest/rest';
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 import { environment } from '../../local/local';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
-
 
 @Component({
   selector: 'page-home',
@@ -21,8 +21,9 @@ export class HomePage {
   //grid: Array<Array<string>>;
   public homePage : string = null;
   private list: string[];
-public shouldShowCancel: any = [];
+  private list2: string[];
 
+public shouldShowCancel: any = [];
   constructor(private http: Http,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
@@ -49,6 +50,12 @@ public shouldShowCancel: any = [];
      this.people = data;
    });
  }
+ onClear(ev)
+ {
+     this.loadPeople();
+     ev.stopPropagation();
+ }
+
  getPeople(ev: any){
    debugger;
    this.setFilteredItems();
@@ -66,6 +73,9 @@ public shouldShowCancel: any = [];
     var list:any = this.people.filter((person) => {
       return (person.service.toLowerCase().indexOf(val.toLowerCase()) > -1);
     });
+    // var list2:any = this.people.filter((person2) => {
+    //   return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    // });
     this.people = list ;
   //  console.log(typeof(list));
     console.log(this.people);
@@ -96,11 +106,12 @@ public shouldShowCancel: any = [];
  setFilteredItems() {
 
   this.list = this.people;
+  // this.list2 = this.p.people2;
 
 }
-  public sub(id) {
+  public sub(id,service) {
 debugger;
-    this.nav.push('FormPage' , {id : id});
+    this.nav.push('FormPage' , {id : id, name: service});
  }
 
 // ionViewDidLoad() {

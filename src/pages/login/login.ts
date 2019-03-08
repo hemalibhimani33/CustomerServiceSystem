@@ -12,6 +12,8 @@ import { v } from '@angular/core/src/render3';
 //import { myData } from '../../providers/rest/rest';
 //import { v } from '../variable';
 //import { v } from '@angular/core/src/render3';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 @IonicPage()
 @Component({
@@ -27,6 +29,7 @@ export class LoginPage {
   };
 MyForm: FormGroup;
 createSuccess: Boolean = false;
+put: Boolean = false;
 data: string;
 //clicked: Boolean = true;
 //mydata: myData ;
@@ -35,7 +38,7 @@ v : ContactPage;
 
 //public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
 
-constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+constructor(private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
 
 ) {
@@ -112,11 +115,14 @@ login(event){
       debugger;
        //this.loggedIn.next(true);
     if(this.data != ""){
+
+     // this.ng4LoadingSpinnerService.show();
       setTimeout(() => {
         window.location.reload();
+        //this.ng4LoadingSpinnerService.hide();
       }, 0.1);
-      //this.ng4LoadingSpinnerService.hide();
-
+    //  this.ng4LoadingSpinnerService.show();
+      this.put = true;
 
       //this.nav.pop();
      // this.showPopup("success", "login successfully");
