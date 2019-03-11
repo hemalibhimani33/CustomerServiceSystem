@@ -20,8 +20,15 @@
             <ion-label>
               <ion-icon name="person"></ion-icon>
             </ion-label>
-            <ion-input placeholder="Username" type="text" [(ngModel)]="formdata.p_surname" name="p_surname" formControlName="p_surname"></ion-input>
+            <ion-input placeholder="FirstName" type="text" [(ngModel)]="formdata.p_surname" name="p_surname" formControlName="p_surname"></ion-input>
             </ion-item>
+
+            <ion-item>
+                <ion-label>
+                  <ion-icon name="person"></ion-icon>
+                </ion-label>
+                <ion-input placeholder="LastName" type="text" type="text" [(ngModel)]="formdata.p_lastname" name="p_lastname" formControlName="p_lastname"></ion-input>
+                </ion-item>
 
             <!-- <ion-item *ngIf="!myForm.controls.p_surname.valid  && (submitAttempt)">
             <p>Please enter a valid Surname.</p>

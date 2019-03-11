@@ -64,7 +64,7 @@ export class RestProvider {
 
          debugger;
 
-    return this.http.post<myData>('http://192.168.32.56:1337/register/login', JSON.stringify(newUser),options);
+    return this.http.post<myData>('http://192.168.32.56:1337/login/login', JSON.stringify(newUser),options);
    // .map((res:any) => res.json())
     // .subscribe((data) => {
     //   console.log(data);
@@ -91,7 +91,7 @@ export class RestProvider {
   // }
 
 
-  RegisterUser(username,email,password,number){
+  RegisterUser(firstname,lastname,email,password,number){
     // let headers = new Headers({ 'Content-Type': 'application/json' });
         //  let options = new RequestOptions({ headers: headers });
         var headers = new Headers();
@@ -99,7 +99,8 @@ export class RestProvider {
         debugger;
      // password = CryptoJS.MD5(password).toString();
           var newUser =	{
-                  "username":username ,
+                  "firstname":firstname ,
+                  "lastname":lastname,
                    "email":email ,
                    "password":password ,
                   "number":number

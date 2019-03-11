@@ -28,6 +28,7 @@ export class RegisterPage {
 
  formdata = {
   p_surname: '',
+  p_lastname:'',
   p_email: '',
   p_number:'',
   p_password: '',
@@ -46,6 +47,8 @@ constructor(public nav: NavController , private auth: AuthService, private alert
 
   this.myForm = this.formBuilder.group({
     p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+    p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+
 
     p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
     //password_ctrl: this.formBuilder.group({
@@ -122,7 +125,7 @@ register(){
   else {
     this.createSuccess = true;
     debugger;
-    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
+    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
 
    debugger;
     this.showPopup("Success", "Account created.");

@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   public register(credentials) {
-    if (credentials.username === null || credentials.email === null || credentials.number === null || credentials.password === null || credentials.confirmpassword === null) {
+    if (credentials.firstname === null || credentials.lastname === null || credentials.email === null || credentials.number === null || credentials.password === null || credentials.confirmpassword === null) {
       return Observable.throw("Please insert credentials");
     } else {
       // At this point store the credentials to your backend!

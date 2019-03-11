@@ -16,11 +16,16 @@ import { FormPage } from '../../pages/form/form';
 
 
 export class ServicePage {
+  date = new Date().toISOString();
+//  time = new TimeRanges();
+  enddate = new Date().toDateString();
+
 
   public people: any;
-  constructor(public nav: NavController ,public  restProvider: RestProvider ) {
+  constructor(public nav: NavController, private alertCtrl: AlertController ,public  restProvider: RestProvider ) {
      //debugger;
-   // this.loadPeople();
+
+//console.log(this.date);
    }
 
    loadPeople(){
@@ -35,7 +40,35 @@ export class ServicePage {
 
      this.nav.push('FormPage',{firstname: vname});
   }
+submitt(event){
+debugger;
 
+  console.log(this.date);
+ // console.log(this.time);
+
+  console.log(this.enddate);
+
+  this.showPopup("Success", "Account created.");
+
+}
+
+showPopup(title, text) {
+  let alert = this.alertCtrl.create({
+    title: title,
+    subTitle: text,
+    buttons: [
+      {
+        text: 'OK',
+        handler: data => {
+
+            this.nav.pop();
+
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
 }
 

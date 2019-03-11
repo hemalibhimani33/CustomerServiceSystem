@@ -68,10 +68,7 @@ orderService(){
 
      var list1:any = [];
 
-    /* for(let i=0;i<this.people.length;i++)
-     {
-        if(this.people[0])
-     }*/
+
 
    var list:any = this.people2.filter((person2) => {
      return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
