@@ -70,6 +70,7 @@ ionViewDidEnter(){
 
 
 
+
 isMatching(group: FormGroup){
 
   console.log("password check");

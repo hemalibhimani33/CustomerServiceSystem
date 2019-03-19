@@ -77,6 +77,8 @@ import { ServicePage } from '../pages/service/service';
 //import { SearchPipe } from '../pipes/search/search';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 
 @NgModule({
@@ -116,6 +118,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
     StatusBar,
     SplashScreen,
     CookieService,
+    Geolocation,
+    NativeGeocoder,
     Ng4LoadingSpinnerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,

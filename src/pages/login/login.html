@@ -1,18 +1,19 @@
-<ion-header>
+ <ion-header>
     <ion-navbar>
       <ion-title class="h"></ion-title>
     </ion-navbar>
 
   </ion-header>
 
-<ion-content class="login-content" padding>
-  <!-- <ion-row class="logo-row">
+<!-- <ion-content class="login-content" padding>
+   <ion-row class="logo-row">
     <ion-col></ion-col>
     <ion-col width-300 height-50>
       <img class="full-image" src="assets/imgs/fintech.jpg"/>
     </ion-col>
     <ion-col></ion-col>
   </ion-row> -->
+  <ion-content class="login-content" padding>
   <div class="login-box">
     <form  [formGroup]="MyForm" *ngIf="!put">
       <ion-row>
@@ -52,7 +53,7 @@
 
           </ion-list>
 
-          <!-- <button ion-button id="button1" icon-only clear>Forgot Password ?</button> -->
+          <button ion-button id="button1" icon-only clear>Forgot Password ?</button>
 
           <button ion-button id="button" (click)="login()" full><b>Login</b></button>
 
