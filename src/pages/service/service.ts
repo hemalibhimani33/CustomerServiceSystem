@@ -130,7 +130,7 @@ getGeolocation(){
      alert('Error getting location'+ JSON.stringify(error));
     // this.hideLoader();
    });
-
+//hemali
 
  }
  generateAddress(addressObj){
