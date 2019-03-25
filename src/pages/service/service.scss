@@ -6,4 +6,23 @@ page-service {
   .watch-text{
       font-size: 18px;
   }
+
+  .service-content {
+    background: #f8f7f7;
+
+  .service-box {
+    //background: #399F8B;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+  }
+}
+  #button {
+    background-color: rgb(235, 235, 117);
+    padding: 2px 4px;
+    font: 13px sans-serif;
+    text-decoration: none;
+    border: 1px solid #000;
+    border-color: #aaa #444 #444 #aaa;
+    color: #000
+  }
 }

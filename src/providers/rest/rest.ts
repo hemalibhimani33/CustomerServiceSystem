@@ -1,5 +1,5 @@
 import * as CryptoJS from 'crypto-js';
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
+import { Injectable, OnInit, OnDestroy, Component } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 // import { NavController,Platform, AlertController, IonicPage } from 'ionic-angular';
 import { Headers, RequestOptions , Http, Response } from '@angular/http';
@@ -17,6 +17,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import { ServicePage } from '../../pages/service/service';
+import { stringify } from '@angular/compiler/src/util';
 
 
 //export type HandleError = <T> (operation?: string, result?: T) => (error: HttpErrorResponse) => Observable<T>;
@@ -31,13 +32,23 @@ const options = {
 
   token: string
   email: string
+
+  formatted : string
+
+
   }
+
+  // export interface myData1{
+  //   components:string
+  //   country:string
+  // }
 
 @Injectable()
 
 export class RestProvider {
    data: Observable<any>;
    public people: any;
+   results: any[];
   constructor(public httpClient:HttpClient, public http: HttpClient) {
 
 
@@ -62,7 +73,7 @@ export class RestProvider {
            "password":password
          };
 
-         debugger;
+
 
     return this.http.post<myData>('http://192.168.32.56:1337/login/login', JSON.stringify(newUser),options);
    // .map((res:any) => res.json())
@@ -79,6 +90,50 @@ export class RestProvider {
 
   }
 
+  currentLocation(latitude,longitude)
+  {
+  //   var headers = new Headers();
+  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+  //   headers.append('Access-Control-Allow-Origin' , '*');
+  //  headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+  //  headers.append('Accept','application/json');
+  //  headers.append('content-type','application/json');
+
+        var newUser1 =	{
+           "latitude":latitude ,
+           "longitude":longitude
+         };
+         if (this.data) {
+          return Promise.resolve(this.data);
+        }
+        return new Promise(resolve => {
+
+        this.httpClient.get('https://api.opencagedata.com/geocode/v1/json?q=' + newUser1.latitude + "+" + newUser1.longitude + '&key=7a55f6bc13be4c81b469ff079305d330')
+          .map((res:Response) => res)
+          .subscribe(data => {
+            debugger;
+            this.results = data['results'];
+              console.log(this.results[0].formatted);
+              resolve(this.results[0].formatted);
+             });
+      });
+
+        // return this.http.post<myData>('https://api.opencagedata.com/geocode/v1/json?q='+latitude+'+'+longitude+'&key=7a55f6bc13be4c81b469ff079305d330', JSON.stringify(newUser1));
+
+// return this.http.get<myData>('https://api.opencagedata.com/geocode/v1/json?q=23.2006975+72.6342312&key=7a55f6bc13be4c81b469ff079305d330')
+// .subscribe(
+//   data => {
+//     debugger;
+//     console.log(data.formatted);
+
+//   }
+//   ,
+//   error =>  {
+
+//    console.log(error);
+//   }
+// );
+  }
 
 
   // ValidateUser(email,password):Observable<any>{
@@ -96,7 +151,7 @@ export class RestProvider {
         //  let options = new RequestOptions({ headers: headers });
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        debugger;
+
      // password = CryptoJS.MD5(password).toString();
           var newUser =	{
                   "firstname":firstname ,
@@ -106,7 +161,7 @@ export class RestProvider {
                   "number":number
                  };
 
-                 debugger;
+
 
           return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options)
                      //.map(this.extractData)
@@ -119,7 +174,7 @@ export class RestProvider {
                              });
       }
       load2(id) {
-        debugger;
+
         var headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
          headers.append('Access-Control-Allow-Origin' , '*');
@@ -131,18 +186,18 @@ export class RestProvider {
             return Promise.resolve(this.data);
           }
           return new Promise(resolve => {
-            debugger;
+
           this.httpClient.get('http://192.168.32.56:1337/Servicecategory/subcategory/' + (id))
             .map((res:Response) => res)
             .subscribe(data => {
-              debugger;
+
                 resolve(data);
                });
         });
       }
 
   load() {
-    debugger;
+
     var headers = new Headers();
      headers.append('Content-Type', 'application/x-www-form-urlencoded');
      headers.append('Access-Control-Allow-Origin' , '*');
@@ -153,22 +208,22 @@ export class RestProvider {
         return Promise.resolve(this.data);
       }
       return new Promise(resolve => {
-        debugger;
+
       this.httpClient.get('http://192.168.32.56:1337/service/view')
         .map((res:Response) => res)
         .subscribe(data => {
-          debugger;
+
             resolve(data);
            });
     });
   }
   private extractData(res: Response) {
-    debugger;
+
     let body = res.json();
           return body || {};
       }
 private handleErrorObservable (error: Response | any) {
-        debugger;
+
     console.error(error.message || error);
     return Observable.throw(error.message || error);
       }
@@ -176,23 +231,23 @@ private handleErrorObservable (error: Response | any) {
   //getApiUrl : string = "https://192.168.32.56:1337/service/index";
 
 // getPost() {
-// debugger;
+//
 // var headers = new Headers();
 //         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-//         debugger;
+//
 //     return  this.http.get(this.getApiUrl)
 //            // .do((res : Response ) => console.log(res.json())
 //           // .map((res : Response ) => res.json())
 //             //.catch(error => console.log(error)))
 //             .map((res:Response) => res)
 //         .subscribe(data => {
-//           debugger;
+//
 //           //  resolve(data);
 //        });
 // }
 
 // getPost(): Observable <any> {
-//   debugger;
+//
 //   console.log("Here");
 //   const headerDict = {
 //     'Content-Type': 'application/json',

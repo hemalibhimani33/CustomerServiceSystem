@@ -35,15 +35,16 @@ public data: any = {};
     this.loadPeople2();
   }
 
-orderService(){
-  this.data = this.auth.getCookie("token");
-  if(this.data != ""){
-    this.nav.push('ServicePage');
-  }else{
-    this.showPopup("failure", "login requires for order service");
-  }
+  orderService(category){
+    this.data = this.auth.getCookie("token");
+    if(this.data != ""){
+      this.nav.push('ServicePage', {name: category});
 
-}
+    }else{
+      this.showPopup("failure", "login requires for order service");
+    }
+
+  }
 
 
   loadPeople2(){
