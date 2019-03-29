@@ -1,4 +1,4 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, timeInterval } from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, Loading, LoadingController, NavController, Option } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
@@ -9,6 +9,7 @@ import { RestProvider } from  './../../providers/rest/rest';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from '@ionic-native/native-geocoder/ngx';
 
+
 @IonicPage()
 @Component({
   selector: 'page-service',
@@ -18,10 +19,11 @@ import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from
 
 
 export class ServicePage {
-  date = new Date().toISOString();
-//  time = new TimeRanges();
+  date = new Date().toDateString();
+
   enddate = new Date().toDateString();
 
+  location: Boolean = false;
 
   responseObj:any;
   watchLocationUpdates:any;
@@ -36,33 +38,62 @@ export class ServicePage {
 
 
   public people3: any = [];
-  public p:any;
+  public userLocation:any;
+  public userLocation1:any;
+
   public l 	: FormGroup;
   public category: any = {};
-
+  eventTime: any;
+  eventLocation: any;
 
 
   constructor(public nav: NavController, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder , private _FB : FormBuilder,public navParams: NavParams) {
      //
+     debugger;
      this.category = navParams.get('name');
 
 //console.log(this.date);
   }
+
+  // save() {
+  //   console.log(this.eventTime);   //undefined
+  // }
+
+  // timeChanged(event: any) {
+  //   console.log(event);                 //undefined
+  // }
 
  public create(vname) {
 
      this.nav.push('FormPage',{firstname: vname});
   }
 submitt(event){
-
-
+  debugger;
+  //console.log(this.my.controls.p_location.value);
+  console.log(this.eventLocation)
   console.log(this.date);
- // console.log(this.time);
-
+  console.log(this.eventTime);
   console.log(this.enddate);
+  var service = {
+    location:this.eventLocation,
+    start_date:this.date,
+    start_time:this.eventTime,
+    end_date:this.enddate
+  }
+  debugger;
+  this.restProvider.orderS(service)
+  .subscribe(data => {
+    debugger;
+    console.log(data);
+    this.showPopup("Success","order successfully.");
+   }, error => {
+     debugger;
+   console.log(error);// Error getting the data
+   this.showPopup("error","no order placed");
+  });
 
-  this.showPopup("Success", "Account created.");
+  //this.showPopup("Success","order successfully.");
 
 }
 
@@ -98,16 +129,7 @@ getGeolocation(){
 
 });
 }
-  // this.geolocation.getCurrentPosition().then((resp) => {
-  //   this.responseObj = resp.coords;
-  //  // this.hideLoader();
-  //   this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
 
-  //  }).catch((error) => {
-  //    alert('Error getting location'+ JSON.stringify(error));
-  //   // this.hideLoader();
-  //  });
-//}
 
 //geocoder method to fetch address from coordinates passed as arguments
 getGeoencoder(latitude,longitude){
@@ -117,64 +139,15 @@ getGeoencoder(latitude,longitude){
   debugger;
   this.restProvider.currentLocation(latitude,longitude)
   .then(data => {
-    debugger;
     this.people3 = data;
-// let p = this.people3;
+  this.eventLocation = this.people3;
+  this.location = true;
     console.log(this.people3);
-    return this.people3;
+
+   // return this.people3;
   });
 
-//   .subscribe(
-//     data => {
-//       debugger;
-//       console.log(data.country);
 
-//     }
-//     ,
-//     error =>  {
-//      console.log(error);
-//     }
-// );
-
-  // return new Promise((resolve, reject) =>
-  // {
-  //     debugger;
-  //     this.nativeGeocoder.reverseGeocode(latitude, longitude,this.geoencoderOptions)
-  //    .then((result : NativeGeocoderReverseResult[]) =>
-  //    {
-  //     console.log(JSON.stringify(result[0]));
-  //      // let str : string   = `The reverseGeocode address is ${result.street} in ${result.countryCode}`;
-  //       resolve(result);
-  //    })
-  //    .catch((error: any) =>
-  //    {
-  //       console.log(error);
-  //       reject(error);
-  //    });
-  //    debugger;
-  //    console.log('above working');
-  // });
-  // this.nativeGeocoder.reverseGeocode(latitude,longitude)
-  // .then((result: NativeGeocoderReverseResult[]) =>{
-
-  //  console.log(JSON.stringify(result[0]));
-  //    this.responseObj = result[0];
-  // })
-
-  // .catch((error: any) => console.log(error));
-
-
-  // this.nativeGeocoder.reverseGeocode(latitude, longitude)
-  // .then((result: NativeGeocoderReverseResult[]) => {
-  //
-  //   console.log(result);
-  //  // this.responseObj.address = this.generateAddress(result[0]);
-  //  // this.hideLoader();
-  // })
-  // .catch((error: any) => {
-  //   alert('Error getting location'+ JSON.stringify(error));
-  //  // this.hideLoader();
-  // });
 }
 generateAddress(addressObj){
   let obj = [];
