@@ -12,27 +12,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AboutPage {
   MyForm1: FormGroup;
-  private loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
-
-
-
   constructor(public navCtrl: NavController,   private cookieService:CookieService) {
 
   }
 
-  private getUserAvailability():boolean{
-    if(this.cookieService.get("token")!=""){
-        return true;
-    }else{
-      return false;
-    }
-
-}
-
   public logout(): any{
     debugger;
     this.cookieService.delete('token');
-    this.loggedIn.next(false);
+   // this.loggedIn.next(false);
     this.navCtrl.push(LoginPage);
   }
 

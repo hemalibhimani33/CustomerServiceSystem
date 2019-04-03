@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title align="center" style="color:black; ">Order Service</ion-title>
@@ -23,20 +23,17 @@
           <ion-item >
               <ion-input type="text"  [(ngModel)]="eventLocation" value="{{eventLocation}}"></ion-input>
 
-            <!-- <ion-input ng-value="myVar" class="my-label"></ion-input> -->
           </ion-item>
         </div>
-        <!-- <ion-item *ngFor="let person3 of people3">
-          <ion-input placeholder="Location">{{person3.formatted}}</ion-input>
-        </ion-item> -->
+        <ion-item>
+          <ion-input placeholder="Location"></ion-input>
+        </ion-item>
 
     <ion-item>
       <ion-label>Start Date</ion-label>
       <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="date"></ion-datetime>
-      <!-- <ion-datetime display-format="MMM DD, YYYY HH:mm"></ion-datetime> -->
 
     </ion-item>
-    <!-- [(ngModel)]="event.month" -->
 
     <ion-item>
       <ion-label>Start Time</ion-label>
@@ -51,9 +48,137 @@
     <button ion-button id="button" (click)="submitt($event)" full><b>Order Service</b></button>
   </ion-item>
   </ion-list>
-
-  <!-- <button ion-button id="button" (click)="submitt($event)" full><b>Order Service</b></button> -->
-
 </div>
+
+</ion-content> -->
+
+
+
+
+
+
+<ion-header>
+  <ion-navbar>
+    <ion-title align="center" style="color:black; ">Order Service</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="service-content" padding>
+   <form
+      [formGroup]="form"
+      (ngSubmit)="manage(form.value)">
+   	  <ion-list
+          margin-bottom>
+
+          <ion-item>
+            <ion-label><h2><b> {{category}}</b></h2></ion-label>
+          </ion-item>
+         <!-- <ion-item
+            margin-bottom
+            no-lines>
+            <ion-label floating>Service name:</ion-label>
+            <ion-input
+               type="text"
+               maxlength="20"
+               formControlName="name"></ion-input>
+            <span>Please enter a service name of no more than 20 characters</span>
+         </ion-item> -->
+         <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="start_date"></ion-datetime>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Start Time</ion-label>
+          <ion-datetime displayFormat="hh:mm:ss A" pickerFormat="hh mm ss A" formControlName="start_time"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>End Date</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" formControlName="end_date"></ion-datetime>
+        </ion-item>
+
+        <!-- <div *ngIf="!location">
+          <ion-item>
+              <button ion-button id="button" (click)="getGeolocation()"full><b>Get Current Location</b></button>
+
+            </ion-item>
+          </div>
+          <div *ngIf="location">
+            <ion-item >
+                <ion-input type="text"  formControlName="eventLocation" value="{{eventLocation}}"></ion-input>
+
+            </ion-item>
+          </div> -->
+
+          <ion-item>
+            <ion-label floating>Enter Address</ion-label>
+            <ion-input
+               type="text"
+               maxlength="200"
+               formControlName="location" value="{{eventLocation}}"></ion-input>
+         </ion-item>
+	     <!-- <div
+	        formArrayName="address"
+	        margin-bottom>
+            <section
+               [formGroupName]="i"
+               *ngFor="let tech of form.controls.address.controls; let i = index">
+               <ion-item-group>
+               	  <ion-item-divider color="light">Location #{{ i + 1 }}</ion-item-divider>
+                  <ion-item>
+                     <ion-label floating>Enter Address</ion-label>
+                     <ion-input
+                        type="text"
+                        maxlength="200"
+                        formControlName="name" value="{{eventLocation}}"></ion-input>
+                  </ion-item>
+
+                  <span
+                     float-right
+                     ion-button
+                     icon-left
+                     clear
+                     *ngIf="form.controls.address.length > 1"
+                     (click)="removeInputField(i)">
+                     <ion-icon name="close"></ion-icon>
+                     Remove
+                  </span>
+               </ion-item-group>
+            </section>
+         </div> -->
+
+
+         <!-- <span
+            ion-button
+            float-left
+            icon-left
+            clear
+            (click)="addNewInputField()">
+               <ion-icon name="add"></ion-icon>
+               Add a new location
+         </span> -->
+         <span
+         ion-button
+         float-left
+         icon-left
+         clear
+         (click)="presentActionSheet()">
+            <ion-icon name="add"></ion-icon>
+            Choose location
+      </span>
+   	 </ion-list>
+         <button
+   	     ion-button
+   	     block
+   	     margin-top
+          id="button"
+   	     text-center
+   	     ><b>Order Service</b></button>
+   </form>
+
+
 
 </ion-content>

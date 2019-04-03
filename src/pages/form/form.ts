@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-
-
 import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
@@ -30,8 +28,6 @@ public data: any = {};
     this.id = navParams.get('id');
     this.service = navParams.get('name');
     console.log(this.service);
-
-
     this.loadPeople2();
   }
 
@@ -42,7 +38,7 @@ orderService(category){
     this.nav.push('ServicePage', {name: category});
 
   }else{
-    this.showPopup("failure", "login requires for order service");
+    this.showPopup("Anonymous", "login requires for order service");
   }
 
 }
@@ -98,6 +94,8 @@ setFilteredItems2() {
           handler: data => {
 
               this.nav.popToRoot();
+             // this.nav.push(LoginPage);
+
 
           }
         }

@@ -79,6 +79,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { LocationPage } from '../pages/location/location';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     HomePage,
     //RegisterPage,
     LoginPage,
+    LocationPage,
     //FormPage,
     TabsPage,
     //ServicePage,
@@ -109,7 +111,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     HomePage,
    // RegisterPage,
     LoginPage,
-
+    LocationPage,
     //FormPage,
     TabsPage,
    // ServicePage

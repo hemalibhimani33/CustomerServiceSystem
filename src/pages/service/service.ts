@@ -1,13 +1,18 @@
+
+
+
+
 import { catchError, timeInterval } from 'rxjs/operators';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, Option } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
  import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
 // import { FormPage } from '../../pages/form/form';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from '@ionic-native/native-geocoder/ngx';
+import { LocationPage } from '../location/location';
 
 
 @IonicPage()
@@ -16,152 +21,319 @@ import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from
   templateUrl: 'service.html',
 
 })
-
-
 export class ServicePage {
-  date = new Date().toDateString();
 
-  enddate = new Date().toDateString();
-
-  location: Boolean = false;
-
-  responseObj:any;
-  watchLocationUpdates:any;
-  loading:any;
-  isWatching:boolean;
-
-  //Geocoder configuration
-  geoencoderOptions: NativeGeocoderOptions = {
-    useLocale: true,
-    maxResults: 5
-  };
+  public form 			: FormGroup;
+  start_date = new Date().toDateString();
+  end_date = new Date().toDateString();
+  start_time = new Date().toTimeString();
+   public category: any = {};
+   location: Boolean = false;
+   eventLocation: any;
+   public people3: any = [];
+   responseObj:any;
 
 
-  public people3: any = [];
-  public userLocation:any;
-  public userLocation1:any;
-
-  public l 	: FormGroup;
-  public category: any = {};
-  eventTime: any;
-  eventLocation: any;
+  constructor(public navCtrl 		: NavController,
+              public navParams 	: NavParams,
+              private _FB          : FormBuilder, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
+             private nativeGeocoder: NativeGeocoder ,public actionSheetController: ActionSheetController)
+  {
+debugger;
 
 
-  constructor(public nav: NavController, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder , private _FB : FormBuilder,public navParams: NavParams) {
-     //
-     debugger;
-     this.category = navParams.get('name');
+    this.category = navParams.get('name');
+     this.form = this._FB.group({
+         start_date : ['', Validators.required],
+         end_date : ['', Validators.required],
+        start_time: ['', Validators.required],
+        location   : ['', Validators.required],
+       // eventLocation    : ['', Validators.required],
+        // address     : this._FB.array([
+        //    this.initAddressFields()
+        // ])
 
-//console.log(this.date);
+     });
   }
 
-  // save() {
-  //   console.log(this.eventTime);   //undefined
-  // }
 
-  // timeChanged(event: any) {
-  //   console.log(event);                 //undefined
-  // }
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+     // header: 'Albums',
+      buttons: [{
+        text: 'Current Location',
+        handler: () => {
+          debugger;
+          console.log('Delete clicked');
+          navigator.geolocation.getCurrentPosition((resp) => {
 
- public create(vname) {
+            this.responseObj = resp.coords;
+            console.log(this.responseObj.latitude);
+            console.log(this.responseObj.longitude);
+            this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
 
-     this.nav.push('FormPage',{firstname: vname});
-  }
-submitt(event){
-  debugger;
-  //console.log(this.my.controls.p_location.value);
-  console.log(this.eventLocation)
-  console.log(this.date);
-  console.log(this.eventTime);
-  console.log(this.enddate);
-  var service = {
-    location:this.eventLocation,
-    start_date:this.date,
-    start_time:this.eventTime,
-    end_date:this.enddate
-  }
-  debugger;
-  this.restProvider.orderS(service)
-  .subscribe(data => {
-    debugger;
-    console.log(data);
-    this.showPopup("Success","order successfully.");
-   }, error => {
-     debugger;
-   console.log(error);// Error getting the data
-   this.showPopup("error","no order placed");
-  });
-
-  //this.showPopup("Success","order successfully.");
-
-}
-
-showPopup(title, text) {
-  let alert = this.alertCtrl.create({
-    title: title,
-    subTitle: text,
-    buttons: [
-      {
-        text: 'OK',
-        handler: data => {
-
-            this.nav.popTo('FormPage');
-
+          });
         }
-      }
-    ]
-  });
-  alert.present();
-}
+      },
+       {
+        text: 'Default Location',
+        handler: () => {
+          this.navCtrl.push(LocationPage);
+        }
+      },
+      //   text: 'Play (open modal)',
+      //   icon: 'arrow-dropright-circle',
+      //   handler: () => {
+      //     console.log('Play clicked');
+      //   }
+      // }, {
+      //   text: 'Favorite',
+      //   icon: 'heart',
+      //   handler: () => {
+      //     console.log('Favorite clicked');
+      //   }
+      // }, {
 
 
-
-getGeolocation(){
- // this.showLoader();
-
- navigator.geolocation.getCurrentPosition((resp) => {
-
-  this.responseObj = resp.coords;
-  console.log(this.responseObj.latitude);
-  console.log(this.responseObj.longitude);
-  this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
-
-});
-}
-
-
-//geocoder method to fetch address from coordinates passed as arguments
-getGeoencoder(latitude,longitude){
-
-  //this.showLoader();
-  console.log(latitude);
-  debugger;
-  this.restProvider.currentLocation(latitude,longitude)
-  .then(data => {
-    this.people3 = data;
-  this.eventLocation = this.people3;
-  this.location = true;
-    console.log(this.people3);
-
-   // return this.people3;
-  });
-
-
-}
-generateAddress(addressObj){
-  let obj = [];
-  let address = "";
-  for (let key in addressObj) {
-    obj.push(addressObj[key]);
+    {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
-  obj.reverse();
-  for (let val in obj) {
-    if(obj[val].length)
-    address += obj[val]+', ';
+
+  initAddressFields() : FormGroup
+  {
+     return this._FB.group({
+        name 		: ['', Validators.required]
+     });
   }
-return address.slice(0, -2);
-}
+
+  addNewInputField() : void
+  {
+     const control = <FormArray>this.form.controls.address;
+     control.push(this.initAddressFields());
+  }
+
+  removeInputField(i : number) : void
+  {
+     const control = <FormArray>this.form.controls.address;
+     control.removeAt(i);
+  }
+
+  manage(val : any) : void
+  {
+
+    if(!this.form.valid){
+      this.showPopup("error","enter valid data");
+    }
+    else{
+    debugger;
+     console.dir(val);
+     debugger;
+      this.restProvider.orderS(val)
+      .subscribe(data => {
+      debugger;
+      console.log(data);
+      this.showPopup("Success","order successfully.");
+      }, error => {
+        debugger;
+        console.log(error);
+      this.showPopup("error","no order placed");
+      });
+    }
+  }
+
+
+  // getGeolocation(){
+  //   // this.showLoader();
+
+  //   navigator.geolocation.getCurrentPosition((resp) => {
+
+  //    this.responseObj = resp.coords;
+  //    console.log(this.responseObj.latitude);
+  //    console.log(this.responseObj.longitude);
+  //    this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
+
+  //  });
+  //  }
+
+
+   getGeoencoder(latitude,longitude){
+
+     console.log(latitude);
+     debugger;
+     this.restProvider.currentLocation(latitude,longitude)
+     .then(data => {
+       this.people3 = data;
+     this.eventLocation = this.people3;
+     //this.location = true;
+       //console.log(this.people3);
+
+     });
+
+
+   }
+
+  showPopup(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+              this.navCtrl.pop();
+              //this.navCtrl.popTo('FormPage');
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 
 }
+
+
+// export class ServicePage {
+//   date = new Date().toDateString();
+//   enddate = new Date().toDateString();
+//   location: Boolean = false;
+//   public form: FormGroup;
+
+
+//   responseObj:any;
+//   // watchLocationUpdates:any;
+//   // loading:any;
+//   // isWatching:boolean;
+
+//   // //Geocoder configuration
+//   // geoencoderOptions: NativeGeocoderOptions = {
+//   //   useLocale: true,
+//   //   maxResults: 5
+//   // };
+
+
+//   public people3: any = [];
+//   public userLocation:any;
+//   public userLocation1:any;
+
+//   public l 	: FormGroup;
+//   public category: any = {};
+//   eventTime: any;
+//   eventLocation: any;
+
+
+//   constructor(public nav: NavController, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
+//     private nativeGeocoder: NativeGeocoder , private _FB : FormBuilder,public navParams: NavParams) {
+
+//      debugger;
+//      this.category = navParams.get('name');
+
+//   }
+
+
+//  public create(vname) {
+
+//      this.nav.push('FormPage',{firstname: vname});
+//   }
+// submitt(event){
+//   debugger;
+//   console.log(this.eventLocation)
+//   console.log(this.date);
+//   console.log(this.eventTime);
+//   console.log(this.enddate);
+  // var service = {
+  //   location:this.eventLocation,
+  //   start_date:this.date,
+  //   start_time:this.eventTime,
+  //   end_date:this.enddate
+  // }
+  // debugger;
+  // this.restProvider.orderS(service)
+  // .subscribe(data => {
+  //   debugger;
+  //   console.log(data);
+  //   this.showPopup("Success","order successfully.");
+  //  }, error => {
+  //    debugger;
+  //  console.log(error);
+  //  this.showPopup("error","no order placed");
+  // });
+
+//   //this.showPopup("Success","order successfully.");
+
+// }
+
+// showPopup(title, text) {
+//   let alert = this.alertCtrl.create({
+//     title: title,
+//     subTitle: text,
+//     buttons: [
+//       {
+//         text: 'OK',
+//         handler: data => {
+
+//             this.nav.popTo('FormPage');
+
+//         }
+//       }
+//     ]
+//   });
+//   alert.present();
+// }
+
+
+
+// getGeolocation(){
+//  // this.showLoader();
+
+//  navigator.geolocation.getCurrentPosition((resp) => {
+
+//   this.responseObj = resp.coords;
+//   console.log(this.responseObj.latitude);
+//   console.log(this.responseObj.longitude);
+//   this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
+
+// });
+// }
+
+
+// getGeoencoder(latitude,longitude){
+
+//   console.log(latitude);
+//   debugger;
+//   this.restProvider.currentLocation(latitude,longitude)
+//   .then(data => {
+//     this.people3 = data;
+//   this.eventLocation = this.people3;
+//   this.location = true;
+//     console.log(this.people3);
+
+//   });
+
+
+// }
+// generateAddress(addressObj){
+//   let obj = [];
+//   let address = "";
+//   for (let key in addressObj) {
+//     obj.push(addressObj[key]);
+//   }
+//   obj.reverse();
+//   for (let val in obj) {
+//     if(obj[val].length)
+//     address += obj[val]+', ';
+//   }
+// return address.slice(0, -2);
+// }
+
+// }
 

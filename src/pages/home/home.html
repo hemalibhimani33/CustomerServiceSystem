@@ -5,64 +5,24 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-<!-- <ion-grid>
-    <ion-list>
 
-        <ion-item *ngFor="let person of people">
-            <button ion-item (click)="sub(person.id)" full id={{person.id}}>
-                <ion-avatar item-left>
-                <img src="{{person.image}}">
-                </ion-avatar>
-                 <h1 >{{person.service}}</h1>
-            </button>
-        </ion-item>
-      </ion-list>
-    </ion-grid>
-    <ion-grid>
-  <ion-row *ngFor="let row of grid">
-  </ion-row>
-</ion-grid> -->
-<!-- <ion-searchbar placeholder="Search for Services" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar> -->
 <ion-searchbar  placeholder="Search for Services" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="getPeople($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
 <ion-grid >
     <ion-row >
       <ion-col col-6 col-md-4 col-xl-3  *ngFor="let person of people" >
         <ion-list>
 
-        <button ion-item (click)="sub(person.id,person.service)" full id={{person.id}} >
+        <button ion-item (click)="sub(person.id,person.category)" full id={{person.id}} >
             <div align="center" class="image-container" >
                     <ion-avatar >
                     <img src="{{homePage}}{{person.image}}">
                     </ion-avatar>
-                    <h2>{{person.service}}</h2>
+                    <h2>{{person.category}}</h2>
             </div>
         </button>
       </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-
-
-  <!-- <ion-grid>
-    <ion-row >
-      <ion-col >
-        <ion-item *ngFor="let person of people">
-        <button ion-item (click)="sub(person.id)" full id={{person.id}} >
-        <div align="center" >
-            <ion-avatar item-left>
-                <img src="{{person.image}}">
-                </ion-avatar>
-        </div>
-        <div align="center">
-            <h1>{{person.service}}</h1>
-        </div>
-      </button>
-    </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
 
 </ion-content>

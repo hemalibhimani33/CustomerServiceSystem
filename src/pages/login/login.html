@@ -3,16 +3,8 @@
       <ion-title class="h"></ion-title>
     </ion-navbar>
 
-  </ion-header>
+</ion-header>
 
-<!-- <ion-content class="login-content" padding>
-   <ion-row class="logo-row">
-    <ion-col></ion-col>
-    <ion-col width-300 height-50>
-      <img class="full-image" src="assets/imgs/fintech.jpg"/>
-    </ion-col>
-    <ion-col></ion-col>
-  </ion-row> -->
   <ion-content class="login-content" padding>
   <div class="login-box">
     <form  [formGroup]="MyForm" *ngIf="!put">
@@ -21,27 +13,14 @@
             <div class="title"><h1><b>Sign In</b></h1></div>
           <ion-list inset>
 
-            <!--<ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
-            </ion-item>
-            -->
 
           <ion-item>
             <ion-label>
               <ion-icon name="mail"></ion-icon>
             </ion-label>
             <ion-input placeholder="Email" type="email" [(ngModel)]="formdata.p_email" name="p_email" formControlName="p_email"></ion-input>
-            <!-- <div *ngIf="f.email.errors.required">Email is required</div> -->
 
           </ion-item>
-
-          <!-- <ion-item *ngIf="!MyForm.controls.p_email.valid  && (createSuccess)">
-            <p>Please enter a valid Email address.</p>
-          </ion-item> -->
 
             <ion-item>
               <ion-label>
@@ -60,14 +39,7 @@
           <button ion-button id="button2"color="primary" (click)="createAccount()" icon-only clear>Not a member? Register</button>
         </ion-col>
       </ion-row>
-    <!--
-      <ion-row>
-        <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
-          <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
-        </ion-col>
-      </ion-row>
-    -->
+
     </form>
     <ion-spinner name="circles" *ngIf="put" ></ion-spinner>
   </div>

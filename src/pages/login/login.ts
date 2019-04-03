@@ -9,10 +9,9 @@ import { myData } from './../../providers/rest/rest'
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { v } from '@angular/core/src/render3';
-//import { myData } from '../../providers/rest/rest';
-//import { v } from '../variable';
-//import { v } from '@angular/core/src/render3';
+
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { HomePage } from '../home/home';
 
 
 @IonicPage()
@@ -31,12 +30,10 @@ MyForm: FormGroup;
 createSuccess: Boolean = false;
 put: Boolean = false;
 data: string;
-//clicked: Boolean = true;
-//mydata: myData ;
+
 mydata : myData[] = [];
 v : ContactPage;
 
-//public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
 
 constructor(private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
@@ -54,35 +51,14 @@ constructor(private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav
   }, );
 
 }
-// clicked: v;
 ionViewDidEnter(){
 
 }
-// ngOnInit() {
-//   this.MyForm = this.formBuilder.group(
-//     {
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', [Validators.required, Validators.minLength(6)]]
-//     }
-//   );
-// }
 
 public createAccount() {
   this.nav.push('RegisterPage');
 }
 
-// get isLoggedIn() {
-//   return this.loggedIn.asObservable();
-// }
-
-// public getUserAvailability():boolean{
-//     if(this.auth.getCookie("token")!=""){
-//         return true;
-//     }else{
-//       return false;
-//     }
-
-// }
 login(event){
   //this.createSuccess = true;
 
@@ -97,7 +73,7 @@ login(event){
       this.createSuccess = true;
      // this.showPopup("Success", "login.");
       debugger;
-
+      this.put = true;
   const email = this.MyForm.controls.p_email.value
   const password = this.MyForm.controls.p_password.value
   debugger;
@@ -110,52 +86,40 @@ login(event){
      this.auth.setCookie('token',data.token,1);
     // debugger;
     this.data = this.auth.getCookie("token");
+    this.nav.setRoot(HomePage);
+
      // this.cookieService.set('token',JSON.stringify(this.mydata));
 
-      debugger;
-       //this.loggedIn.next(true);
-    if(this.data != ""){
+    //   debugger;
+    //    //this.loggedIn.next(true);
+    // if(this.data != ""){
 
-     // this.ng4LoadingSpinnerService.show();
-      setTimeout(() => {
-        window.location.reload();
-        //this.ng4LoadingSpinnerService.hide();
-      }, 0.1);
-    //  this.ng4LoadingSpinnerService.show();
-      this.put = true;
+    //  // this.ng4LoadingSpinnerService.show();
+    //   setTimeout(() => {
+    //     window.location.reload();
+    //     //this.ng4LoadingSpinnerService.hide();
+    //   }, 0.1);
+    // //  this.ng4LoadingSpinnerService.show();
+    //   this.put = true;
 
-      //this.nav.pop();
-     // this.showPopup("success", "login successfully");
+    //   //this.nav.pop();
+    //  // this.showPopup("success", "login successfully");
 
-    }
-    // window.location.reload();
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 0.1);
+    // }
+
     },
 
     error =>  {
      console.log(error);
-    // debugger;
-     //this.loggedIn.next(true);
-    // this.clicked = true;
-     this.showPopup("failure", "invalid information");}
-     //this.nav.push(ContactPage);}
-     // this.showPopup("failure", "invalid information");}
 
-
-);
-
-
-
-      debugger;
-     // this.nav.push('ServicePage');
-
+     this.showPopup("failure", "invalid information");
     }
+   );
+   }
    // this.nav.push('ServicePage');
 
 
-  }
+ }
 
   showPopup(title, text) {
     let alert = this.alertCtrl.create({

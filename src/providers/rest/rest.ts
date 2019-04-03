@@ -237,7 +237,7 @@ export class RestProvider {
           }
           return new Promise(resolve => {
 
-          this.httpClient.get('http://192.168.32.56:1337/Servicecategory/subcategory/' + (id))
+          this.httpClient.get('http://192.168.32.56:1337/Service/subservice/' + (id))
             .map((res:Response) => res)
             .subscribe(data => {
 
@@ -259,7 +259,7 @@ export class RestProvider {
       }
       return new Promise(resolve => {
 
-      this.httpClient.get('http://192.168.32.56:1337/service/view')
+      this.httpClient.get('http://192.168.32.56:1337/category/view')
         .map((res:Response) => res)
         .subscribe(data => {
 
