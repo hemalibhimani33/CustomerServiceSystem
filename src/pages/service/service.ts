@@ -32,6 +32,8 @@ export class ServicePage {
    eventLocation: any;
    public people3: any = [];
    responseObj:any;
+  id: any;
+  cid: any;
 
 
   constructor(public navCtrl 		: NavController,
@@ -41,6 +43,8 @@ export class ServicePage {
   {
 debugger;
 
+this.id = navParams.get('id');
+this.cid = navParams.get('cid');
 
     this.category = navParams.get('name');
      this.form = this._FB.group({
@@ -136,7 +140,7 @@ debugger;
     debugger;
      console.dir(val);
      debugger;
-      this.restProvider.orderS(val)
+      this.restProvider.orderS(this.id,this.cid,val)
       .subscribe(data => {
       debugger;
       console.log(data);

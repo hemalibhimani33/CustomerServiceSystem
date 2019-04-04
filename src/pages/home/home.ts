@@ -16,6 +16,9 @@ import { Headers, RequestOptions , Http, Response } from '@angular/http';
 })
 export class HomePage {
   public people: any = [];
+ //galleryType = 'regular';
+  //image: Array<string>;
+  //grid: Array<Array<string>>;
   public homePage : string = null;
   private list: string[];
   private list2: string[];
@@ -24,18 +27,26 @@ public shouldShowCancel: any = [];
   constructor(private http: Http,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
-    debugger;
 
+    //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
+    //this.ionViewLoaded();
+   // this.ionViewLoaded();
    this.homePage = 'http://localhost:8100/';
     this.loadPeople();
+
+
+    // this.people.push({
+    //   image : this.people.image,
+    //   service : this.people.service
+    // });
 
   }
 
   loadPeople(){
-    debugger;
+
    this.restProvider.load()
    .then(data => {
-     debugger;
+
      this.people = data;
    });
  }
@@ -46,13 +57,22 @@ public shouldShowCancel: any = [];
  }
 
  getPeople(ev: any){
-   debugger;
+debugger;
    this.setFilteredItems();
    let val = ev.target.value;
 
    if (val && val.trim() != '') {
 
+      //var list1:any = [];
+
+     /* for(let i=0;i<this.people.length;i++)
+      {
+         if(this.people[0])
+      }*/
+
     var list:any = this.people.filter((person) => {
+      debugger;
+      console.log(person.service);
       return (person.service.toLowerCase().indexOf(val.toLowerCase()) > -1);
     });
     // var list2:any = this.people.filter((person2) => {
@@ -64,6 +84,25 @@ public shouldShowCancel: any = [];
   }
 
 
+  //  if(serVal && serVal.trim()!="")
+  //  {
+  //   console.log(this.people);
+  //    this.list = this.people.filter((person)=>
+  //    {
+  //      console.log(person);
+  //      return (person.service.toLowerCase().indexOf(serVal.toLowerCase())) > -1;
+
+  //   });
+
+  //   console.log(list);
+
+  //   //
+
+  //   //this.loadPeople();
+  //  }
+
+
+
  }
 
  setFilteredItems() {
@@ -73,8 +112,13 @@ public shouldShowCancel: any = [];
 
 }
   public sub(id,service) {
-debugger;
+
     this.nav.push('FormPage' , {id : id, name: service});
  }
 
+// ionViewDidLoad() {
+
+//   this.setFilteredItems();
+
+// }
 }

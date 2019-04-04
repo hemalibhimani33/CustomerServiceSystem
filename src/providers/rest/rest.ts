@@ -20,6 +20,8 @@ import 'rxjs/add/operator/toPromise';
 import { ServicePage } from '../../pages/service/service';
 import { stringify } from '@angular/compiler/src/util';
 import { AuthService } from '../auth-service/auth-service';
+import * as firebase from 'firebase';
+
 
 
 //export type HandleError = <T> (operation?: string, result?: T) => (error: HttpErrorResponse) => Observable<T>;
@@ -36,7 +38,7 @@ const options = {
   email: string
 
   formatted : string
-
+id:number
 
   }
 
@@ -54,12 +56,7 @@ export class RestProvider {
    public data1: any = {};
 
   constructor(public httpClient:HttpClient, public http: HttpClient,private auth: AuthService) {
-
-
    }
-
-
-
 
   //ngOnDestroy(): void {}
 
@@ -89,9 +86,6 @@ export class RestProvider {
             //     data => console.log(data),
             //     error => console.log(error),
             // );
-
-
-
   }
 
   currentLocation(latitude,longitude)
@@ -126,29 +120,7 @@ export class RestProvider {
   }
 
 
-  // orderS(services){
-  //   // let headers = new Headers({ 'Content-Type': 'application/json' });
-  //       // let options = new RequestOptions({ headers: headers });
-  //       var headers = new Headers();
-  //      // this.data1 = this.auth.getCookie("token");
-  //      // headers.append("Authorization","this.data");
-
-  //       headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  //    // password = CryptoJS.MD5(password).toString();
-  //         var newUser =	{ services
-  //                };
-
-  //                debugger;
-  //         return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(services),options);
-  //                    //.map(this.extractData)
-  //                    //.catch(this.handleErrorObservable);
-  //                           //   .subscribe(data => {
-  //                           //    console.log(data['_body']);
-  //                           //   }, error => {
-  //                           //   console.log(error);// Error getting the data
-  //                           //  });
-  //     }
-      orderS(services){
+      orderS(id,cid,services){
         // let headers = new Headers({ 'Content-Type': 'application/json' });
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -176,15 +148,14 @@ export class RestProvider {
           }
         };
 
-
-
-
          // password = CryptoJS.MD5(password).toString();
-              var newUser =	{ services
+              var newUser3 =	{ services,
+                "categoryid":id ,
+                "serviceid":cid,
                      };
 
                      debugger;
-              return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(services),option);
+              return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(newUser3),option);
                          //.map(this.extractData)
                          //.catch(this.handleErrorObservable);
                                 //   .subscribe(data => {
@@ -213,15 +184,15 @@ export class RestProvider {
 
 
           debugger;
-          return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options)
+          return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options);
                      //.map(this.extractData)
                      //.catch(this.handleErrorObservable);
 
-                     .subscribe(data => {
-                               console.log(data['_body']);
-                              }, error => {
-                              console.log(error);// Error getting the data
-                             });
+                    //  .subscribe(data => {
+                    //            console.log(data['_body']);
+                    //           }, error => {
+                    //           console.log(error);// Error getting the data
+                    //          });
       }
       load2(id) {
 
@@ -259,9 +230,12 @@ export class RestProvider {
       }
       return new Promise(resolve => {
 
-      this.httpClient.get('http://192.168.32.56:1337/category/view')
-        .map((res:Response) => res)
+      this.httpClient.get<myData>('http://192.168.32.56:1337/category/view')
+        //.map((res:Response) => res)
         .subscribe(data => {
+          debugger;
+          console.log(data);
+          console.log(data.id);
 
             resolve(data);
            });

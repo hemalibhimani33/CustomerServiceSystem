@@ -4,6 +4,7 @@ import { LoginPage } from '../login/login';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../../providers/auth-service/auth-service';
 
 
 @Component({
@@ -11,17 +12,19 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  MyForm1: FormGroup;
-  constructor(public navCtrl: NavController,   private cookieService:CookieService) {
+  booking: Boolean = false;
+  public user1: any = {};
+  clicked: boolean;
 
-  }
 
-  public logout(): any{
+  constructor(public navCtrl: NavController,  private auth: AuthService,  private cookieService:CookieService) {
     debugger;
-    this.cookieService.delete('token');
-   // this.loggedIn.next(false);
-    this.navCtrl.push(LoginPage);
+    this.user1 = this.auth.getCookie("token");
+    console.log("asad");
+    if(this.user1 != ""){
+      this.booking = true;
+    }else{
+    this.booking = false;
+    }
   }
-
-
 }

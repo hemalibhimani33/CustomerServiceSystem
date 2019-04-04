@@ -14,8 +14,17 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: 'register.html',
 })
 
+// export class UserInfo {
+//   username: string;
+//   email: string;
+//   number: number;
+//   password: string;
+// }
+
 
 export class RegisterPage {
+
+
 
  formdata = {
   p_surname: '',
@@ -26,14 +35,17 @@ export class RegisterPage {
   p_confirm_password: ''
 };
 
+//u = new UserInfo();
 myForm: FormGroup;
+//apiUrl = '192.168.32.56:1337/register';
+
 
 createSuccess: Boolean = false;
 constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider , private httpClient:HttpClient
 ) {
 
-   this.myForm = this.formBuilder.group({
+  this.myForm = this.formBuilder.group({
     p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
     p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
 
@@ -48,12 +60,17 @@ constructor(public nav: NavController , private auth: AuthService, private alert
     //}, this.matchPassword)
 
   }, {'validator': this.isMatching});
+ //   this.restProvider.ValidateUser(this.myForm.controls.p_username.value,this.myForm.controls.p_email.value,this.myForm.controls.p_number.value,this.myForm.controls.p_password.value)
+
+    //this.products = products;
 
 }
 
 ionViewDidEnter(){
 
 }
+
+
 
 
 isMatching(group: FormGroup){
@@ -68,18 +85,19 @@ isMatching(group: FormGroup){
   } else{
     return null;
   }
-
 }
 
 matchPassword(group): any {
   let password = group.controls.p_password;
   let confirm = group.controls.p_confirm_password;
 console.log("indise");
+  // Don't kick in until user touches both fields
   if (password.pristine || confirm.pristine) {
     console.log("sd");
     return null;
   }
 
+  // Mark group as touched so we can add invalid class easily
   group.markAsTouched();
 
   if (password.value === confirm.value) {
@@ -92,10 +110,11 @@ console.log("sdfdsf");
 }
 
 register(){
-  this.createSuccess = true;
-  debugger;
+  //this.createSuccess = true;
 
- if(!this.myForm.valid){
+
+  if(!this.myForm.valid){
+    //this.createSuccess = false ;
     if(!this.myForm.controls.p_surname.valid){
       this.showPopup("failure", "Enter Valid username information.");
     }else if(!this.myForm.controls.p_lastname.valid){
@@ -111,13 +130,21 @@ register(){
     }
   }
   else {
-    debugger;
+   // this.createSuccess = true;
     this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
+    .subscribe(data => {
+      debugger;
+      console.log(data);
+      this.showPopup("Success", "Account created.");
 
-   debugger;
-    this.showPopup("Success", "Account created.");
+     }, error => {
+       debugger;
+     console.log(error);
+     this.showPopup("failure", "already exist");
+     // Error getting the data
+    });
+    //this.showPopup("Success", "Account created.");
    // this.nav.push('LoginPage');
-
    console.log(this.myForm.value);
     console.log(this.formdata);
   }
@@ -132,7 +159,7 @@ showPopup(title, text) {
         text: 'OK',
         handler: data => {
           if (this.createSuccess) {
-            this.nav.popToRoot();
+            this.nav.pop();
           }
         }
       }

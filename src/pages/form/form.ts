@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { ContactPage } from './../contact/contact';
+import { Component, Pipe } from '@angular/core';
+
+
 import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
 import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -28,22 +32,22 @@ public data: any = {};
     this.id = navParams.get('id');
     this.service = navParams.get('name');
     console.log(this.service);
+
+
     this.loadPeople2();
   }
 
-orderService(category){
+orderService(cid,category){
   this.data = this.auth.getCookie("token");
   if(this.data != ""){
     debugger;
-    this.nav.push('ServicePage', {name: category});
+    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category});
 
   }else{
     this.showPopup("Anonymous", "login requires for order service");
   }
 
 }
-
-
   loadPeople2(){
 
    this.restProvider.load2(this.id)
@@ -58,15 +62,13 @@ orderService(category){
      ev.stopPropagation();
  }
  get(ev: any){
-
+debugger;
   this.setFilteredItems2();
   let val = ev.target.value;
 
   if (val && val.trim() != '') {
 
      var list1:any = [];
-
-
 
    var list:any = this.people2.filter((person2) => {
      return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
@@ -92,11 +94,8 @@ setFilteredItems2() {
         {
           text: 'OK',
           handler: data => {
-
-              this.nav.popToRoot();
-             // this.nav.push(LoginPage);
-
-
+            debugger;
+              this.nav.push(LoginPage);
           }
         }
       ]

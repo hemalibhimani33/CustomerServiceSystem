@@ -8,7 +8,6 @@ import { ModalController, Platform, NavParams, ViewController } from 'ionic-angu
 import { RegisterPage } from '../register/register';
 import { LoginPage } from '../login/login';
 import { BehaviorSubject } from 'rxjs';
-import { v } from '../variable';
 import { CookieService } from 'ngx-cookie-service';
 
 
@@ -29,7 +28,9 @@ export class ContactPage {
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
       debugger;
+
       this.data = this.auth.getCookie("token");
+      console.log("asad");
       if(this.data != ""){
         this.clicked = true;
       }else{
@@ -47,18 +48,41 @@ export class ContactPage {
   }
   }
   public logout(): any{
-    debugger;
+   // this.clicked = false;
+   // this.ionViewWillEnter();
+
+    //this.cookieService.delete('token');
+    // this.data = this.auth.getCookie("token");
+    // console.log(this.data);
+    // this.auth.delete('token');
+    //     console.log(this.data);
+
     this.data = this.auth.getCookie("token");
     this.auth.setCookie('token',this.data,-1);    //localStorage.removeItem("token");
+   // this.data = this.auth.getCookie("token");
+
+   // console.log(this.data);
+   window.location.assign('http://localhost:8100');
 
         this.clicked = false;
-
+   // this.loggedIn.next(false);
+  // this.clicked = false;
+   // this.nav.push(ContactPage);
+    //this.router.navigate(['/contact']);
   }
+//   ionViewWillEnter(){
+//     this.myDefaultMethodToFetchData();
+// }
+// myDefaultMethodToFetchData(){
+//   this.clicked = false;
+// }
 
- public loginn(): any{
-      debugger;
+     public loginn(): any{
+
+  //  this.clicked = true;
       this.nav.push(LoginPage);
-     console.log( localStorage.getItem('clicked'));
+     //console.log( localStorage.getItem('clicked'));
+
        }
 
 

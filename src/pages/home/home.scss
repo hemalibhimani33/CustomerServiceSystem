@@ -6,6 +6,10 @@ page-home {
 
 }
 
+    // .image-container {
+    //     min-height: 200px;
+    //     background-size: cover;
+    // }
 
     @media (min-width: 0px) {
         .images {
@@ -28,4 +32,27 @@ page-home {
     .one-image {
         margin: 2px;
     }
+    // .sticky {
+    //  height: fixed;
+    // }
+    .grid-container {
+      display: grid;
+     // height: 400px;
+      align-content: center;
+      grid-template-columns: auto auto auto;
+      grid-gap: 5px;
+      background-color: #f8f7f7;
+      padding-top: 5px;
+    }
+    .search{
+background-color: #5ba6f9;
+
+    }
+
+    // .grid-container > div {
+    //   background-color: rgba(255, 255, 255, 0.8);
+    //   text-align: center;
+    //   padding: 20px 0;
+    //   font-size: 30px;
+    // }
 }

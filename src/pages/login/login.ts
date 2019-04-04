@@ -70,23 +70,26 @@ login(event){
       }
     }
     else {
-      this.createSuccess = true;
-     // this.showPopup("Success", "login.");
-      debugger;
-      this.put = true;
-  const email = this.MyForm.controls.p_email.value
-  const password = this.MyForm.controls.p_password.value
-  debugger;
-   this.restProvider.LoginUser(email, password)
+      setTimeout(() => {
+        this.put = true;
+      }, 1);
+    //this.put = true;
+    const email = this.MyForm.controls.email.value
+    const password = this.MyForm.controls.password.value
+    this.restProvider.LoginUser(email, password)
    .subscribe(
     data => {
-      console.log(data);
-      console.log(data.token);
-
-     this.auth.setCookie('token',data.token,1);
-    // debugger;
+    console.log(data.token);
+    this.auth.setCookie('token',data.token,1);
     this.data = this.auth.getCookie("token");
-    this.nav.setRoot(HomePage);
+    // if(this.data != ""){
+    //   this.put = true;
+    // }
+    // this.showPopup("success", "login successfully");
+   // this.go('http://localhost:8100/');
+    // this.nav.setRoot(HomePage);
+     debugger;
+     window.location.assign('http://localhost:8100/');
 
      // this.cookieService.set('token',JSON.stringify(this.mydata));
 

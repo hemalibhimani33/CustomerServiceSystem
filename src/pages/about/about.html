@@ -7,5 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-    <button ion-button id="button"  full><b>No Booking Found</b></button>
+  <div *ngIf="!booking">
+    <button ion-button id="button" color="dark" full><b>No Booking Found</b></button>
+    <!-- <ion-row class="logo">
+        <ion-col>
+          <img class="full-image" src="assets/imgs/booking.png"/>
+        </ion-col>
+      </ion-row> -->
+  </div>
+  <div *ngIf="booking">
+      <button ion-button id="button" color="dark" full><b>beauty</b></button>
+  </div>
+
+
 </ion-content>
