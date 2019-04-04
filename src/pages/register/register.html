@@ -28,7 +28,12 @@
                   <ion-icon name="person"></ion-icon>
                 </ion-label>
                 <ion-input placeholder="LastName" type="text" type="text" [(ngModel)]="formdata.p_lastname" name="p_lastname" formControlName="p_lastname"></ion-input>
-            </ion-item>
+                </ion-item>
+
+            <!-- <ion-item *ngIf="!myForm.controls.p_surname.valid  && (submitAttempt)">
+            <p>Please enter a valid Surname.</p>
+            </ion-item> -->
+
 
             <ion-item>
             <ion-label>
@@ -36,6 +41,10 @@
             </ion-label>
             <ion-input placeholder="Email" type="email" [(ngModel)]="formdata.p_email" name="p_email" formControlName="p_email"></ion-input>
             </ion-item>
+<!--
+            <div *ngIf="!myForm.controls.p_email.valid  && (createSuccess)">
+            <p>Please enter a valid Email address.</p>
+            </div> -->
 
             <ion-item>
               <ion-label>
@@ -55,14 +64,27 @@
               <ion-label>
                 <ion-icon name="call"></ion-icon>
               </ion-label>
-              <ion-input placeholder="Phonenumber" type="number" [(ngModel)]="formdata.p_number" name="p_number" formControlName="p_number"></ion-input>
+              <ion-input placeholder="number" type="phonenumber" [(ngModel)]="formdata.p_number" name="p_number" formControlName="p_number"></ion-input>
             </ion-item>
+
+            <!-- <ion-item *ngIf="!myForm.controls.p_number.valid  && (submitAttempt)">
+              <p>Please enter a valid number.</p>
+            </ion-item> -->
+
 
         </ion-list>
 
-        <button ion-button id="button" (click)="register()" full><b>Register</b></button>
+        <button ion-button  id="button" (click)="register()" full><b>Register</b></button>
+        <!-- <button ion-button color="primary"(click)="postData()" full>Register</button> -->
         </ion-col>
       </ion-row>
+
+     <!-- <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" ng-click="login(email,password)" full type="submit" [disabled]="!registerForm.form.valid">Register</button>
+        </ion-col>
+      </ion-row>
+    -->
     </form>
   </div>
 </ion-content>

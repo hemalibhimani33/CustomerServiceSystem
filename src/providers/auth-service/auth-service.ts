@@ -5,6 +5,7 @@ import { RestProvider } from '../rest/rest';
 import { CookieService } from 'ngx-cookie-service';
 import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import * as firebase from 'firebase';
 
 
 export class User {
@@ -20,10 +21,18 @@ export class User {
 @Injectable()
 export class AuthService {
   currentUser: User;
-  debugger;
+
   constructor(public httpClient:HttpClient, public http: HttpClient, private cookieService: CookieService) {
 
 
+  }
+
+  resetPassword(email: string) {
+    debugger;
+    var auth = firebase.auth();
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error))
   }
   //constructor(public nav: NavController,public  restProvider: RestProvider, private cookieService: CookieService) { }
   setCookie(cname, cvalue, exdays) {
@@ -42,7 +51,7 @@ export class AuthService {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        debugger;
+
         return c.substring(name.length, c.length);
       }
     }

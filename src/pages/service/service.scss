@@ -21,8 +21,11 @@ page-service {
     padding: 2px 4px;
     font: 13px sans-serif;
     text-decoration: none;
-    border: 1px solid #000;
-    border-color: #aaa #444 #444 #aaa;
+    //border: 1px solid #000;
+    //border-color: #aaa #444 #444 #aaa;
     color: #000
+  }
+  .my-label {
+    font-size: 1em;
   }
 }

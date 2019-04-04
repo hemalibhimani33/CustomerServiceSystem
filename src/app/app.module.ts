@@ -1,3 +1,4 @@
+import { LocationPage } from './../pages/location/location';
  import { AuthService } from './../providers/auth-service/auth-service';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { ErrorHandler, NgModule } from '@angular/core';
@@ -79,7 +80,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { LocationPage } from '../pages/location/location';
 
 
 @NgModule({
@@ -91,6 +91,7 @@ import { LocationPage } from '../pages/location/location';
     //RegisterPage,
     LoginPage,
     LocationPage,
+
     //FormPage,
     TabsPage,
     //ServicePage,
@@ -126,6 +127,8 @@ import { LocationPage } from '../pages/location/location';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     RestProvider,
+
+
   ]
 })
 export class AppModule {}
