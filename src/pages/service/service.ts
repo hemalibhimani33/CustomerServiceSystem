@@ -27,8 +27,9 @@ export class ServicePage {
   start_date = new Date().toDateString();
   end_date = new Date().toDateString();
   start_time = new Date().toTimeString();
+  location:string;
    public category: any = {};
-   location: Boolean = false;
+  // location: Boolean = false;
    eventLocation: any;
    public people3: any = [];
    responseObj:any;
@@ -139,8 +140,17 @@ this.cid = navParams.get('cid');
     else{
     debugger;
      console.dir(val);
+     var service =	{
+      "start_date":this.start_date,
+      "start_time":this.start_time,
+      "end_date":this.end_date,
+      "location":this.eventLocation,
+      "categoryid":this.id ,
+      "serviceid":this.cid,
+           };
+
      debugger;
-      this.restProvider.orderS(this.id,this.cid,val)
+      this.restProvider.orderS(service)
       .subscribe(data => {
       debugger;
       console.log(data);

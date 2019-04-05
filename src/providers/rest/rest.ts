@@ -120,7 +120,7 @@ export class RestProvider {
   }
 
 
-      orderS(id,cid,services){
+      orderS(services){
         // let headers = new Headers({ 'Content-Type': 'application/json' });
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -134,13 +134,7 @@ export class RestProvider {
        headers.append('content-type','application/json');
         debugger;
         this.data1 = this.auth.getCookie("token");
-      //  headers.append('Authorization', this.data1)
 
-        // const option = {
-        //   headers: {
-        //     'authorization':  this.data1,
-        //   }
-        // };
         const option = {
           headers: {
             //'Access-Control-Allow-Origin':'*',
@@ -148,14 +142,8 @@ export class RestProvider {
           }
         };
 
-         // password = CryptoJS.MD5(password).toString();
-              var newUser3 =	{ services,
-                "categoryid":id ,
-                "serviceid":cid,
-                     };
-
                      debugger;
-              return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(newUser3),option);
+              return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(services),option);
                          //.map(this.extractData)
                          //.catch(this.handleErrorObservable);
                                 //   .subscribe(data => {

@@ -86,18 +86,18 @@
          </ion-item> -->
          <ion-item>
           <ion-label>Start Date</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" formControlName="start_date"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="start_date" formControlName="start_date"></ion-datetime>
 
         </ion-item>
 
         <ion-item>
           <ion-label>Start Time</ion-label>
-          <ion-datetime displayFormat="hh:mm:ss A" pickerFormat="hh mm ss A" formControlName="start_time"></ion-datetime>
+          <ion-datetime displayFormat="hh:mm:ss A" [(ngModel)]="start_time" pickerFormat="hh mm ss A" formControlName="start_time"></ion-datetime>
         </ion-item>
 
         <ion-item>
           <ion-label>End Date</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" formControlName="end_date"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="end_date" formControlName="end_date"></ion-datetime>
         </ion-item>
 
         <!-- <div *ngIf="!location">
@@ -118,7 +118,7 @@
             <ion-input
                type="text"
                maxlength="200"
-               formControlName="location" value="{{eventLocation}}"></ion-input>
+               formControlName="location" [(ngModel)]="eventLocation" value="{{eventLocation}}"></ion-input>
          </ion-item>
 	     <!-- <div
 	        formArrayName="address"

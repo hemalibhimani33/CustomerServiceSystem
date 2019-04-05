@@ -86,15 +86,16 @@ ngOnInit() {
     if (this.MyForm.invalid) {
       return;
       }
-      setTimeout(() => {
-          this.put = true;
-        }, 1);
+
       //this.put = true;
       const email = this.MyForm.controls.email.value
       const password = this.MyForm.controls.password.value
       this.restProvider.LoginUser(email, password)
      .subscribe(
       data => {
+        setTimeout(() => {
+          this.put = true;
+        }, 1);
       console.log(data.token);
       this.auth.setCookie('token',data.token,1);
       this.data = this.auth.getCookie("token");

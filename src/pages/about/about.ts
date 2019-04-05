@@ -17,6 +17,7 @@ export class AboutPage {
   clicked: boolean;
 
 
+
   constructor(public navCtrl: NavController,  private auth: AuthService,  private cookieService:CookieService) {
     debugger;
     this.user1 = this.auth.getCookie("token");
@@ -27,4 +28,10 @@ export class AboutPage {
     this.booking = false;
     }
   }
+
+
+  public cnl() {
+    debugger;
+console.log("delete");
+ }
 }
