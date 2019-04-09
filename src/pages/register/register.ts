@@ -131,6 +131,9 @@ register(){
   }
   else {
    // this.createSuccess = true;
+   debugger;
+   console.log(this.myForm.controls.p_surname.value);
+
     this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
     .subscribe(data => {
       debugger;

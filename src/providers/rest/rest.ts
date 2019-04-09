@@ -205,6 +205,29 @@ export class RestProvider {
         });
       }
 
+      MyBooking() {
+
+        var headers = new Headers();
+         headers.append('Content-Type', 'application/x-www-form-urlencoded');
+         headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        headers.append('Accept','application/json');
+        headers.append('content-type','application/json');
+         if (this.data) {
+            return Promise.resolve(this.data);
+          }
+          return new Promise(resolve => {
+          this.httpClient.get<myData>('http://192.168.32.56:1337/category/view')
+            //.map((res:Response) => res)
+            .subscribe(data => {
+              debugger;
+              console.log(data);
+              console.log(data.id);
+                resolve(data);
+               });
+        });
+      }
+
   load() {
 
     var headers = new Headers();

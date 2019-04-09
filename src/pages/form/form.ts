@@ -25,7 +25,7 @@ public service: any = {};
 public data: any = {};
 
 
-  constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+  constructor(public nav: NavController ,public alertController: AlertController, private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
 
@@ -44,7 +44,8 @@ orderService(cid,category){
     this.nav.push('ServicePage', {id : this.id,cid : cid,name: category});
 
   }else{
-    this.showPopup("Anonymous", "login requires for order service");
+    //this.showPopup("Anonymous", "login requires for order service");
+    this.presentAlertConfirm("Anonymous","login requires for order service");
   }
 
 }
@@ -86,6 +87,32 @@ setFilteredItems2() {
 
   ionViewDidLoad() {
   }
+
+  async presentAlertConfirm(title, text) {
+    const alert = await this.alertController.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Login',
+          handler: () => {
+            this.nav.push(LoginPage);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
       title: title,

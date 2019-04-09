@@ -4,7 +4,7 @@
 
 import { catchError, timeInterval } from 'rxjs/operators';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController, ToastController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
@@ -40,7 +40,7 @@ export class ServicePage {
   constructor(public navCtrl 		: NavController,
               public navParams 	: NavParams,
               private _FB          : FormBuilder, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
-             private nativeGeocoder: NativeGeocoder ,public actionSheetController: ActionSheetController)
+             private nativeGeocoder: NativeGeocoder ,public toastController: ToastController,public actionSheetController: ActionSheetController)
   {
 debugger;
 
@@ -155,12 +155,23 @@ this.cid = navParams.get('cid');
       debugger;
       console.log(data);
       this.showPopup("Success","order successfully.");
+      //this.presentToastWithOptions("order successfully.");
       }, error => {
         debugger;
         console.log(error);
       this.showPopup("error","no order placed");
       });
     }
+  }
+  async presentToastWithOptions(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'Done'
+
+    });
+    toast.present();
   }
 
 

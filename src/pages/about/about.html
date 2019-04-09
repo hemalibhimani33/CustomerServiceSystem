@@ -8,89 +8,142 @@
 
 
 
-<ion-content fullscreen="" class="ion-padding hydrated" style="--offset-top:76px; --offset-bottom:0px;" padding>
+<ion-content  class="mybooking" fullscreen=""  padding>
   <div *ngIf="!booking">
-    <button ion-button id="button" color="dark" full><b>No Booking Found</b></button>
+    <button ion-button id="button" color="dark" (click)="forbooking()"  full><b>Login requires</b></button>
     <!-- <ion-row class="logo">
         <ion-col>
           <img class="full-image" src="assets/imgs/booking.png"/>
         </ion-col>
       </ion-row> -->
   </div>
-  <div *ngIf="booking">
-    <ion-list>
-      <ion-item>
-          <ion-label class="service">
-            beauty
-          </ion-label>
-          <ion-label  class="status" color="primary">
-              Pending
-          </ion-label>
-          </ion-item>
-        <ion-item>
-          <ion-label slot="start">
-            Two Icons End
-          </ion-label>
-          <ion-icon type="button"(click)="cnl()" name="close-circle"class="cancel" item-right></ion-icon>
+  <div *ngIf="booking" >
+                <!-- <ion-grid class="order">
+                    <ion-row >
+                        <ion-col>
+                          <ion-list>
+                          <ion-item>
+                                      <div align="left">
+                                      <h2><b>Beauty</b></h2>
+                                      <h3>Salon AT home for women</h3>
 
-          <ion-label class="status" color="primary">
-              Two Icons End
-          </ion-label>
-        </ion-item>
+                                      <h3>Pending</h3>
+                                      <span
+                               float-right
+                               ion-button
+                               icon-left
+                               color="danger"
+                               clear>
+                               <ion-icon name="close"></ion-icon>
+                               Cancel Order
+                            </span>
+                            </div>
+                          </ion-item>
+                        </ion-list>
+                        </ion-col>
+                      </ion-row>
 
-        <ion-item>
-          <ion-label slot="start">
-            Two Icons End
-          </ion-label>
-          <ion-label class="status"color="primary">
-              Two Icons End
-          </ion-label>
-        </ion-item>
-      </ion-list>
-          <!-- <ion-list class="list list-md hydrated">
-            <ion-list-header class="hydrated">
-              Notes
-            </ion-list-header>
+                      <ion-row >
+                          <ion-col>
+                            <ion-list>
+                            <ion-item>
+                                        <div align="left">
+                                        <h2><b>Beauty</b></h2>
+                                        <h3>Salon AT home for women</h3>
 
-            <ion-item-sliding class="hydrated">
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Primary Note</ion-label>
-                <ion-note slot="end" color="primary" class="ion-color ion-color-primary hydrated">99</ion-note>
-              </ion-item>
-
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Secondary Note</ion-label>
-                <ion-note slot="end" color="secondary" class="ion-color ion-color-secondary hydrated">99</ion-note>
-              </ion-item>
-
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Tertiary Note</ion-label>
-                <ion-note slot="end" color="tertiary" class="ion-color ion-color-tertiary hydrated">99</ion-note>
-              </ion-item>
-
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Success Note</ion-label>
-                <ion-note slot="end" color="success" class="ion-color ion-color-success hydrated">99</ion-note>
-              </ion-item>
-
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Warning Note</ion-label>
-                <ion-note slot="end" color="warning" class="ion-color ion-color-warning hydrated">99</ion-note>
-              </ion-item>
-
-              <ion-item class="in-list item ion-focusable item-label hydrated">
-                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">Danger Note</ion-label>
-                <ion-note slot="end" color="danger" class="ion-color ion-color-danger hydrated">99</ion-note>
-              </ion-item>
-          </ion-item-sliding></ion-list> -->
+                                        <h3>Pending</h3>
+                                        <span
+                                 float-right
+                                 ion-button
+                                 icon-left
+                                 color="danger"
+                                 clear>
+                                 <ion-icon name="close"></ion-icon>
+                                 Cancel Order
+                              </span>
+                              </div>
+                            </ion-item>
+                          </ion-list>
+                          </ion-col>
+                        </ion-row>
+                  </ion-grid> -->
 
 
+                  <ion-item>
+                      <ion-label>Bookings</ion-label>
+                      <ion-select interface="action-sheet" placeholder="Select One">
+                          <ion-option value="red4">ALL</ion-option>
 
+                        <ion-option value="red">Pending</ion-option>
+                        <ion-option value="red1">Rejected</ion-option>
 
+                        <ion-option value="red2">Accepted</ion-option>
 
+                        <ion-option value="red3">Completed</ion-option>
 
+                      </ion-select>
+                    </ion-item>
+
+                  <ion-item class="order">
+                      <ion-label >
+                           <h2><b>Beauty</b></h2>
+                            <h2>Salon AT home for women</h2>
+                            <h2 id = "status">{{eventFlag}}</h2>
+                            <!-- <h2 id = "status">Pending</h2>
+                                      <span
+                               float-right
+                               ion-button
+                               icon-left
+                               color="danger"
+                               clear>
+                               <ion-icon name="close"></ion-icon>
+                               Cancel Order
+                            </span> -->
+                        </ion-label>
+                        <!-- <ion-label>
+
+                            <span
+                     float-right
+                     ion-button
+                     icon-left
+                     color="danger"
+                     clear>
+                     <ion-icon name="close"></ion-icon>
+                     Cancel Order
+                  </span>
+                </ion-label> -->
+                  </ion-item>
+                  <ion-item class="order">
+                      <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">
+                           <h2><b>Beauty</b></h2>
+                            <h2>Salon AT home for women</h2>
+                            <h2 id = "status">Pending</h2>
+                                      <!-- <span
+                               float-right
+                               ion-button
+                               icon-left
+                               color="danger"
+                               clear>
+                               <ion-icon name="close"></ion-icon>
+                               Cancel Order
+                            </span> -->
+                        </ion-label>
+                  </ion-item>
+                  <ion-item class="order">
+                      <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">
+                           <h2><b>Beauty</b></h2>
+                            <h2>Salon AT home for women</h2>
+                            <h2 id = "status">Pending</h2>
+                                      <!-- <span
+                               float-right
+                               ion-button
+                               icon-left
+                               color="danger"
+                               clear>
+                               <ion-icon name="close"></ion-icon>
+                               Cancel Order
+                            </span> -->
+                        </ion-label>
+                  </ion-item>
   </div>
-
-
-
 </ion-content>

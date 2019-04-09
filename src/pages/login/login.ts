@@ -41,7 +41,7 @@ v : ContactPage;
 @ViewChild(Navbar) navBar: Navbar;
 
 //public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
-constructor(private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+constructor(public loadingController: LoadingController,private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
 
 ) {
@@ -79,6 +79,16 @@ ngOnInit() {
   }
 
   get f() { return this.MyForm.controls; }
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 5000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
 
   login(event){
     debugger;
@@ -94,7 +104,8 @@ ngOnInit() {
      .subscribe(
       data => {
         setTimeout(() => {
-          this.put = true;
+          this.presentLoadingWithOptions();
+          // this.put = true;
         }, 1);
       console.log(data.token);
       this.auth.setCookie('token',data.token,1);

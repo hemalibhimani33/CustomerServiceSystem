@@ -5,16 +5,23 @@ page-about {
     //   // padding-top: 1px;
     //   // padding-bottom: 20px;
     // }
+    background: #f8f7f7;
     .service{
       text-align: left;
     }
 
-    .status{
-     // text-align: right;
-    }
+
     .cancel{
       align-items: right;
       padding-left: 10px;
+    }
+
+    .order #status{
+      color: blue;
+    }
+    .mybooking{
+      background: #f8f7f7;
+
     }
 
     }
