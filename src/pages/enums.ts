@@ -12,7 +12,7 @@
 
  export enum Status {
     pending = -1,
-    Rejected = 0,
-    Accepted = 1,
+    Accepted = 0,
+    Rejected = 1,
     Completed = 2
   }

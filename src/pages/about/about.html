@@ -68,27 +68,27 @@
                         </ion-row>
                   </ion-grid> -->
 
-
                   <ion-item>
                       <ion-label>Bookings</ion-label>
-                      <ion-select interface="action-sheet" placeholder="Select One">
-                          <ion-option value="red4">ALL</ion-option>
-
-                        <ion-option value="red">Pending</ion-option>
-                        <ion-option value="red1">Rejected</ion-option>
-
-                        <ion-option value="red2">Accepted</ion-option>
-
-                        <ion-option value="red3">Completed</ion-option>
-
+                      <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One">
+                        <ion-option value="all" selected>ALL</ion-option>
+                        <ion-option value="pending">Pending</ion-option>
+                        <ion-option value="rejected">Rejected</ion-option>
+                        <ion-option value="accepted">Accepted</ion-option>
+                        <ion-option value="completed">Completed</ion-option>
                       </ion-select>
-                    </ion-item>
+                  </ion-item>
 
-                  <ion-item class="order">
+                  <ion-item class="order" *ngFor="let person3 of people3">
                       <ion-label >
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
-                            <h2 id = "status">{{eventFlag}}</h2>
+                            <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
+                            <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2>
+                            <h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2>
+                            <h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2>
+                            <h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2>
+                            <!-- <h2 id = "status">{{eventFlag}}</h2> -->
                             <!-- <h2 id = "status">Pending</h2>
                                       <span
                                float-right
@@ -113,20 +113,33 @@
                   </span>
                 </ion-label> -->
                   </ion-item>
-                  <ion-item class="order">
+                  <!-- <ion-item class="order">
+                      <ion-label class="s">
+                           <h2><b>Beauty</b></h2>
+                            <h2>Salon AT home for women</h2>
+
+                        </ion-label>
+                        <ion-label align="right" >
+                          <h2 id = "status">Pending</h2>
+                          <h2 id = "status"></h2> -->
+
+                          <!-- <span
+                   float-right
+                   ion-button
+                   icon-left
+                   color="danger"
+                   clear>
+                   <ion-icon name="close"></ion-icon>
+                   Cancel Order
+                </span> -->
+                        <!-- </ion-label>
+                  </ion-item> -->
+                  <!-- <ion-item class="order">
                       <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
                             <h2 id = "status">Pending</h2>
-                                      <!-- <span
-                               float-right
-                               ion-button
-                               icon-left
-                               color="danger"
-                               clear>
-                               <ion-icon name="close"></ion-icon>
-                               Cancel Order
-                            </span> -->
+
                         </ion-label>
                   </ion-item>
                   <ion-item class="order">
@@ -134,16 +147,8 @@
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
                             <h2 id = "status">Pending</h2>
-                                      <!-- <span
-                               float-right
-                               ion-button
-                               icon-left
-                               color="danger"
-                               clear>
-                               <ion-icon name="close"></ion-icon>
-                               Cancel Order
-                            </span> -->
-                        </ion-label>
-                  </ion-item>
+
+                      </ion-label>
+                  </ion-item> -->
   </div>
 </ion-content>

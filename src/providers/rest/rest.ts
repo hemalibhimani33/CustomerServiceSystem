@@ -21,6 +21,7 @@ import { ServicePage } from '../../pages/service/service';
 import { stringify } from '@angular/compiler/src/util';
 import { AuthService } from '../auth-service/auth-service';
 import * as firebase from 'firebase';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -39,8 +40,17 @@ const options = {
 
   formatted : string
 id:number
+OrderStatus:number
+category: string
 
   }
+  // export interface myData1 {
+
+  //   token: string
+  // id:number
+
+
+  //   }
 
   // export interface myData1{
   //   components:string
@@ -54,6 +64,7 @@ export class RestProvider {
    public people: any;
    results: any[];
    public data1: any = {};
+  eventFlag: any;
 
   constructor(public httpClient:HttpClient, public http: HttpClient,private auth: AuthService) {
    }
@@ -206,7 +217,7 @@ export class RestProvider {
       }
 
       MyBooking() {
-
+        debugger;
         var headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
          headers.append('Access-Control-Allow-Origin' , '*');
@@ -217,12 +228,14 @@ export class RestProvider {
             return Promise.resolve(this.data);
           }
           return new Promise(resolve => {
-          this.httpClient.get<myData>('http://192.168.32.56:1337/category/view')
+          this.httpClient.get<myData>('http://192.168.32.56:1337/OrderService/')
             //.map((res:Response) => res)
             .subscribe(data => {
               debugger;
               console.log(data);
-              console.log(data.id);
+              console.log(data.category);
+              var i:number;
+              console.log(data[0].OrderStatus);
                 resolve(data);
                });
         });

@@ -83,8 +83,8 @@ ngOnInit() {
     const loading = await this.loadingController.create({
       spinner: null,
       duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
+     // message: 'Please wait...',
+      //translucent: true,
       cssClass: 'custom-class custom-loading'
     });
     return await loading.present();
@@ -107,6 +107,7 @@ ngOnInit() {
           this.presentLoadingWithOptions();
           // this.put = true;
         }, 1);
+        debugger;
       console.log(data.token);
       this.auth.setCookie('token',data.token,1);
       this.data = this.auth.getCookie("token");

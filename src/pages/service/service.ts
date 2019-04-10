@@ -80,12 +80,12 @@ this.cid = navParams.get('cid');
           });
         }
       },
-       {
-        text: 'Default Location',
-        handler: () => {
-          this.navCtrl.push(LocationPage);
-        }
-      },
+      //  {
+      //   text: 'Default Location',
+      //   handler: () => {
+      //     this.navCtrl.push(LocationPage);
+      //   }
+      // },
       //   text: 'Play (open modal)',
       //   icon: 'arrow-dropright-circle',
       //   handler: () => {

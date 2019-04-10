@@ -51,8 +51,8 @@ export class ContactPage {
     const loading = await this.loadingController.create({
       spinner: null,
       duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
+     // message: 'Please wait...',
+     // translucent: true,
       cssClass: 'custom-class custom-loading'
     });
     return await loading.present();

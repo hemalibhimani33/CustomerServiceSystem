@@ -19,9 +19,27 @@ page-about {
     .order #status{
       color: blue;
     }
+    .order #status1{
+      color: blue;
+    }
+    .order #status2{
+      color: green;
+    }
+    .order #status3{
+      color: red;
+    }
+    .order #status4{
+      color: green;
+    }
     .mybooking{
       background: #f8f7f7;
 
+    }
+    .order{
+      width: 100%;
+    }
+    .order .s{
+      width: 70%;
     }
 
     }

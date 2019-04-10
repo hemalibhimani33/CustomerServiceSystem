@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { StreamPriorityOptions } from 'http2';
 import { Status } from './../enums'
+import { RestProvider } from  './../../providers/rest/rest';
 
 @Component({
   selector: 'page-about',
@@ -18,18 +19,22 @@ export class AboutPage {
   public user1: any = {};
   clicked: boolean;
   eventFlag: any;
+  courseValue:any;
+  public people3: any = [];
 
 
 
-  constructor(public navCtrl: NavController,public alertController: AlertController,private alertCtrl: AlertController,  private auth: AuthService,  private cookieService:CookieService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public  restProvider: RestProvider ,public alertController: AlertController,private alertCtrl: AlertController,  private auth: AuthService,  private cookieService:CookieService) {
     debugger;
     this.user1 = this.auth.getCookie("token");
     console.log("asad");
     if(this.user1 != ""){
       this.booking = true;
       debugger;
-      this.eventFlag = Status[0];
-      console.log(Status[0]);
+      // this.eventFlag = Status[0];
+      // console.log(Status[0]);
+      // console.log(this.courseValue);
+      this.loadStatus();
     }else{
     this.booking = false;
     }
@@ -37,6 +42,15 @@ export class AboutPage {
 
   public forbooking() {
   this.navCtrl.push(LoginPage);
+  }
+
+  loadStatus(){
+debugger;
+    this.restProvider.MyBooking()
+    .then(data => {
+      this.people3 = data;
+      debugger;
+    });
   }
 
 
