@@ -21,6 +21,7 @@ export class AboutPage {
   eventFlag: any;
   courseValue:any;
   public people3: any = [];
+  public allpeople3: any = [];
 
 
 
@@ -39,6 +40,30 @@ export class AboutPage {
     this.booking = false;
     }
   }
+  onContextChange(value): void {
+    var i = 0;
+    debugger;
+    console.log(value);
+    this.eventFlag = Status[value];
+    console.log(this.eventFlag);
+    debugger;
+
+    this.people3 = this.people3.filter(person3 => person3.OrderStatus === this.eventFlag);
+    // var list : any = this.people3.filter((person3) =>
+    // {
+    //   for (var i = 0; i < this.people3.length; i++){
+    //     if((this.people3[i].OrderStatus) == this.eventFlag){
+    //       console.log(this.people3[i]);
+    //     }else{
+    //       console.log("out");
+    //     }
+    //   }
+    // });
+
+  }
+  public loadData() {
+    this.loadStatus();
+  }
 
   public forbooking() {
   this.navCtrl.push(LoginPage);
@@ -51,9 +76,8 @@ debugger;
       this.people3 = data;
       debugger;
     });
+    debugger;
   }
-
-
 
 
   public cnl() {

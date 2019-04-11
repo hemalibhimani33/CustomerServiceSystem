@@ -11,7 +11,7 @@
 //   }
 
  export enum Status {
-    pending = -1,
+    Pending = -1,
     Accepted = 0,
     Rejected = 1,
     Completed = 2

@@ -71,7 +71,7 @@ export class RestProvider {
 
   //ngOnDestroy(): void {}
 
-  LoginUser(email,password){
+  LoginUser(loginuser){
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -80,23 +80,13 @@ export class RestProvider {
    headers.append('Accept','application/json');
    headers.append('content-type','application/json');
 
-        var newUser =	{
-           "email":email ,
-           "password":password
-         };
+        // var newUser =	{
+        //    "email":email ,
+        //    "password":password
+        //  };
 
+    return this.http.post<myData>('http://192.168.32.56:1337/login/login', JSON.stringify(loginuser),options);
 
-
-    return this.http.post<myData>('http://192.168.32.56:1337/login/login', JSON.stringify(newUser),options);
-   // .map((res:any) => res.json())
-    // .subscribe((data) => {
-    //   console.log(data);
-    //  },
-    // (error) => {console.log(error)});
-            // .subscribe(
-            //     data => console.log(data),
-            //     error => console.log(error),
-            // );
   }
 
   currentLocation(latitude,longitude)
@@ -165,34 +155,17 @@ export class RestProvider {
           }
 
 
-  RegisterUser(firstname,lastname,email,password,number){
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-        //  let options = new RequestOptions({ headers: headers });
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-     // password = CryptoJS.MD5(password).toString();
-          debugger;
-          var newUser =	{
-                  "firstname":firstname ,
-                  "lastname":lastname,
-                   "email":email ,
-                   "password":password ,
-                  "number":number
-                 };
+      RegisterUser(newUser){
+        // let headers = new Headers({ 'Content-Type': 'application/json' });
+            //  let options = new RequestOptions({ headers: headers });
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+              debugger;
 
+              return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options);
 
-          debugger;
-          return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options);
-                     //.map(this.extractData)
-                     //.catch(this.handleErrorObservable);
-
-                    //  .subscribe(data => {
-                    //            console.log(data['_body']);
-                    //           }, error => {
-                    //           console.log(error);// Error getting the data
-                    //          });
-      }
+          }
       load2(id) {
 
         var headers = new Headers();
@@ -224,11 +197,19 @@ export class RestProvider {
         headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
         headers.append('Accept','application/json');
         headers.append('content-type','application/json');
+        this.data1 = this.auth.getCookie("token");
+
+        const option = {
+          headers: {
+            //'Access-Control-Allow-Origin':'*',
+            'authorization': this.data1,
+          }
+        };
          if (this.data) {
             return Promise.resolve(this.data);
           }
           return new Promise(resolve => {
-          this.httpClient.get<myData>('http://192.168.32.56:1337/OrderService/')
+          this.httpClient.get<myData>('http://192.168.32.56:1337/OrderService/',option)
             //.map((res:Response) => res)
             .subscribe(data => {
               debugger;

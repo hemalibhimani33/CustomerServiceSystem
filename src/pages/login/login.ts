@@ -68,14 +68,11 @@ public createAccount() {
 
 ngOnInit() {
   this.MyForm = this.formBuilder.group(
-
     {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]]
     }
-
     );
-
   }
 
   get f() { return this.MyForm.controls; }
@@ -100,7 +97,11 @@ ngOnInit() {
       //this.put = true;
       const email = this.MyForm.controls.email.value
       const password = this.MyForm.controls.password.value
-      this.restProvider.LoginUser(email, password)
+      var loginuser1 =	{
+        "email":email ,
+        "password":password
+      };
+      this.restProvider.LoginUser(loginuser1)
      .subscribe(
       data => {
         setTimeout(() => {

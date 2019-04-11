@@ -67,6 +67,7 @@ this.cid = navParams.get('cid');
      // header: 'Albums',
       buttons: [{
         text: 'Current Location',
+        icon: 'pin',
         handler: () => {
           debugger;
           console.log('Delete clicked');
@@ -213,7 +214,8 @@ this.cid = navParams.get('cid');
         {
           text: 'OK',
           handler: data => {
-              this.navCtrl.pop();
+            //  this.navCtrl.pop();
+              window.location.assign('http://localhost:8100/');
               //this.navCtrl.popTo('FormPage');
 
           }

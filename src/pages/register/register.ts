@@ -51,6 +51,7 @@ constructor(public nav: NavController , private auth: AuthService, private alert
 
 
     p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+    // p_email: ['', Validators.compose([Validators.required, Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')])],
     //password_ctrl: this.formBuilder.group({
      p_number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
      // p_password: ['', [Validators.required, Validators.minLength(6)]],
@@ -133,8 +134,15 @@ register(){
    // this.createSuccess = true;
    debugger;
    console.log(this.myForm.controls.p_surname.value);
-
-    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
+   var user =	{
+    "firstname":this.myForm.controls.p_surname.value,
+    "lastname":this.myForm.controls.p_lastname.value,
+     "email":this.myForm.controls.p_email.value ,
+     "password":this.myForm.controls.p_password.value ,
+    "number":this.myForm.controls.p_number.value
+   };
+    //this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
+    this.restProvider.RegisterUser(user)
     .subscribe(data => {
       debugger;
       console.log(data);

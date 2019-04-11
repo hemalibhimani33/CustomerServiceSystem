@@ -26,7 +26,6 @@
                                       <div align="left">
                                       <h2><b>Beauty</b></h2>
                                       <h3>Salon AT home for women</h3>
-
                                       <h3>Pending</h3>
                                       <span
                                float-right
@@ -70,12 +69,14 @@
 
                   <ion-item>
                       <ion-label>Bookings</ion-label>
-                      <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One">
+                      <!-- <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One"> -->
+                      <ion-select interface="action-sheet"  placeholder="Select One" (ionChange)="onContextChange($event)" >
+
                         <ion-option value="all" selected>ALL</ion-option>
-                        <ion-option value="pending">Pending</ion-option>
-                        <ion-option value="rejected">Rejected</ion-option>
-                        <ion-option value="accepted">Accepted</ion-option>
-                        <ion-option value="completed">Completed</ion-option>
+                        <ion-option value="Pending">Pending</ion-option>
+                        <ion-option value="Rejected">Rejected</ion-option>
+                        <ion-option value="Accepted">Accepted</ion-option>
+                        <ion-option value="Completed">Completed</ion-option>
                       </ion-select>
                   </ion-item>
 
@@ -83,6 +84,8 @@
                       <ion-label >
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
+                            <!-- <h2><b>{{person3.categoryid}}</b></h2>
+                            <h2>{{person3.serviceid}}</h2> -->
                             <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
                             <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2>
                             <h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2>
