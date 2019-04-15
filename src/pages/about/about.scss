@@ -29,7 +29,7 @@ page-about {
       color: red;
     }
     .order #status4{
-      color: green;
+      color: rgb(88, 235, 88);
     }
     .mybooking{
       background: #f8f7f7;
@@ -39,9 +39,40 @@ page-about {
       width: 100%;
     }
     .order .s{
-      width: 70%;
+      min-width: 70% !important;
+    }
+
+    .cust-item-footer{
+      position: absolute;
+    right: 0px;
+    width: 85px;
+    z-index: 9999;
+    bottom: 12px;
+    text-align: right;
+    h2{
+      padding-right: 15px;
+      font-size: 12px !important;
+    }
+    span.button.button-md.button-clear{
+      height: 25px !important;
+      font-size: 12px !important;
     }
 
     }
+    ion-item{
+      position: relative;
+      min-height: 70px;
+      .item-inner{
+        .input-wrapper{
+          .ion-label{
+            padding-right: 85px;
+            overflow: visible;
+
+          }
+        }
+      }
+    }
+
+  }
 
 

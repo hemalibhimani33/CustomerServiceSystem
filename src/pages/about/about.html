@@ -72,39 +72,43 @@
                       <!-- <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One"> -->
                       <ion-select interface="action-sheet"  placeholder="Select One" (ionChange)="onContextChange($event)" >
 
-                        <ion-option value="all" selected>ALL</ion-option>
+                        <ion-option value="ALL" selected>ALL</ion-option>
                         <ion-option value="Pending">Pending</ion-option>
                         <ion-option value="Rejected">Rejected</ion-option>
                         <ion-option value="Accepted">Accepted</ion-option>
                         <ion-option value="Completed">Completed</ion-option>
+                        <ion-option value="Cancel Order">Cancel Order</ion-option>
                       </ion-select>
                   </ion-item>
 
                   <ion-item class="order" *ngFor="let person3 of people3">
-                      <ion-label >
+                      <ion-label>
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
                             <!-- <h2><b>{{person3.categoryid}}</b></h2>
                             <h2>{{person3.serviceid}}</h2> -->
                             <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
-                            <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2>
-                            <h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2>
-                            <h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2>
-                            <h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2>
-                            <!-- <h2 id = "status">{{eventFlag}}</h2> -->
-                            <!-- <h2 id = "status">Pending</h2>
-                                      <span
-                               float-right
-                               ion-button
-                               icon-left
-                               color="danger"
-                               clear>
-                               <ion-icon name="close"></ion-icon>
-                               Cancel Order
-                            </span> -->
+                            <div class="cust-item-footer">
+                              <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2>
+                              <h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2>
+                              <h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2>
+                              <h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2>
+                              <!-- <h2 id = "status">{{eventFlag}}</h2> -->
+                                        <span
+                                        *ngIf="person3.OrderStatus == -1"
+                                 float-right
+                                 ion-button
+                                 icon-left
+                                 (click)="cnl(person3)"
+                                 color="danger"
+                                 clear>
+                                 <ion-icon name="close"></ion-icon>
+                                Order
+                              </span>
+                            </div>
                         </ion-label>
-                        <!-- <ion-label>
 
+                        <!-- <ion-label>
                             <span
                      float-right
                      ion-button
@@ -117,25 +121,23 @@
                 </ion-label> -->
                   </ion-item>
                   <!-- <ion-item class="order">
-                      <ion-label class="s">
+
+                        <ion-label class="s">
                            <h2><b>Beauty</b></h2>
                             <h2>Salon AT home for women</h2>
-
                         </ion-label>
-                        <ion-label align="right" >
+                        <ion-label class="p" align="right">
                           <h2 id = "status">Pending</h2>
-                          <h2 id = "status"></h2> -->
-
-                          <!-- <span
-                   float-right
-                   ion-button
-                   icon-left
-                   color="danger"
-                   clear>
-                   <ion-icon name="close"></ion-icon>
-                   Cancel Order
-                </span> -->
-                        <!-- </ion-label>
+                          <h2 id = "status"><h2
+                     ion-button
+                     icon-left
+                     (click)="cnl()"
+                     color="danger"
+                     clear>
+                     <ion-icon name="close"></ion-icon>
+                      Order
+                          </h2></h2>
+                        </ion-label>
                   </ion-item> -->
                   <!-- <ion-item class="order">
                       <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">

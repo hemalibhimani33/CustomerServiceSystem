@@ -69,13 +69,14 @@ public createAccount() {
 ngOnInit() {
   this.MyForm = this.formBuilder.group(
     {
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
     password: ['', [Validators.required, Validators.minLength(6)]]
     }
     );
   }
 
   get f() { return this.MyForm.controls; }
+
   async presentLoadingWithOptions() {
     const loading = await this.loadingController.create({
       spinner: null,
@@ -93,7 +94,6 @@ ngOnInit() {
     if (this.MyForm.invalid) {
       return;
       }
-
       //this.put = true;
       const email = this.MyForm.controls.email.value
       const password = this.MyForm.controls.password.value

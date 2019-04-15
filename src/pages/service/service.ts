@@ -156,7 +156,9 @@ this.cid = navParams.get('cid');
       debugger;
       console.log(data);
       this.showPopup("Success","order successfully.");
-      //this.presentToastWithOptions("order successfully.");
+
+     // this.presentToastWithOptions("order successfully.");
+     // window.location.assign('http://localhost:8100/');
       }, error => {
         debugger;
         console.log(error);
@@ -175,7 +177,6 @@ this.cid = navParams.get('cid');
     toast.present();
   }
 
-
   // getGeolocation(){
   //   // this.showLoader();
 
@@ -189,9 +190,7 @@ this.cid = navParams.get('cid');
   //  });
   //  }
 
-
    getGeoencoder(latitude,longitude){
-
      console.log(latitude);
      debugger;
      this.restProvider.currentLocation(latitude,longitude)
@@ -200,10 +199,7 @@ this.cid = navParams.get('cid');
      this.eventLocation = this.people3;
      //this.location = true;
        //console.log(this.people3);
-
      });
-
-
    }
 
   showPopup(title, text) {
@@ -214,20 +210,16 @@ this.cid = navParams.get('cid');
         {
           text: 'OK',
           handler: data => {
-            //  this.navCtrl.pop();
-              window.location.assign('http://localhost:8100/');
+            // this.navCtrl.pop();
+               window.location.assign('http://localhost:8100/');
               //this.navCtrl.popTo('FormPage');
-
           }
         }
       ]
     });
     alert.present();
   }
-
-
 }
-
 
 // export class ServicePage {
 //   date = new Date().toDateString();
