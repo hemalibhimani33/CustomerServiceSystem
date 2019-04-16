@@ -26,14 +26,14 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController,public toastController: ToastController, public navParams: NavParams,public  restProvider: RestProvider ,public alertController: AlertController,private alertCtrl: AlertController,  private auth: AuthService,  private cookieService:CookieService) {
     debugger;
+
     this.user1 = this.auth.getCookie("token");
-    console.log("asad");
     if(this.user1 != ""){
+      debugger;
       this.booking = true;
       this.loadStatus();
-      debugger;
     }else{
-    this.booking = false;
+      this.booking = false;
     }
   }
   onContextChange(value): void {
@@ -48,19 +48,6 @@ export class AboutPage {
       this.loadStatus();
     }else{
    this.people3 = this.allpeople3.filter(person3 => person3.OrderStatus === this.eventFlag);
-    // this.people3 = this.allpeople3.filter(person3 =>
-    //   {
-    //   if(person3.OrderStatus === this.eventFlag)
-    //   {
-    //     return person3;
-    //   }
-    //   else{
-    //     console.log("not found");
-    //     this.presentToastWithOptions("not Found");
-    //   }
-    //   }
-    //   );
-
   }
     // var list : any = this.people3.filter((person3) =>
     // {
@@ -73,6 +60,7 @@ export class AboutPage {
       // }
     // });
   }
+
   async presentToastWithOptions(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -95,19 +83,12 @@ export class AboutPage {
       this.people3 = data;
       this.allpeople3 = this.people3;
     });
-    debugger;
   }
 
   public cnl(person3) {
     debugger;
-    //this.showPopup("Cancel Order", "r u sure u want to cancel order");
     this.presentAlertConfirm("Cancel Order","Are You Sure You want to cancel order");
     this.deletedBooking = person3;
-    // let index = this.people3.indexOf(person3);
-    //       debugger;
-    //       if(index > -1){
-    //         this.people3.splice(index, 1);
-    //       }
  }
 
  async presentAlertConfirm(title, text) {
@@ -122,7 +103,7 @@ export class AboutPage {
         handler: (blah) => {
           console.log('Confirm Cancel: blah');
         }
-      }, {
+      },{
         text: 'Sure',
         handler: () => {
           console.log('Confirm Okay');
@@ -131,7 +112,6 @@ export class AboutPage {
           if(index > -1){
             this.people3.splice(index, 1);
           }
-
         }
       }
     ]

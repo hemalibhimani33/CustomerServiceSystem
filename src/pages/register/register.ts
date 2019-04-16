@@ -53,7 +53,7 @@ constructor(public nav: NavController , private auth: AuthService, private alert
     //password_ctrl: this.formBuilder.group({
      p_number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
      // p_password: ['', [Validators.required, Validators.minLength(6)]],
-      p_password: ['', [Validators.required, Validators.minLength(6)]],
+      p_password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])],
 
       p_confirm_password: ['', Validators.compose([Validators.required])]
     //}, this.matchPassword)
@@ -115,13 +115,13 @@ register(){
   if(!this.myForm.valid){
     //this.createSuccess = false ;
     if(!this.myForm.controls.p_surname.valid){
-      this.showPopup("failure", "Enter Valid username information.");
+      this.showPopup("failure", "Enter Valid firstname information.");
     }else if(!this.myForm.controls.p_lastname.valid){
       this.showPopup("failure", "Enter Valid lastname information.");
     }else if(!this.myForm.controls.p_email.valid){
       this.showPopup("failure", "Enter Valid email address.");
     }else if(!this.myForm.controls.p_password.valid){
-      this.showPopup("failure", "Enter Valid password.");
+      this.showPopup("failure", "Password requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces.");
     }else if(!this.myForm.controls.p_number.valid){
       this.showPopup("failure", "Enter 10 digit mobile number.");
     }else{

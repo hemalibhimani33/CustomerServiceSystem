@@ -89,10 +89,10 @@
                             <h2>{{person3.serviceid}}</h2> -->
                             <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
                             <div class="cust-item-footer">
-                              <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2>
-                              <h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2>
-                              <h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2>
-                              <h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2>
+                              <b> <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2></b>
+                              <b><h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2></b>
+                              <b><h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2></b>
+                              <b><h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2></b>
                               <!-- <h2 id = "status">{{eventFlag}}</h2> -->
                                         <span
                                         *ngIf="person3.OrderStatus == -1"
@@ -102,8 +102,7 @@
                                  (click)="cnl(person3)"
                                  color="danger"
                                  clear>
-                                 <ion-icon name="close"></ion-icon>
-                                Order
+                                 <ion-icon name="trash"></ion-icon> Order
                               </span>
                             </div>
                         </ion-label>

@@ -140,7 +140,8 @@ this.cid = navParams.get('cid');
     }
     else{
     debugger;
-     console.dir(val);
+     console.log(val);
+
      var service =	{
       "start_date":this.start_date,
       "start_time":this.start_time,
@@ -149,6 +150,7 @@ this.cid = navParams.get('cid');
       "categoryid":this.id ,
       "serviceid":this.cid,
            };
+           console.log(this.start_date);
 
      debugger;
       this.restProvider.orderS(service)
