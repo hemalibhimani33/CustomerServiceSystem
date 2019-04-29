@@ -34,20 +34,25 @@ export class RestProvider {
    public people: any;
    results: any[];
    public data1: any = {};
-  eventFlag: any;
+   eventFlag: any;
 
   constructor(public httpClient:HttpClient, public http: HttpClient,private auth: AuthService) {
    }
 
-  LoginUser(loginuser){
+  rootURL="http://192.168.32.56:1337/";
+
+
+  LoginUser(loginuser)
+  {
+    console.log(this.rootURL);
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin' , '*');
-   headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-   headers.append('Accept','application/json');
-   headers.append('content-type','application/json');
-    return this.http.post<myData>('http://192.168.32.56:1337/login/login', JSON.stringify(loginuser),options);
-
+    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers.append('Accept','application/json');
+    headers.append('content-type','application/json');
+    debugger;
+    return this.http.post<myData>(this.rootURL + 'login/login', JSON.stringify(loginuser),options);
   }
 
   currentLocation(latitude,longitude)
@@ -71,7 +76,8 @@ export class RestProvider {
   }
 
 
-      orderS(services){
+  orderS(services)
+  {
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Access-Control-Allow-Origin' , '*');
@@ -88,7 +94,7 @@ export class RestProvider {
         };
 
        debugger;
-       return this.http.post<myData>('http://192.168.32.56:1337/OrderService/PlaceOrder', JSON.stringify(services),option);
+       return this.http.post<myData>(this.rootURL + 'OrderService/PlaceOrder', JSON.stringify(services),option);
                          //.map(this.extractData)
                          //.catch(this.handleErrorObservable);
                                 //   .subscribe(data => {
@@ -96,22 +102,43 @@ export class RestProvider {
                                 //   }, error => {
                                 //   console.log(error);// Error getting the data
                                 //  });
-          }
+  }
 
 
 
-      RegisterUser(newUser){
-        // let headers = new Headers({ 'Content-Type': 'application/json' });
-            //  let options = new RequestOptions({ headers: headers });
+  RegisterUser(newUser)
+  {
+            // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
             var headers = new Headers();
             headers.append('Content-Type', 'application/x-www-form-urlencoded');
             debugger;
-            return this.http.post('http://192.168.32.56:1337/register/create', JSON.stringify(newUser),options);
-          }
+            return this.http.post(this.rootURL + 'register/create', JSON.stringify(newUser),options);
+  }
 
+  UpdateStatus(deletedBooking)
+  {
+            // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
+            var headers = new Headers();
+            debugger;
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            deletedBooking.OrderStatus = 3;
+            console.log(deletedBooking);
+            debugger;
+            return this.http.put(this.rootURL +'OrderService/update/', JSON.stringify(deletedBooking),options)
+            .subscribe(data => {
+              debugger;
+              console.log(data);
+            }, error => {
+              debugger;
+            console.log(error);
+            });
+   }
 
-      load2(id) {
-        var headers = new Headers();
+  load2(id)
+  {
+         var headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
          headers.append('Access-Control-Allow-Origin' , '*');
          headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
@@ -122,75 +149,77 @@ export class RestProvider {
             return Promise.resolve(this.data);
           }
           return new Promise(resolve => {
-          this.httpClient.get('http://192.168.32.56:1337/Service/subservice/' + (id))
+          this.httpClient.get(this.rootURL +'Service/subservice/' + (id))
             .map((res:Response) => res)
             .subscribe(data => {
                 resolve(data);
                });
         });
-      }
-
-      MyBooking() {
-        debugger;
-        var headers = new Headers();
-         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-         headers.append('Access-Control-Allow-Origin' , '*');
-        headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-        headers.append('Accept','application/json');
-        headers.append('content-type','application/json');
-        this.data1 = this.auth.getCookie("token");
-
-        const option = {
-          headers: {
-            'authorization': this.data1,
-          }
-        };
-         if (this.data) {
-            return Promise.resolve(this.data);
-          }
-          return new Promise(resolve => {
-          this.httpClient.get<myData>('http://192.168.32.56:1337/OrderService/Orderdetail',option)
-            //.map((res:Response) => res)
-            .subscribe(data => {
-              debugger;
-              console.log(data);
-              console.log(data.category);
-              var i:number;
-              console.log(data[0].OrderStatus);
-                resolve(data);
-               });
-        });
-      }
-
-  load() {
-    var headers = new Headers();
-     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-     headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
-    headers.append('Accept','application/json');
-    headers.append('content-type','application/json');
-     if (this.data) {
-        return Promise.resolve(this.data);
-      }
-      return new Promise(resolve => {
-
-      this.httpClient.get<myData>('http://192.168.32.56:1337/category/view')
-        //.map((res:Response) => res)
-        .subscribe(data => {
-          debugger;
-          console.log(data);
-          console.log(data.id);
-          resolve(data);
-           });
-    });
   }
-  private extractData(res: Response) {
 
-    let body = res.json();
-          return body || {};
+  MyBooking()
+  {
+          debugger;
+          var headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          headers.append('Access-Control-Allow-Origin' , '*');
+          headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+          headers.append('Accept','application/json');
+          headers.append('content-type','application/json');
+          this.data1 = this.auth.getCookie("token");
+
+          const option = {
+            headers: {
+              'authorization': this.data1,
+            }
+          };
+          if(this.data) {
+              return Promise.resolve(this.data);
+            }
+            return new Promise(resolve => {
+            this.httpClient.get<myData>(this.rootURL + 'booking/bookingStatus',option)
+              //.map((res:Response) => res)
+              .subscribe(data => {
+                debugger;
+                console.log(data);
+                console.log(data.category);
+                var i:number;
+                console.log(data[0].OrderStatus);
+                resolve(data);
+                });
+          });
+  }
+
+  load()
+  {
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      headers.append('Access-Control-Allow-Origin' , '*');
+      headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+      headers.append('Accept','application/json');
+      headers.append('content-type','application/json');
+      if (this.data) {
+          return Promise.resolve(this.data);
+        }
+        return new Promise(resolve => {
+
+        this.httpClient.get<myData>(this.rootURL +'category/view')
+          //.map((res:Response) => res)
+          .subscribe(data => {
+            debugger;
+            console.log(data);
+            console.log(data.id);
+            resolve(data);
+            });
+      });
+  }
+
+  private extractData(res: Response) {
+      let body = res.json();
+      return body || {};
       }
-private handleErrorObservable (error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.message || error);
+  private handleErrorObservable (error: Response | any) {
+      console.error(error.message || error);
+      return Observable.throw(error.message || error);
       }
 }

@@ -59,18 +59,10 @@ constructor(public nav: NavController , private auth: AuthService, private alert
     //}, this.matchPassword)
 
   }, {'validator': this.isMatching});
- //   this.restProvider.ValidateUser(this.myForm.controls.p_username.value,this.myForm.controls.p_email.value,this.myForm.controls.p_number.value,this.myForm.controls.p_password.value)
-
-    //this.products = products;
-
 }
 
 ionViewDidEnter(){
-
 }
-
-
-
 
 isMatching(group: FormGroup){
 
@@ -110,8 +102,6 @@ console.log("sdfdsf");
 
 register(){
   //this.createSuccess = true;
-
-
   if(!this.myForm.valid){
     //this.createSuccess = false ;
     if(!this.myForm.controls.p_surname.valid){
@@ -133,28 +123,28 @@ register(){
    debugger;
    console.log(this.myForm.controls.p_surname.value);
    var user =	{
-    "firstname":this.myForm.controls.p_surname.value,
-    "lastname":this.myForm.controls.p_lastname.value,
-     "email":this.myForm.controls.p_email.value ,
-     "password":this.myForm.controls.p_password.value ,
-    "number":this.myForm.controls.p_number.value
+      "firstname":this.myForm.controls.p_surname.value,
+      "lastname":this.myForm.controls.p_lastname.value,
+      "email":this.myForm.controls.p_email.value ,
+      "password":this.myForm.controls.p_password.value ,
+      "number":this.myForm.controls.p_number.value
    };
     this.restProvider.RegisterUser(user)
-    .subscribe(data => {
-      debugger;
-      console.log(data);
-      this.showPopup("Success", "Account created.");
+      .subscribe(data => {
+        debugger;
+        console.log(data);
+        this.showPopup("Success", "Account created.");
 
-     }, error => {
-       debugger;
-     console.log(error);
-     this.showPopup("failure", "already exist");
-     // Error getting the data
-    });
-    //this.showPopup("Success", "Account created.");
-   // this.nav.push('LoginPage');
-   console.log(this.myForm.value);
-    console.log(this.formdata);
+      }, error => {
+        debugger;
+      console.log(error);
+      this.showPopup("failure", "already exist");
+      // Error getting the data
+      });
+      //this.showPopup("Success", "Account created.");
+      // this.nav.push('LoginPage');
+      console.log(this.myForm.value);
+      console.log(this.formdata);
   }
 
 }

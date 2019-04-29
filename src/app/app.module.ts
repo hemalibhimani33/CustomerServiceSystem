@@ -1,15 +1,9 @@
-import { LocationPage } from './../pages/location/location';
+ import { LocationPage } from './../pages/location/location';
  import { AuthService } from './../providers/auth-service/auth-service';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { ErrorHandler, NgModule } from '@angular/core';
-// import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-// import { SplashScreen } from '@ionic-native/splash-screen';
-// import { StatusBar } from '@ionic-native/status-bar';
  import { HttpModule } from '@angular/http';
- import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
-
-
-
+//import { AlertController, IonicPage, Loading, LoadingController, NavController} from 'ionic-angular';
 // import { MyApp } from './app.component';
  import { HttpClientModule } from  '@angular/common/http';
  import { RestProvider } from '../providers/rest/rest';
@@ -19,51 +13,11 @@ import { LocationPage } from './../pages/location/location';
 // import { ServicePage } from '../pages/service/service';
 // import {IonicPageModule} from 'ionic-angular';
 
-
-
-// @NgModule({
-//   declarations: [
-//     MyApp,
-//     //ServicePage,
-//     //LoginPage,
-//     //RegisterPage,
-//     //TabsPage
-//   ],
-//   imports: [
-//     BrowserModule,
-//     HttpClientModule,
-//     HttpModule,
-//     IonicModule.forRoot(MyApp),
-//     //IonicPageModule.forChild(TabsPage),
-
-//   ],
-//   bootstrap: [IonicApp],
-//   entryComponents: [
-//     MyApp,
-//     //ServicePage,
-//     //LoginPage,
-//     //RegisterPage,
-//     //TabsPage
-//   ],
-//   providers: [
-//     StatusBar,
-//     SplashScreen,
-//     {provide: ErrorHandler, useClass: IonicErrorHandler},
-//     AuthService,
-//     RestProvider,
-
-//   ]
-// })
-// export class AppModule {}
-
-
-
 import { NgModule, ErrorHandler } from '@angular/core';
 import {Injectable, Injector} from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -74,14 +28,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { ServicePage } from '../pages/service/service';
-
-//import { SearchPipe } from '../pipes/search/search';
 import { CookieService } from 'ngx-cookie-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-
+// import { LocalNotifications, LocalNotificationsOriginal } from '@ionic-native/local-notifications';
 
 
 @NgModule({
@@ -93,11 +45,9 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     //RegisterPage,
     LoginPage,
     LocationPage,
-
     //FormPage,
     TabsPage,
     //ServicePage,
-
   ],
   imports: [
     BrowserModule,
@@ -126,12 +76,11 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     Geolocation,
     NativeGeocoder,
     EmailComposer,
+    //LocalNotificationsOriginal,
     Ng4LoadingSpinnerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     RestProvider,
-
-
   ]
 })
 export class AppModule {}

@@ -57,7 +57,7 @@ public shouldShowCancel: any = [];
  }
 
  getPeople(ev: any){
-debugger;
+   debugger;
    this.setFilteredItems();
    let val = ev.target.value;
 

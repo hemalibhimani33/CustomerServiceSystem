@@ -20,7 +20,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-
 })
 export class LoginPage implements OnInit{
   public submitted: boolean = false;
@@ -29,6 +28,7 @@ export class LoginPage implements OnInit{
     p_email: '',
     p_password: '',
   };
+
 MyForm: FormGroup;
 createSuccess: Boolean = false;
 put: Boolean = false;
@@ -89,9 +89,9 @@ ngOnInit() {
   }
 
   login(event){
-    debugger;
-    this.submitted = true;
-    if (this.MyForm.invalid) {
+      debugger;
+      this.submitted = true;
+      if (this.MyForm.invalid) {
       return;
       }
       //this.put = true;
@@ -109,24 +109,18 @@ ngOnInit() {
           // this.put = true;
         }, 1);
         debugger;
-      console.log(data.token);
-      this.auth.setCookie('token',data.token,1);
-      this.data = this.auth.getCookie("token");
-      // if(this.data != ""){
-      //   this.put = true;
-      // }
-      // this.showPopup("success", "login successfully");
-     // this.go('http://localhost:8100/');
-      // this.nav.setRoot(HomePage);
-       debugger;
-       window.location.assign('http://localhost:8100/');
+        console.log(data.token);
+        this.auth.setCookie('token',data.token,1);
+        this.data = this.auth.getCookie("token");
+        // this.showPopup("success", "login successfully");
+        debugger;
+        window.location.assign('http://localhost:8100/');
       },
-      error =>  {
-       console.log(error);
-       this.showPopup("failure", "invalid information");}
+      error => {
+        console.log(error);
+        this.showPopup("failure", "invalid information");}
         );
       }
-
 
 // login(event){
 //   //this.createSuccess = true;

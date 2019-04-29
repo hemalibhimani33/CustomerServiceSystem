@@ -107,11 +107,16 @@ export class AboutPage {
         text: 'Sure',
         handler: () => {
           console.log('Confirm Okay');
-          let index = this.people3.indexOf(this.deletedBooking);
           debugger;
-          if(index > -1){
-            this.people3.splice(index, 1);
-          }
+          this.restProvider.UpdateStatus(this.deletedBooking);
+          window.location.assign('http://localhost:8100/');
+         // this.deletedBooking.OrderStatus = 3;
+         // console.log(this.deletedBooking);
+          // let index = this.people3.indexOf(this.deletedBooking);
+          // debugger;
+          // if(index > -1){
+          //   this.people3.splice(index, 1);
+          // }
         }
       }
     ]
