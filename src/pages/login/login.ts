@@ -11,9 +11,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { v } from '@angular/core/src/render3';
 //import { myData } from '../../providers/rest/rest';
-//import { v } from '../variable';
-//import { v } from '@angular/core/src/render3';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { LocationPage } from '../location/location';
 
 
 @IonicPage()
@@ -45,8 +44,6 @@ constructor(public loadingController: LoadingController,private ng4LoadingSpinne
   , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
 
 ) {
-
- //
   // this.MyForm = this.formBuilder.group({
   //   p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
   //   //password_ctrl: this.formBuilder.group({
@@ -55,11 +52,9 @@ constructor(public loadingController: LoadingController,private ng4LoadingSpinne
   // }, );
 
 }
-resetPassword(email: string) {
+resetPassword() {
   debugger;
-  this.auth.resetPassword(email)
-
-  console.log(email);
+  this.nav.push(LocationPage);
 }
 
 public createAccount() {
@@ -70,7 +65,9 @@ ngOnInit() {
   this.MyForm = this.formBuilder.group(
     {
     email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+   password: ['', [Validators.required, Validators.minLength(6)]]
+   // password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])]
+
     }
     );
   }
@@ -114,7 +111,8 @@ ngOnInit() {
         this.data = this.auth.getCookie("token");
         // this.showPopup("success", "login successfully");
         debugger;
-        window.location.assign('http://localhost:8100/');
+       window.location.assign('http://localhost:8100/');
+
       },
       error => {
         console.log(error);

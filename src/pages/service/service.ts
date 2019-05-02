@@ -13,6 +13,7 @@ import { RestProvider } from  './../../providers/rest/rest';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from '@ionic-native/native-geocoder/ngx';
 import { LocationPage } from '../location/location';
+import { DefaultLocationPage } from '../default-location/default-location';
 
 
 @IonicPage()
@@ -32,6 +33,8 @@ export class ServicePage {
   // location: Boolean = false;
    eventLocation: any;
    public people3: any = [];
+   public people5: any = [];
+  diff:number;
    responseObj:any;
   id: any;
   cid: any;
@@ -51,7 +54,7 @@ this.cid = navParams.get('cid');
      this.form = this._FB.group({
          start_date : ['', Validators.required],
          end_date : ['', Validators.required],
-        start_time: ['', Validators.required],
+        start_time : ['', Validators.required],
         location   : ['', Validators.required],
        // eventLocation    : ['', Validators.required],
         // address     : this._FB.array([
@@ -79,6 +82,15 @@ this.cid = navParams.get('cid');
             this.getGeoencoder(this.responseObj.latitude,this.responseObj.longitude);
 
           });
+        }
+      },
+      {
+        text: 'default Address',
+        icon: 'pin',
+        handler: () => {
+          debugger;
+          this.navCtrl.push(DefaultLocationPage);
+         // this.restProvider.loadAddress();
         }
       },
       //  {
@@ -150,9 +162,14 @@ this.cid = navParams.get('cid');
       "categoryid":this.id ,
       "serviceid":this.cid,
            };
-           console.log(this.start_date);
+          //  let start_date = new Date();
+          //  let currentDate = start_date.getDate();
+          //  console.log(currentDate);
+          debugger;
+          var dropdt = new Date(this.start_date);
+          var pickdt = new Date(this.end_date);
+          var diff = (this.start_date);
 
-     debugger;
       this.restProvider.orderS(service)
       .subscribe(data => {
       debugger;
@@ -168,13 +185,13 @@ this.cid = navParams.get('cid');
       });
     }
   }
+
   async presentToastWithOptions(msg) {
     const toast = await this.toastController.create({
       message: msg,
       showCloseButton: true,
       position: 'bottom',
       closeButtonText: 'Done'
-
     });
     toast.present();
   }

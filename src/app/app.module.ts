@@ -34,6 +34,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 // import { LocalNotifications, LocalNotificationsOriginal } from '@ionic-native/local-notifications';
+import { ResetPage } from '../pages/reset/reset';
+import { DefaultLocationPage } from '../pages/default-location/default-location';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     //RegisterPage,
     LoginPage,
     LocationPage,
+    ResetPage,
+    DefaultLocationPage,
     //FormPage,
     TabsPage,
     //ServicePage,
@@ -53,7 +57,6 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     BrowserModule,
     HttpClientModule,
     HttpModule,
-
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -65,6 +68,8 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
    // RegisterPage,
     LoginPage,
     LocationPage,
+    ResetPage,
+    DefaultLocationPage,
     //FormPage,
     TabsPage,
    // ServicePage

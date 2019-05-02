@@ -24,8 +24,8 @@ const options = {
   id:number
   OrderStatus:number
   category: string
+  location: string
   }
-
 
 @Injectable()
 
@@ -40,7 +40,6 @@ export class RestProvider {
    }
 
   rootURL="http://192.168.32.56:1337/";
-
 
   LoginUser(loginuser)
   {
@@ -75,7 +74,6 @@ export class RestProvider {
       });
   }
 
-
   orderS(services)
   {
         var headers = new Headers();
@@ -103,8 +101,6 @@ export class RestProvider {
                                 //   console.log(error);// Error getting the data
                                 //  });
   }
-
-
 
   RegisterUser(newUser)
   {
@@ -155,6 +151,28 @@ export class RestProvider {
                 resolve(data);
                });
         });
+  }
+  loadAddress()
+  {
+         var headers = new Headers();
+         headers.append('Content-Type', 'application/x-www-form-urlencoded');
+         headers.append('Access-Control-Allow-Origin' , '*');
+         headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+         headers.append('Accept','application/json');
+         headers.append('content-type','application/json');
+
+        if(this.data) {
+          return Promise.resolve(this.data);
+        }
+        return new Promise(resolve => {
+        this.httpClient.get<myData>(this.rootURL + 'OrderService/orderlist')
+          //.map((res:Response) => res)
+          .subscribe(data => {
+            debugger;
+            console.log(data.location);
+            resolve(data);
+            });
+      });
   }
 
   MyBooking()

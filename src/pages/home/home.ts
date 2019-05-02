@@ -42,6 +42,22 @@ public shouldShowCancel: any = [];
 
   }
 
+  doRefresh(event) {
+    debugger;
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.restProvider.load()
+   .then(data => {
+
+     this.people = data;
+    event.complete();
+   });
+     // event.target.complete();
+    }, 1);
+  }
+
   loadPeople(){
 
    this.restProvider.load()
@@ -72,8 +88,8 @@ public shouldShowCancel: any = [];
 
     var list:any = this.people.filter((person) => {
       debugger;
-      console.log(person.service);
-      return (person.service.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      console.log(person.category);
+      return (person.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
     });
     // var list2:any = this.people.filter((person2) => {
     //   return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);

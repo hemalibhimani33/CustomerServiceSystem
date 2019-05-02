@@ -72,7 +72,7 @@ debugger;
      var list1:any = [];
 
    var list:any = this.people2.filter((person2) => {
-     return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
+     return (person2.service.toLowerCase().indexOf(val.toLowerCase()) > -1);
    });
    this.people2 = list ;
  //  console.log(typeof(list));

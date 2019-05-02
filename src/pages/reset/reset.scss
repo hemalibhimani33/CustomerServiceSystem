@@ -1,18 +1,12 @@
-page-location {
+page-reset {
+  .reset-content {
+    background: #f8f7f7;
 
-
-  .location-content {
     ion-row {
       align-items: center;
       text-align: center;
     }
-    .location-box {
-      //background: #399F8B;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
-    }
   }
-
 
   #button {
     //margin-top: 90px;
@@ -24,5 +18,4 @@ page-location {
     border-color: #aaa #444 #444 #aaa;
     color: #000
   }
-
 }

@@ -36,6 +36,7 @@ export class AboutPage {
       this.booking = false;
     }
   }
+
   onContextChange(value): void {
     var i = 0;
     debugger;
@@ -45,7 +46,8 @@ export class AboutPage {
     debugger;
     if(value === "ALL"){
       debugger;
-      this.loadStatus();
+
+     // this.loadStatus();
     }else{
    this.people3 = this.allpeople3.filter(person3 => person3.OrderStatus === this.eventFlag);
   }
