@@ -13,12 +13,12 @@
           <ion-searchbar  placeholder="Search for Services" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="get($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
 
             <ion-item *ngFor="let person2 of people2">
-                <button ion-item (click)="orderService(person2.id,person2.service)" full id={{person2.id}}>
+                <button ion-item (click)="orderService(person2.id,person2.service,person2.price)" full id={{person2.id}}>
                     <ion-thumbnail item-left>
                     <img src="{{person2.image}}">
                     </ion-thumbnail>
                      <h2><b>{{person2.service}}</b></h2>
-                     <h2 color="blue"><b>Price : {{person2.price}}</b></h2>
+                     <h2 class="price1"><b>Price : {{person2.price}}</b></h2>
                 </button>
             </ion-item>
           </ion-list>

@@ -4,7 +4,7 @@
 
 import { catchError, timeInterval } from 'rxjs/operators';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController, ToastController, DateTime } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
@@ -25,9 +25,9 @@ import { DefaultLocationPage } from '../default-location/default-location';
 export class ServicePage {
 
   public form 			: FormGroup;
-  start_date = new Date().toDateString();
-  end_date = new Date().toDateString();
-  start_time = new Date().toTimeString();
+  start_date = new Date();
+  end_date = new Date();
+  start_time = new Date();
   location:string;
    public category: any = {};
   // location: Boolean = false;
@@ -38,10 +38,12 @@ export class ServicePage {
    responseObj:any;
   id: any;
   cid: any;
+  price:any;
 
 
   constructor(public navCtrl 		: NavController,
               public navParams 	: NavParams,
+              public alertController: AlertController,
               private _FB          : FormBuilder, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
              private nativeGeocoder: NativeGeocoder ,public toastController: ToastController,public actionSheetController: ActionSheetController)
   {
@@ -49,6 +51,8 @@ debugger;
 
 this.id = navParams.get('id');
 this.cid = navParams.get('cid');
+this.price = navParams.get('priceToservice');
+console.log(this.price);
 
     this.category = navParams.get('name');
      this.form = this._FB.group({
@@ -162,19 +166,91 @@ this.cid = navParams.get('cid');
       "categoryid":this.id ,
       "serviceid":this.cid,
            };
+
+           var service1 = service;
           //  let start_date = new Date();
           //  let currentDate = start_date.getDate();
           //  console.log(currentDate);
           debugger;
-          var dropdt = new Date(this.start_date);
-          var pickdt = new Date(this.end_date);
-          var diff = (this.start_date);
+          const date3 = new Date(this.start_date);
 
-      this.restProvider.orderS(service)
-      .subscribe(data => {
-      debugger;
-      console.log(data);
-      this.showPopup("Success","order successfully.");
+        //   console.log(date3);
+        //   console.log(date3.getMonth()+1);
+        //  console.log(date3.getDate());
+        //  console.log(date3.getFullYear());
+
+        // if(this.start_date === this.end_date)
+        // {
+        //   console.log(this.start_time.getHours());
+        // }
+         var sDate = ((date3.getMonth() + 1) + '/' + date3.getDate() + '/' +  date3.getFullYear());
+         const date4 = new Date(this.end_date);
+
+        //  console.log(date4);
+        //  console.log(date4.getMonth()+1);
+        // console.log(date4.getDate());
+        // console.log(date4.getFullYear());
+        var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
+
+          const date1 = new Date(sDate);
+          const date2 = new Date(eDate);
+          const diffTime = Math.abs(date2.getTime() - date1.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          console.log(diffDays);
+          console.log(diffDays*(this.price));
+          var tPrice = diffDays*(this.price);
+
+// const diffTime = Math.abs(this.start_date.getTime() - this.end_date.getTime());
+// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+// console.log(diffDays);
+this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to place order");
+
+    //   this.restProvider.orderS(service)
+    //   .subscribe(data => {
+    //   debugger;
+    //   console.log(data);
+    //   this.showPopup("Success","order successfully.");
+
+    //  // this.presentToastWithOptions("order successfully.");
+    //  // window.location.assign('http://localhost:8100/');
+    //   }, error => {
+    //     debugger;
+    //     console.log(error);
+    //   this.showPopup("error","no order placed");
+    //   });
+    }
+  }
+
+  async presentAlertConfirm(title, text) {
+    const alert = await this.alertController.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        },{
+          text: 'Sure',
+          handler: () => {
+            var service =	{
+              "start_date":this.start_date,
+              "start_time":this.start_time,
+              "end_date":this.end_date,
+              "location":this.eventLocation,
+              "categoryid":this.id ,
+              "serviceid":this.cid,
+                   };
+            debugger;
+            console.log('Confirm Okay');
+            this.restProvider.orderS(service)
+            .subscribe(data => {
+           debugger;
+            console.log(data);
+              this.showPopup("Success","order successfully.");
 
      // this.presentToastWithOptions("order successfully.");
      // window.location.assign('http://localhost:8100/');
@@ -183,7 +259,11 @@ this.cid = navParams.get('cid');
         console.log(error);
       this.showPopup("error","no order placed");
       });
-    }
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async presentToastWithOptions(msg) {

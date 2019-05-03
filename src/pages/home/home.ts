@@ -50,7 +50,6 @@ public shouldShowCancel: any = [];
       console.log('Async operation has ended');
       this.restProvider.load()
    .then(data => {
-
      this.people = data;
     event.complete();
    });

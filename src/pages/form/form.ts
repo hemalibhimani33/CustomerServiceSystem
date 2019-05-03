@@ -37,11 +37,11 @@ public data: any = {};
     this.loadPeople2();
   }
 
-orderService(cid,category){
+orderService(cid,category,price){
   this.data = this.auth.getCookie("token");
   if(this.data != ""){
     debugger;
-    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category});
+    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price});
 
   }else{
     //this.showPopup("Anonymous", "login requires for order service");
@@ -50,10 +50,8 @@ orderService(cid,category){
 
 }
   loadPeople2(){
-
    this.restProvider.load2(this.id)
    .then(data => {
-
      this.people2 = data;
    });
  }
