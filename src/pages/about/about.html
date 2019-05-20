@@ -83,20 +83,20 @@
 
                   <ion-item class="order" *ngFor="let person3 of people3">
                       <ion-label>
-                           <!-- <h2><b>Beauty</b></h2>
-                            <h2>Salon AT home for women</h2> -->
+                           <!-- <h2><b>Beauty</b></h2> -->
+                            <!-- <h2>Salon AT home for women</h2> -->
                             <h2><b>{{person3.category}}</b></h2>
                             <h2>{{person3.service}}</h2>
                             <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
                             <div class="cust-item-footer">
-                              <b> <h2 id = "status1" *ngIf="person3.OrderStatus == -1">Pending</h2></b>
-                              <b><h2 id = "status2" *ngIf="person3.OrderStatus == 0">Accepted</h2></b>
-                              <b><h2 id = "status3" *ngIf="person3.OrderStatus == 1">Rejected</h2></b>
-                              <b><h2 id = "status4" *ngIf="person3.OrderStatus == 2">Completed</h2></b>
-                              <b><h2 id = "status5" *ngIf="person3.OrderStatus == 3">CanceledOrder</h2></b>
+                              <b> <h2 id = "status1" *ngIf="person3.orderstatus == -1">Pending</h2></b>
+                              <b><h2 id = "status2" *ngIf="person3.orderstatus == 0">Accepted</h2></b>
+                              <b><h2 id = "status3" *ngIf="person3.orderstatus == 1">Rejected</h2></b>
+                              <b><h2 id = "status4" *ngIf="person3.orderstatus == 2">Completed</h2></b>
+                              <b><h2 id = "status5" *ngIf="person3.orderstatus == 3">CanceledOrder</h2></b>
                               <!-- <h2 id = "status">{{eventFlag}}</h2> -->
                                         <span
-                                        *ngIf="person3.OrderStatus == -1"
+                                        *ngIf="person3.orderstatus == -1"
                                  float-right
                                  ion-button
                                  icon-left

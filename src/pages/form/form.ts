@@ -41,7 +41,7 @@ orderService(cid,category,price){
   this.data = this.auth.getCookie("token");
   if(this.data != ""){
     debugger;
-    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price});
+    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price,service: this.service});
 
   }else{
     //this.showPopup("Anonymous", "login requires for order service");

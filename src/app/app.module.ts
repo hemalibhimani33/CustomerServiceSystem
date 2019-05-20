@@ -36,6 +36,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 // import { LocalNotifications, LocalNotificationsOriginal } from '@ionic-native/local-notifications';
 import { ResetPage } from '../pages/reset/reset';
 import { DefaultLocationPage } from '../pages/default-location/default-location';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { DefaultLocationPage } from '../pages/default-location/default-location'
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    IonicStorageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

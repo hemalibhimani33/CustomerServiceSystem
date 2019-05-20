@@ -14,6 +14,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from '@ionic-native/native-geocoder/ngx';
 import { LocationPage } from '../location/location';
 import { DefaultLocationPage } from '../default-location/default-location';
+import { storage } from 'firebase';
+
 
 
 @IonicPage()
@@ -23,6 +25,7 @@ import { DefaultLocationPage } from '../default-location/default-location';
 
 })
 export class ServicePage {
+  //[x: string]: any;
 
   public form 			: FormGroup;
   start_date = new Date();
@@ -39,11 +42,15 @@ export class ServicePage {
   id: any;
   cid: any;
   price:any;
+  TotalPrice: any;
+  service:any;
+
 
 
   constructor(public navCtrl 		: NavController,
               public navParams 	: NavParams,
               public alertController: AlertController,
+              private auth: AuthService,
               private _FB          : FormBuilder, private alertCtrl: AlertController ,public  restProvider: RestProvider ,private geolocation: Geolocation,
              private nativeGeocoder: NativeGeocoder ,public toastController: ToastController,public actionSheetController: ActionSheetController)
   {
@@ -55,19 +62,19 @@ this.price = navParams.get('priceToservice');
 console.log(this.price);
 
     this.category = navParams.get('name');
+    this.service = navParams.get('service');
+
      this.form = this._FB.group({
-         start_date : ['', Validators.required],
-         end_date : ['', Validators.required],
+        start_date : ['', Validators.required],
+        end_date : ['', Validators.required],
         start_time : ['', Validators.required],
         location   : ['', Validators.required],
        // eventLocation    : ['', Validators.required],
         // address     : this._FB.array([
         //    this.initAddressFields()
         // ])
-
      });
   }
-
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
@@ -93,28 +100,11 @@ console.log(this.price);
         icon: 'pin',
         handler: () => {
           debugger;
+          this.auth.setCookie('defaultAddress',this.eventLocation,1);
           this.navCtrl.push(DefaultLocationPage);
          // this.restProvider.loadAddress();
         }
       },
-      //  {
-      //   text: 'Default Location',
-      //   handler: () => {
-      //     this.navCtrl.push(LocationPage);
-      //   }
-      // },
-      //   text: 'Play (open modal)',
-      //   icon: 'arrow-dropright-circle',
-      //   handler: () => {
-      //     console.log('Play clicked');
-      //   }
-      // }, {
-      //   text: 'Favorite',
-      //   icon: 'heart',
-      //   handler: () => {
-      //     console.log('Favorite clicked');
-      //   }
-      // }, {
 
 
     {
@@ -148,11 +138,12 @@ console.log(this.price);
      control.removeAt(i);
   }
 
+
   manage(val : any) : void
   {
 
     if(!this.form.valid){
-      this.showPopup("error","enter valid data");
+      this.showPopup1("error","enter valid data");
     }
     else{
     debugger;
@@ -167,30 +158,26 @@ console.log(this.price);
       "serviceid":this.cid,
            };
 
-           var service1 = service;
-          //  let start_date = new Date();
-          //  let currentDate = start_date.getDate();
-          //  console.log(currentDate);
+          var service1 = service;
           debugger;
+
+
+        if(this.start_date === this.end_date)
+        {
+          console.log(this.start_time);
+          var a = this.start_time.split(':');
+          console.log(a[0] - 24);
+          var hours = (24 - a[0]);
+          var hPrice = (this.price*hours)/24;
+          this.TotalPrice = hPrice;
+          this.presentAlertConfirm("Your Price will be "+ hPrice,"Are You Sure You want to place order");
+        }
+        else{
           const date3 = new Date(this.start_date);
-
-        //   console.log(date3);
-        //   console.log(date3.getMonth()+1);
-        //  console.log(date3.getDate());
-        //  console.log(date3.getFullYear());
-
-        // if(this.start_date === this.end_date)
-        // {
-        //   console.log(this.start_time.getHours());
-        // }
          var sDate = ((date3.getMonth() + 1) + '/' + date3.getDate() + '/' +  date3.getFullYear());
          const date4 = new Date(this.end_date);
 
-        //  console.log(date4);
-        //  console.log(date4.getMonth()+1);
-        // console.log(date4.getDate());
-        // console.log(date4.getFullYear());
-        var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
+          var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
 
           const date1 = new Date(sDate);
           const date2 = new Date(eDate);
@@ -199,25 +186,13 @@ console.log(this.price);
           console.log(diffDays);
           console.log(diffDays*(this.price));
           var tPrice = diffDays*(this.price);
+          this.TotalPrice = tPrice;
 
 // const diffTime = Math.abs(this.start_date.getTime() - this.end_date.getTime());
 // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 // console.log(diffDays);
 this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to place order");
-
-    //   this.restProvider.orderS(service)
-    //   .subscribe(data => {
-    //   debugger;
-    //   console.log(data);
-    //   this.showPopup("Success","order successfully.");
-
-    //  // this.presentToastWithOptions("order successfully.");
-    //  // window.location.assign('http://localhost:8100/');
-    //   }, error => {
-    //     debugger;
-    //     console.log(error);
-    //   this.showPopup("error","no order placed");
-    //   });
+        }
     }
   }
 
@@ -243,6 +218,9 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
               "location":this.eventLocation,
               "categoryid":this.id ,
               "serviceid":this.cid,
+              "totalamount":this.TotalPrice,
+              "category_name":this.service,
+              "service_name":this.category
                    };
             debugger;
             console.log('Confirm Okay');
@@ -294,12 +272,14 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
      debugger;
      this.restProvider.currentLocation(latitude,longitude)
      .then(data => {
-       this.people3 = data;
+     this.people3 = data;
      this.eventLocation = this.people3;
      //this.location = true;
        //console.log(this.people3);
      });
    }
+
+
 
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
@@ -318,7 +298,25 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
     });
     alert.present();
   }
+
+
+  showPopup1(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+             console.log("invalid data");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
+
 
 // export class ServicePage {
 //   date = new Date().toDateString();

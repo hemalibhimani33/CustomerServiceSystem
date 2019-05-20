@@ -48,7 +48,7 @@ export class AboutPage {
       debugger;
       this.loadStatus();
     }else{
-    this.people3 = this.allpeople3.filter(person3 => person3.OrderStatus === this.eventFlag);
+    this.people3 = this.allpeople3.filter(person3 => person3.orderstatus === this.eventFlag);
   }
     // var list : any = this.people3.filter((person3) =>
     // {

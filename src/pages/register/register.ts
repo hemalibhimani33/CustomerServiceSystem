@@ -14,17 +14,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: 'register.html',
 })
 
-// export class UserInfo {
-//   username: string;
-//   email: string;
-//   number: number;
-//   password: string;
-// }
-
-
 export class RegisterPage {
-
-
 
  formdata = {
   p_surname: '',
@@ -35,29 +25,21 @@ export class RegisterPage {
   p_confirm_password: ''
 };
 
-//u = new UserInfo();
 myForm: FormGroup;
-//apiUrl = '192.168.32.56:1337/register';
-
 
 createSuccess: Boolean = false;
 constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider , private httpClient:HttpClient
 ) {
-
   this.myForm = this.formBuilder.group({
-    p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
-    p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
-    // p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
-    p_email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
-    //password_ctrl: this.formBuilder.group({
-     p_number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
-     // p_password: ['', [Validators.required, Validators.minLength(6)]],
+      p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+      p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+      // p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+      p_email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
+      p_number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
+      // p_password: ['', [Validators.required, Validators.minLength(6)]],
       p_password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])],
-
       p_confirm_password: ['', Validators.compose([Validators.required])]
-    //}, this.matchPassword)
-
   }, {'validator': this.isMatching});
 }
 

@@ -39,7 +39,7 @@ export class RestProvider {
   constructor(public httpClient:HttpClient, public http: HttpClient,private auth: AuthService) {
    }
 
-  rootURL="http://192.168.32.56:1337/";
+  rootURL="http://192.168.32.75:1337/";
 
   LoginUser(loginuser)
   {
@@ -112,6 +112,20 @@ export class RestProvider {
             return this.http.post(this.rootURL + 'register/create', JSON.stringify(newUser),options);
   }
 
+  ResetPasswordToken(email)
+  {
+            // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
+            debugger;
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            debugger;
+            var usermail =	{
+              "email": email
+            };
+            return this.http.post<myData>(this.rootURL + 'ForgotPassword/findEmail', JSON.stringify(usermail),options);
+  }
+
   UpdateStatus(deletedBooking)
   {
             // let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -119,7 +133,7 @@ export class RestProvider {
             var headers = new Headers();
             debugger;
             headers.append('Content-Type', 'application/x-www-form-urlencoded');
-            deletedBooking.OrderStatus = 3;
+            deletedBooking.orderstatus = 3;
             console.log(deletedBooking);
             debugger;
             return this.http.put(this.rootURL +'OrderService/update/', JSON.stringify(deletedBooking),options)
@@ -152,6 +166,7 @@ export class RestProvider {
                });
         });
   }
+
   loadAddress()
   {
          var headers = new Headers();
@@ -201,8 +216,6 @@ export class RestProvider {
                 debugger;
                 console.log(data);
                 console.log(data.category);
-                var i:number;
-                console.log(data[0].OrderStatus);
                 resolve(data);
                 });
           });

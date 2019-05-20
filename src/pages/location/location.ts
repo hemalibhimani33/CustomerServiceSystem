@@ -50,7 +50,20 @@ export class LocationPage implements OnInit{
     //this.put = true;
     const email = this.emailForm.controls.email.value
     console.log(email);
-    this.nav.push(ResetPage);
+    this.restProvider.ResetPasswordToken(email)
+    .subscribe(
+      data => {
+        debugger;
+        console.log(data);
+        console.log(data.token);
+        this.nav.push(ResetPage);
+      },
+      error => {
+        console.log(error);
+        this.showPopup("failure", "Invalid User");
+        }
+        );
+    //this.nav.push(ResetPage);
   }
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
@@ -70,4 +83,5 @@ export class LocationPage implements OnInit{
     alert.present();
   }
 }
+
 
