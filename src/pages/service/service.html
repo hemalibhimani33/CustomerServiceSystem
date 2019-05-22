@@ -86,7 +86,7 @@
          </ion-item> -->
          <ion-item>
           <ion-label>Start Date</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="start_date" formControlName="start_date"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD YYYY" min="{{this.myD}}" max="2029" [(ngModel)]="start_date" formControlName="start_date"></ion-datetime>
 
         </ion-item>
 
@@ -97,7 +97,7 @@
 
         <ion-item>
           <ion-label>End Date</ion-label>
-          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="end_date" formControlName="end_date"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD YYYY" min="{{this.start_date}}" [(ngModel)]="end_date" formControlName="end_date"></ion-datetime>
         </ion-item>
 
         <!-- <div *ngIf="!location">
@@ -117,7 +117,7 @@
             <ion-input
                type="text"
                maxlength="200"
-               formControlName="location" [(ngModel)]="eventLocation" value="{{eventLocation}}"></ion-input>
+               formControlName="location" [(ngModel)]="eventLocation" value="{{eventLocation}}" value="{{thing1}}"></ion-input>
          </ion-item>
 
 
@@ -166,7 +166,7 @@
          icon-left
          clear
          (click)="presentActionSheet()">
-            <ion-icon name="add" *ngFor="let person5 of people5"></ion-icon>
+            <ion-icon name="add"></ion-icon>
             Choose location
       </span>
    	 </ion-list>

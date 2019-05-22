@@ -181,7 +181,6 @@ export class RestProvider {
         }
         return new Promise(resolve => {
         this.httpClient.get<myData>(this.rootURL + 'OrderService/orderlist')
-          //.map((res:Response) => res)
           .subscribe(data => {
             debugger;
             console.log(data.location);

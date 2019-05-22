@@ -1,7 +1,4 @@
 
-
-
-
 import { catchError, timeInterval } from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, Loading, LoadingController, NavController, Option, ActionSheetController, ToastController, DateTime } from 'ionic-angular';
@@ -17,7 +14,6 @@ import { DefaultLocationPage } from '../default-location/default-location';
 import { storage } from 'firebase';
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-service',
@@ -28,6 +24,7 @@ export class ServicePage {
   //[x: string]: any;
 
   public form 			: FormGroup;
+  myD: String = new Date().toISOString();
   start_date = new Date();
   end_date = new Date();
   start_time = new Date();
@@ -44,6 +41,8 @@ export class ServicePage {
   price:any;
   TotalPrice: any;
   service:any;
+  defaultA: any;
+  thing1: any;
 
 
 
@@ -63,6 +62,11 @@ console.log(this.price);
 
     this.category = navParams.get('name');
     this.service = navParams.get('service');
+    debugger;
+    this.restProvider.loadAddress()
+          .then(data => {
+            this.people5 = data;
+          });
 
      this.form = this._FB.group({
         start_date : ['', Validators.required],
@@ -75,6 +79,9 @@ console.log(this.price);
         // ])
      });
   }
+  public ionViewWillEnter() {
+    this.thing1 = this.navParams.get('thing1')|| null;
+}
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
@@ -95,16 +102,19 @@ console.log(this.price);
           });
         }
       },
-      {
-        text: 'default Address',
-        icon: 'pin',
-        handler: () => {
-          debugger;
-          this.auth.setCookie('defaultAddress',this.eventLocation,1);
-          this.navCtrl.push(DefaultLocationPage);
-         // this.restProvider.loadAddress();
-        }
-      },
+      // {
+      //   text: 'default Address',
+      //   icon: 'pin',
+      //   handler: () => {
+      //     debugger;
+      //     //this.auth.setCookie('defaultAddress',this.eventLocation,1);
+      //     this.navCtrl.push(DefaultLocationPage);
+      //     // this.restProvider.loadAddress()
+      //     // .then(data => {
+      //     //   this.people6 = data;
+      //     // });
+      //   }
+      // },
 
 
     {
@@ -116,6 +126,25 @@ console.log(this.price);
         }
       }]
     });
+
+    for (let i = 0; i < this.people5.length; i++) {
+      actionSheet.addButton({
+          text: this.people5[i].location,
+          icon: 'pin',
+          handler: () => {
+            debugger;
+            this.eventLocation = this.people5[i].location;
+
+            //this.auth.setCookie('defaultAddress',this.eventLocation,1);
+           // this.navCtrl.push(DefaultLocationPage);
+            // this.restProvider.loadAddress()
+            // .then(data => {
+            //   this.people6 = data;
+            // });
+          }
+      })
+  }
+
     await actionSheet.present();
   }
 

@@ -3,7 +3,7 @@
     <ion-title align="center" style="color:black; ">Category</ion-title>
 
   </ion-navbar>
-  <ion-searchbar class="search" placeholder="Search for Services" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="getPeople($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
+  <ion-searchbar class="search" placeholder="Search for Services" (change)="onClear($event)" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="getPeople($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
 
 </ion-header>
 <ion-content>
