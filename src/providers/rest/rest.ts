@@ -123,7 +123,24 @@ export class RestProvider {
             var usermail =	{
               "email": email
             };
-            return this.http.post<myData>(this.rootURL + 'ForgotPassword/findEmail', JSON.stringify(usermail),options);
+            return this.http.post<myData>(this.rootURL + 'ForgotPassword/VerifyEmail', JSON.stringify(usermail),options);
+  }
+
+  GenerateOTP()
+  {
+            // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
+            debugger;
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            debugger;
+            this.data1 = this.auth.getCookie("token");
+            const option3 = {
+              headers: {
+                'authorization': this.data1,
+              }
+            };
+            return this.http.post<myData>(this.rootURL + 'EmailService/SendOtp',option3);
   }
 
   UpdateStatus(deletedBooking)

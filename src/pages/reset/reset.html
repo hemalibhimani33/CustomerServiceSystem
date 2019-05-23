@@ -16,19 +16,26 @@
 <ion-content class="reset-content" padding>
     <ion-row>
         <ion-col>
-            <div *ngIf="!otpVerification">
+            <div *ngIf="!otpVerification && generateOTP">
             <ion-list>
                 <ion-item>
-                    <ion-label floating>Enter OTP :</ion-label>
-                    <ion-input></ion-input>
+                    <ion-label floating>Enter 6 digit OTP :</ion-label>
+                    <ion-input [(ngModel)]="OTP" type="number"></ion-input>
                  </ion-item>
             </ion-list>
-            <button ion-button id="button" (click)="OTPvarification()" full><b>verify OTP</b></button>
+            <button ion-button id="button" (click)="OTPvarification()" full><b>Verify OTP</b></button>
             </div>
 
+              <div *ngIf="!generateOTP">
+              <button ion-button id="button" (click)="GO()" full><b>Generate OTP</b></button>
+              </div>
+
+
+
             <div *ngIf="otpVerification">
+                <form [formGroup]="NewPasswordForm">
                 <ion-list>
-                    <ion-item>
+                    <!-- <ion-item>
                         <ion-label>
                           <ion-icon name="lock"></ion-icon>
                         </ion-label>
@@ -40,9 +47,24 @@
                           <ion-icon name="lock"></ion-icon>
                         </ion-label>
                         <ion-input placeholder="Confirm password" type="password"></ion-input>
-                      </ion-item>
+                      </ion-item> -->
+
+                      <ion-item>
+                          <ion-label>
+                            <ion-icon name="lock"></ion-icon>
+                          </ion-label>
+                          <ion-input placeholder="Password" type="password" [(ngModel)]="formdata1.p_password" name="p_password" formControlName="p_password"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-label>
+                            <ion-icon name="lock"></ion-icon>
+                          </ion-label>
+                          <ion-input placeholder="Confirm password" type="password" [(ngModel)]="formdata1.p_confirm_password" name="p_confirm_password" formControlName="p_confirm_password"></ion-input>
+                        </ion-item>
                 </ion-list>
-                <button ion-button id="button" (click)="OTPvarification()" full><b>Change password</b></button>
+                <button ion-button id="button" (click)="changePassword()" full><b>Change password</b></button>
+              </form>
                 </div>
           </ion-col>
     </ion-row>

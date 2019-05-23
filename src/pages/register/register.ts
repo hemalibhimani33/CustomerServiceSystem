@@ -115,7 +115,7 @@ register(){
       .subscribe(data => {
         debugger;
         console.log(data);
-        this.showPopup("Success", "Account created.");
+        this.showPopup1("Success", "Account created.");
 
       }, error => {
         debugger;
@@ -131,6 +131,21 @@ register(){
 
 }
 showPopup(title, text) {
+  let alert = this.alertCtrl.create({
+    title: title,
+    subTitle: text,
+    buttons: [
+      {
+        text: 'OK',
+        handler: data => {
+           // this.nav.pop();
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+showPopup1(title, text) {
   let alert = this.alertCtrl.create({
     title: title,
     subTitle: text,
