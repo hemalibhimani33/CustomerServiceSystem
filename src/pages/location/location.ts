@@ -19,7 +19,8 @@ export class LocationPage implements OnInit{
 
 
   formdata = {
-    p_email: ''
+   // p_email: '',
+    p_number:''
   };
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingController: LoadingController,private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService)
@@ -33,7 +34,9 @@ export class LocationPage implements OnInit{
   ngOnInit() {
     this.emailForm = this.formBuilder.group(
       {
-      email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])]
+     // email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
+      number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
+
       }
       );
     }
@@ -48,9 +51,10 @@ export class LocationPage implements OnInit{
    // this.showPopup("failure", "Enter Valid email address");
     }
     //this.put = true;
-    const email = this.emailForm.controls.email.value
-    console.log(email);
-    this.restProvider.ResetPasswordToken(email)
+    //const email = this.emailForm.controls.email.value
+    const number = this.emailForm.controls.number.value;
+    console.log(number);
+    this.restProvider.ResetPasswordToken(number)
     .subscribe(
       data => {
         debugger;
@@ -59,6 +63,7 @@ export class LocationPage implements OnInit{
         this.nav.push(ResetPage);
       },
       error => {
+        debugger;
         console.log(error);
         this.showPopup("failure", "Invalid User");
         }

@@ -45,7 +45,6 @@ export class ServicePage {
   thing1: any;
 
 
-
   constructor(public navCtrl 		: NavController,
               public navParams 	: NavParams,
               public alertController: AlertController,
@@ -258,9 +257,10 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
             .subscribe(data => {
            debugger;
             console.log(data);
-              this.showPopup("Success","order successfully.");
+            window.location.assign('http://localhost:8100/');
+            //  this.showPopup("Success","order successfully.");
 
-     // this.presentToastWithOptions("order successfully.");
+      this.presentToastWithOptions("order successfully.");
      // window.location.assign('http://localhost:8100/');
       }, error => {
         debugger;

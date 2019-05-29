@@ -112,7 +112,7 @@ export class RestProvider {
             return this.http.post(this.rootURL + 'register/create', JSON.stringify(newUser),options);
   }
 
-  ResetPasswordToken(email)
+  ResetPasswordToken(number)
   {
             // let headers = new Headers({ 'Content-Type': 'application/json' });
             // let options = new RequestOptions({ headers: headers });
@@ -121,12 +121,12 @@ export class RestProvider {
             headers.append('Content-Type', 'application/x-www-form-urlencoded');
             debugger;
             var usermail =	{
-              "email": email
+              "mobile": number
             };
-            return this.http.post<myData>(this.rootURL + 'ForgotPassword/VerifyEmail', JSON.stringify(usermail),options);
+            return this.http.post<myData>(this.rootURL + 'SmsService/SendOTP', JSON.stringify(usermail),options);
   }
 
-  GenerateOTP()
+  GenerateOTP(otp)
   {
             // let headers = new Headers({ 'Content-Type': 'application/json' });
             // let options = new RequestOptions({ headers: headers });
@@ -140,7 +140,10 @@ export class RestProvider {
                 'authorization': this.data1,
               }
             };
-            return this.http.post<myData>(this.rootURL + 'EmailService/SendOtp',option3);
+            var userotp =	{
+              "OTP": otp
+            };
+            return this.http.post<myData>(this.rootURL + 'SmsService/VerifyOTP', JSON.stringify(userotp),option3);
   }
 
   UpdateStatus(deletedBooking)

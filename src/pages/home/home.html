@@ -3,22 +3,21 @@
     <ion-title align="center" style="color:black; ">Category</ion-title>
 
   </ion-navbar>
-  <ion-searchbar class="search" placeholder="Search for Services" (change)="onClear($event)" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="getPeople($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
+  <ion-searchbar class="search" placeholder="Search for Services"   (onchange)="onClear($event)"  debounce="1" (ionClear)="onClear($event)" [showCancelButton]="shouldShowCancel" (ionInput)="getPeople($event)" show-cancel="true" (ionCancel)="onClear($event)"></ion-searchbar>
 
 </ion-header>
 <ion-content>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
 <!-- <ion-grid>
     <ion-list>
-
         <ion-item *ngFor="let person of people">
             <button ion-item (click)="sub(person.id)" full id={{person.id}}>
                 <ion-avatar item-left>
                 <img src="{{person.image}}">
                 </ion-avatar>
-                 <h1 >{{person.service}}</h1>
+                <h1 >{{person.service}}</h1>
             </button>
         </ion-item>
       </ion-list>

@@ -113,20 +113,35 @@ export class ResetPage {
     debugger;
     console.log(this.OTP);
     console.log("varified");
-    this.otpVerification = true;
+    this.restProvider.GenerateOTP(this.OTP)
+    .subscribe(
+      data => {
+        debugger;
+        console.log(data);
+        this.otpVerification = true;
+      },
+      error => {
+        debugger;
+        console.log(error);
+        this.showPopup("failure", "Invalid User");
+        }
+        );
+
+   // this.otpVerification = true;
   }
-  GO() {
-    debugger;
-    console.log("varified");
-    this.restProvider.GenerateOTP()
-    .subscribe(data => {
-      debugger;
-      console.log(data);
-      //this.generateOTP = true;
-    }, error => {
-      debugger;
-    console.log(error);
-    });
-    this.generateOTP = true;
-  }
+
+  // GO() {
+  //   debugger;
+  //   console.log("varified");
+  //   this.restProvider.GenerateOTP()
+  //   .subscribe(data => {
+  //     debugger;
+  //     console.log(data);
+  //     //this.generateOTP = true;
+  //   }, error => {
+  //     debugger;
+  //   console.log(error);
+  //   });
+  //   this.generateOTP = true;
+  // }
 }

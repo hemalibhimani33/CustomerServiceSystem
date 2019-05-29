@@ -16,7 +16,7 @@
 <ion-content class="reset-content" padding>
     <ion-row>
         <ion-col>
-            <div *ngIf="!otpVerification && generateOTP">
+            <div *ngIf="!otpVerification">
             <ion-list>
                 <ion-item>
                     <ion-label floating>Enter 6 digit OTP :</ion-label>
@@ -26,9 +26,9 @@
             <button ion-button id="button" (click)="OTPvarification()" full><b>Verify OTP</b></button>
             </div>
 
-              <div *ngIf="!generateOTP">
+              <!-- <div *ngIf="!generateOTP">
               <button ion-button id="button" (click)="GO()" full><b>Generate OTP</b></button>
-              </div>
+              </div> -->
 
 
 

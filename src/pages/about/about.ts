@@ -14,6 +14,7 @@ import { RestProvider } from  './../../providers/rest/rest';
 
 export class AboutPage {
   booking: Boolean = false;
+  nobooking : Boolean = false;
   public user1: any = {};
   clicked: boolean;
   eventFlag: any;
@@ -31,7 +32,8 @@ export class AboutPage {
     if(this.user1 != ""){
       debugger;
       this.booking = true;
-      this.loadStatus();
+       this.loadStatus();
+
     }else{
       this.booking = false;
     }
@@ -47,6 +49,7 @@ export class AboutPage {
     if(value === "ALL"){
       debugger;
       this.loadStatus();
+
     }else{
     this.people3 = this.allpeople3.filter(person3 => person3.orderstatus === this.eventFlag);
   }
@@ -83,6 +86,17 @@ export class AboutPage {
     .then(data => {
       this.people3 = data;
       this.allpeople3 = this.people3;
+      if(this.allpeople3 == "")
+      {
+        this.nobooking = true;
+      }else{
+       // this.loadStatus();
+        this.nobooking = false;
+
+      }
+    //  console.log(this.allpeople3[0].start_date);
+    //  var date = new Date(this.allpeople3[0].start_date);
+     // console.log((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
     });
   }
 

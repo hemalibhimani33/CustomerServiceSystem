@@ -109,7 +109,7 @@ register(){
       "lastname":this.myForm.controls.p_lastname.value,
       "email":this.myForm.controls.p_email.value ,
       "password":this.myForm.controls.p_password.value ,
-      "number":this.myForm.controls.p_number.value
+      "mobile":this.myForm.controls.p_number.value
    };
     this.restProvider.RegisterUser(user)
       .subscribe(data => {

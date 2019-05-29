@@ -66,9 +66,10 @@
                           </ion-col>
                         </ion-row>
                   </ion-grid> -->
-
+                  <ion-label *ngIf="nobooking">No Booking Available</ion-label>
+                  <div *ngIf="!nobooking">
                   <ion-item>
-                      <ion-label>Bookings</ion-label>
+                      <ion-label >Bookings</ion-label>
                       <!-- <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One"> -->
                       <ion-select interface="action-sheet"  placeholder="Select One" (ionChange)="onContextChange($event)" >
 
@@ -87,6 +88,7 @@
                             <!-- <h2>Salon AT home for women</h2> -->
                             <h2><b>{{person3.category}}</b></h2>
                             <h2>{{person3.service}}</h2>
+                            <h3  id = "status1">{{person3.start_date}} {{person3.start_time}}</h3>
                             <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
                             <div class="cust-item-footer">
                               <b> <h2 id = "status1" *ngIf="person3.orderstatus == -1">Pending</h2></b>
@@ -120,40 +122,6 @@
                   </span>
                 </ion-label> -->
                   </ion-item>
-                  <!-- <ion-item class="order">
-
-                        <ion-label class="s">
-                           <h2><b>Beauty</b></h2>
-                            <h2>Salon AT home for women</h2>
-                        </ion-label>
-                        <ion-label class="p" align="right">
-                          <h2 id = "status">Pending</h2>
-                          <h2 id = "status"><h2
-                     ion-button
-                     icon-left
-                     (click)="cnl()"
-                     color="danger"
-                     clear>
-                     <ion-icon name="close"></ion-icon>
-                      Order
-                          </h2></h2>
-                        </ion-label>
-                  </ion-item> -->
-                  <!-- <ion-item class="order">
-                      <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">
-                           <h2><b>Beauty</b></h2>
-                            <h2>Salon AT home for women</h2>
-                            <h2 id = "status">Pending</h2>
-
-                        </ion-label>
-                  </ion-item>
-                  <ion-item class="order">
-                      <ion-label class="sc-ion-label-md-h sc-ion-label-md-s hydrated">
-                           <h2><b>Beauty</b></h2>
-                            <h2>Salon AT home for women</h2>
-                            <h2 id = "status">Pending</h2>
-
-                      </ion-label>
-                  </ion-item> -->
+                  </div>
   </div>
 </ion-content>

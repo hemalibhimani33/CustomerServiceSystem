@@ -9,7 +9,6 @@ import { ContactPage } from '../contact/contact';
 import { myData } from './../../providers/rest/rest'
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
-import { v } from '@angular/core/src/render3';
 //import { myData } from '../../providers/rest/rest';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LocationPage } from '../location/location';
@@ -48,9 +47,7 @@ constructor(public loadingController: LoadingController,private ng4LoadingSpinne
   //   p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
   //   //password_ctrl: this.formBuilder.group({
   //   p_password: ['', Validators.compose([Validators.required])],
-
   // }, );
-
 }
 resetPassword() {
   debugger;
@@ -112,20 +109,23 @@ ngOnInit() {
         // this.showPopup("success", "login successfully");
         debugger;
        window.location.assign('http://localhost:8100/');
+      // document.location.href = 'this.nav.pop' ;
+
+        // this.nav.pop();
+        // return redirect()
+        //   ->back();
 
       },
       error => {
         console.log(error);
-        this.showPopup("failure", "invalid information");}
+        this.showPopup("failure", "Invalid User");}
         );
       }
 
 // login(event){
 //   //this.createSuccess = true;
-
 //     if(!this.MyForm.valid){
 //       this.createSuccess = false ;
-
 //       if(!this.MyForm.controls.p_email.valid){
 //       this.showPopup("failure", "invalid email");
 //       }
@@ -162,7 +162,6 @@ ngOnInit() {
 //      console.log(error);
 //      this.showPopup("failure", "invalid information");}
 // );
-
 //     }
 //   }
 
