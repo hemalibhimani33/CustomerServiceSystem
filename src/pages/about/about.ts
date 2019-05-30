@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import { Status } from './../enums'
 import { RestProvider } from  './../../providers/rest/rest';
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-about',
@@ -38,6 +39,11 @@ export class AboutPage {
       this.booking = false;
     }
   }
+
+  date1(start_date) {
+    return  moment(start_date).format('ddd, MMM YY');
+    //moment('person3.start_date').format('ddd, MMM YY')
+ }
 
   onContextChange(value): void {
     var i = 0;

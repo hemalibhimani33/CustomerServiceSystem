@@ -6,10 +6,13 @@ page-about {
     //   // padding-bottom: 20px;
     // }
     background: #f8f7f7;
+    #noBooking{
+      color: red;
+
+    }
     .service{
       text-align: left;
     }
-
 
     .cancel{
       align-items: right;
@@ -19,10 +22,7 @@ page-about {
     .order #status{
       color: blue;
     }
-    #noBooking{
-      color: red;
 
-    }
     .order #status1{
       color: blue;
     }
