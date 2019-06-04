@@ -19,12 +19,14 @@
             <div *ngIf="!otpVerification">
             <ion-list>
                 <ion-item>
-                    <ion-label floating>Enter 6 digit OTP :</ion-label>
+                    <ion-label floating>Enter 4 digit OTP :</ion-label>
                     <ion-input [(ngModel)]="OTP" type="number"></ion-input>
                  </ion-item>
             </ion-list>
-            <button ion-button id="button" (click)="OTPvarification()" full><b>Verify OTP</b></button>
-            </div>
+            <button ion-button id="button" (click)="OTPverification()" full><b>Verify OTP</b></button>
+            <button ion-button id="button" (click)="OTPResend()" full><b>Resend OTP</b></button>
+
+          </div>
 
               <!-- <div *ngIf="!generateOTP">
               <button ion-button id="button" (click)="GO()" full><b>Generate OTP</b></button>

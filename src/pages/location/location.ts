@@ -60,7 +60,8 @@ export class LocationPage implements OnInit{
         debugger;
         console.log(data);
         console.log(data.token);
-        this.nav.push(ResetPage);
+       // this.auth.setCookie('token',data.token,1);
+        this.nav.push(ResetPage,{number: number,token:data.token});
       },
       error => {
         debugger;

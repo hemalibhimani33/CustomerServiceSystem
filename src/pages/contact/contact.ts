@@ -9,6 +9,7 @@ import { RegisterPage } from '../register/register';
 import { LoginPage } from '../login/login';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { config } from '../variable';
 
 
 
@@ -75,7 +76,7 @@ export class ContactPage {
    // this.data = this.auth.getCookie("token");
 
    // console.log(this.data);
-   window.location.assign('http://localhost:8100');
+   window.location.assign(config.URL);
 
         this.clicked = false;
    // this.loggedIn.next(false);
@@ -83,17 +84,30 @@ export class ContactPage {
    // this.nav.push(ContactPage);
     //this.router.navigate(['/contact']);
   }
-//   ionViewWillEnter(){
-//     this.myDefaultMethodToFetchData();
-// }
-// myDefaultMethodToFetchData(){
-//   this.clicked = false;
-// }
+
+  doRefresh(refresher) {
+    //console.log('Begin async operation', refresher);
+    this.data = this.auth.getCookie("token");
+    console.log("asad");
+    if(this.data != ""){
+      this.clicked = true;
+    }else{
+    this.clicked = false;
+
+    }
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
 
      public loginn(): any{
-
+debugger;
   //  this.clicked = true;
       this.nav.push(LoginPage);
+
+
      //console.log( localStorage.getItem('clicked'));
 
        }

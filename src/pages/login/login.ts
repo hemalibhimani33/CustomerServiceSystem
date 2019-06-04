@@ -1,6 +1,6 @@
 import { HomePage } from './../home/home';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, Navbar} from 'ionic-angular';
+import { AlertController, IonicPage, Loading, LoadingController, NavController, Navbar, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
@@ -12,6 +12,9 @@ import { BehaviorSubject } from 'rxjs';
 //import { myData } from '../../providers/rest/rest';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LocationPage } from '../location/location';
+import { ResetPage } from '../reset/reset';
+import { config } from '../variable';
+import { AboutPage } from '../about/about';
 
 
 @IonicPage()
@@ -37,23 +40,32 @@ mydata : myData[] = [];
 v : ContactPage;
 
 @ViewChild(Navbar) navBar: Navbar;
+  public loginU : string = null;
+  ap: any;
+
 
 //public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
-constructor(public loadingController: LoadingController,private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
-  , public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
+constructor(
+  public loadingController: LoadingController,private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+ , public navParams: NavParams, public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
 
 ) {
+ // AboutPage ap : AboutPage;
+
+
   // this.MyForm = this.formBuilder.group({
   //   p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
   //   //password_ctrl: this.formBuilder.group({
   //   p_password: ['', Validators.compose([Validators.required])],
   // }, );
+debugger;
+  this.loginU = navParams.get('loginPageURL');
+  console.log(this.loginU);
 }
 resetPassword() {
   debugger;
   this.nav.push(LocationPage);
 }
-
 public createAccount() {
   this.nav.push('RegisterPage');
 }
@@ -98,72 +110,41 @@ ngOnInit() {
       this.restProvider.LoginUser(loginuser1)
      .subscribe(
       data => {
-        setTimeout(() => {
-          this.presentLoadingWithOptions();
-          // this.put = true;
-        }, 1);
+        // setTimeout(() => {
+        //   this.presentLoadingWithOptions();
+        //   // this.put = true;
+        // }, 1);
         debugger;
         console.log(data.token);
         this.auth.setCookie('token',data.token,1);
         this.data = this.auth.getCookie("token");
         // this.showPopup("success", "login successfully");
         debugger;
-       window.location.assign('http://localhost:8100/');
+      // window.location.assign(config.URL);
       // document.location.href = 'this.nav.pop' ;
+      //document.onkeydown = function() { window.location.reload; };
+     // window.location.reload;
 
-        // this.nav.pop();
-        // return redirect()
-        //   ->back();
+     if (this.loginU == (config.URL + "/#/search/service"))
+     {
+      this.showPopup1("Success", "login successfully.");
+     // this.ap.OnInit1();
 
+     }else{
+      setTimeout(() => {
+          this.presentLoadingWithOptions();
+          // this.put = true;
+        }, 1);
+      window.location.assign(config.URL);
+
+     }
+   // this.showPopup1("Success", "login successfully.");
       },
       error => {
         console.log(error);
         this.showPopup("failure", "Invalid User");}
         );
       }
-
-// login(event){
-//   //this.createSuccess = true;
-//     if(!this.MyForm.valid){
-//       this.createSuccess = false ;
-//       if(!this.MyForm.controls.p_email.valid){
-//       this.showPopup("failure", "invalid email");
-//       }
-//     }
-//     else {
-//      // this.createSuccess = true;
-//      // this.showPopup("Success", "login.");
-
-//   const email = this.MyForm.controls.p_email.value
-//   const password = this.MyForm.controls.p_password.value
-
-//    this.restProvider.LoginUser(email, password)
-//    .subscribe(
-//     data => {
-//     console.log(data.token);
-//     this.auth.setCookie('token',data.token,1);
-//     this.data = this.auth.getCookie("token");
-//     if(this.data != ""){
-//       this.put = true;
-//      // this.ng4LoadingSpinnerService.show();
-
-//       // setTimeout(() => {
-//       //   this.put = true;
-//       // }, 1);
-//     //  this.ng4LoadingSpinnerService.show();
-
-//     //this.nav.setRoot(HomePage);
-//       //this.nav.pop();
-//      // this.showPopup("success", "login successfully");
-//     }
-//     this.nav.setRoot(HomePage);
-//     },
-//     error =>  {
-//      console.log(error);
-//      this.showPopup("failure", "invalid information");}
-// );
-//     }
-//   }
 
   showPopup(title, text) {
     let alert = this.alertCtrl.create({
@@ -176,6 +157,22 @@ ngOnInit() {
             if (this.createSuccess) {
               this.nav.pop();
             }
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showPopup1(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+              this.nav.pop();
           }
         }
       ]

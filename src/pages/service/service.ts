@@ -12,6 +12,8 @@ import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderReverseResult } from
 import { LocationPage } from '../location/location';
 import { DefaultLocationPage } from '../default-location/default-location';
 import { storage } from 'firebase';
+import { LoginPage } from '../login/login';
+import { config } from '../variable';
 
 
 @IonicPage()
@@ -43,6 +45,9 @@ export class ServicePage {
   service:any;
   defaultA: any;
   thing1: any;
+  data: string;
+  public loginURL : string = null;
+
 
 
   constructor(public navCtrl 		: NavController,
@@ -170,59 +175,150 @@ console.log(this.price);
 
   manage(val : any) : void
   {
+    this.data = this.auth.getCookie("token");
 
-    if(!this.form.valid){
-      this.showPopup1("error","enter valid data");
+    if(this.data != "")
+
+    {
+      if(!this.form.valid){
+        this.showPopup1("error","enter valid data");
+      }
+      else{
+      debugger;
+       console.log(val);
+
+       var service =	{
+        "start_date":this.start_date,
+        "start_time":this.start_time,
+        "end_date":this.end_date,
+        "location":this.eventLocation,
+        "categoryid":this.id ,
+        "serviceid":this.cid,
+             };
+
+            var service1 = service;
+            debugger;
+
+
+          if(this.start_date === this.end_date)
+          {
+            console.log(this.start_time);
+            var a = this.start_time.split(':');
+            console.log(a[0] - 24);
+            var hours = (24 - a[0]);
+            var hPrice = (this.price*hours)/24;
+            this.TotalPrice = hPrice;
+            this.presentAlertConfirm("Your Price will be "+ hPrice,"Are You Sure You want to place order");
+          }
+          else{
+            const date3 = new Date(this.start_date);
+           var sDate = ((date3.getMonth() + 1) + '/' + date3.getDate() + '/' +  date3.getFullYear());
+           const date4 = new Date(this.end_date);
+
+            var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
+
+            const date1 = new Date(sDate);
+            const date2 = new Date(eDate);
+            const diffTime = Math.abs(date2.getTime() - date1.getTime());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            console.log(diffDays);
+            console.log(diffDays*(this.price));
+            var tPrice = diffDays*(this.price);
+            this.TotalPrice = tPrice;
+
+  // const diffTime = Math.abs(this.start_date.getTime() - this.end_date.getTime());
+  // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  // console.log(diffDays);
+  this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to place order");
+          }
+      }
+
     }
+
     else{
-    debugger;
-     console.log(val);
-
-     var service =	{
-      "start_date":this.start_date,
-      "start_time":this.start_time,
-      "end_date":this.end_date,
-      "location":this.eventLocation,
-      "categoryid":this.id ,
-      "serviceid":this.cid,
-           };
-
-          var service1 = service;
-          debugger;
-
-
-        if(this.start_date === this.end_date)
-        {
-          console.log(this.start_time);
-          var a = this.start_time.split(':');
-          console.log(a[0] - 24);
-          var hours = (24 - a[0]);
-          var hPrice = (this.price*hours)/24;
-          this.TotalPrice = hPrice;
-          this.presentAlertConfirm("Your Price will be "+ hPrice,"Are You Sure You want to place order");
-        }
-        else{
-          const date3 = new Date(this.start_date);
-         var sDate = ((date3.getMonth() + 1) + '/' + date3.getDate() + '/' +  date3.getFullYear());
-         const date4 = new Date(this.end_date);
-
-          var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
-
-          const date1 = new Date(sDate);
-          const date2 = new Date(eDate);
-          const diffTime = Math.abs(date2.getTime() - date1.getTime());
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          console.log(diffDays);
-          console.log(diffDays*(this.price));
-          var tPrice = diffDays*(this.price);
-          this.TotalPrice = tPrice;
-
-// const diffTime = Math.abs(this.start_date.getTime() - this.end_date.getTime());
-// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-// console.log(diffDays);
-this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to place order");
-        }
+      //this.showPopup("Anonymous", "login requires for order service");
+      this.presentAlertConfirm1("Anonymous","login requires for order service");
     }
+
+//     if(!this.form.valid){
+//       this.showPopup1("error","enter valid data");
+//     }
+//     else{
+//     debugger;
+//      console.log(val);
+
+//      var service =	{
+//       "start_date":this.start_date,
+//       "start_time":this.start_time,
+//       "end_date":this.end_date,
+//       "location":this.eventLocation,
+//       "categoryid":this.id ,
+//       "serviceid":this.cid,
+//            };
+
+//           var service1 = service;
+//           debugger;
+
+
+//         if(this.start_date === this.end_date)
+//         {
+//           console.log(this.start_time);
+//           var a = this.start_time.split(':');
+//           console.log(a[0] - 24);
+//           var hours = (24 - a[0]);
+//           var hPrice = (this.price*hours)/24;
+//           this.TotalPrice = hPrice;
+//           this.presentAlertConfirm("Your Price will be "+ hPrice,"Are You Sure You want to place order");
+//         }
+//         else{
+//           const date3 = new Date(this.start_date);
+//          var sDate = ((date3.getMonth() + 1) + '/' + date3.getDate() + '/' +  date3.getFullYear());
+//          const date4 = new Date(this.end_date);
+
+//           var eDate = ((date4.getMonth() + 1) + '/' + date4.getDate() + '/' +  date4.getFullYear());
+
+//           const date1 = new Date(sDate);
+//           const date2 = new Date(eDate);
+//           const diffTime = Math.abs(date2.getTime() - date1.getTime());
+//           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+//           console.log(diffDays);
+//           console.log(diffDays*(this.price));
+//           var tPrice = diffDays*(this.price);
+//           this.TotalPrice = tPrice;
+
+// // const diffTime = Math.abs(this.start_date.getTime() - this.end_date.getTime());
+// // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+// // console.log(diffDays);
+// this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to place order");
+//         }
+//     }
+  }
+
+  async presentAlertConfirm1(title, text) {
+    const alert = await this.alertController.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Login',
+          handler: () => {
+            debugger;
+            this.loginURL = (config.URL + "/#/search/service");
+            this.navCtrl.push(LoginPage,{loginPageURL: this.loginURL});
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentAlertConfirm(title, text) {
@@ -235,6 +331,9 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
+            //this.navCtrl.pop();
+            window.location.assign(config.URL);
+
             console.log('Confirm Cancel: blah');
           }
         },{
@@ -257,7 +356,7 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
             .subscribe(data => {
            debugger;
             console.log(data);
-            window.location.assign('http://localhost:8100/');
+            window.location.assign(config.URL);
             //  this.showPopup("Success","order successfully.");
 
       this.presentToastWithOptions("order successfully.");
@@ -320,7 +419,7 @@ this.presentAlertConfirm("Your Price will be "+ tPrice,"Are You Sure You want to
           text: 'OK',
           handler: data => {
             // this.navCtrl.pop();
-               window.location.assign('http://localhost:8100/');
+               window.location.assign(config.URL);
               //this.navCtrl.popTo('FormPage');
           }
         }

@@ -31,7 +31,7 @@ public shouldShowCancel: any = [];
     //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
     //this.ionViewLoaded();
    // this.ionViewLoaded();
-   this.homePage = 'http://localhost:8100/';
+    this.homePage = 'http://localhost:8100/';
     this.loadPeople();
 
 

@@ -39,14 +39,17 @@ public data: any = {};
 
 orderService(cid,category,price){
   this.data = this.auth.getCookie("token");
-  if(this.data != ""){
-    debugger;
-    this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price,service: this.service});
+  // if(this.data != ""){
+  //   debugger;
+  //   this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price,service: this.service});
 
-  }else{
-    //this.showPopup("Anonymous", "login requires for order service");
-    this.presentAlertConfirm("Anonymous","login requires for order service");
-  }
+  // }else{
+  //   //this.showPopup("Anonymous", "login requires for order service");
+  //   this.presentAlertConfirm("Anonymous","login requires for order service");
+  // }
+
+  this.nav.push('ServicePage', {id : this.id,cid : cid,name: category,priceToservice: price,service: this.service});
+
 
 }
   loadPeople2(){

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { NavController, AlertController, NavParams, ToastController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
@@ -7,12 +7,13 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 import { Status } from './../enums'
 import { RestProvider } from  './../../providers/rest/rest';
 import * as moment from 'moment';
+import { config } from '../variable';
 
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
 })
-
+@Injectable()
 export class AboutPage {
   booking: Boolean = false;
   nobooking : Boolean = false;
@@ -40,9 +41,21 @@ export class AboutPage {
     }
   }
 
+OnInit1() {
+  this.user1 = this.auth.getCookie("token");
+  if(this.user1 != ""){
+    debugger;
+    this.booking = true;
+     this.loadStatus();
+
+  }else{
+    this.booking = false;
+  }
+
+}
+
   date1(start_date) {
-    return  moment(start_date).format('ddd, MMM YY');
-    //moment('person3.start_date').format('ddd, MMM YY')
+    return  moment(start_date).format('DD MMM YYYY');
  }
 
   onContextChange(value): void {
@@ -59,16 +72,7 @@ export class AboutPage {
     }else{
     this.people3 = this.allpeople3.filter(person3 => person3.orderstatus === this.eventFlag);
   }
-    // var list : any = this.people3.filter((person3) =>
-    // {
-      // for (var i = 0; i < this.people3.length; i++){
-      //   if((this.people3[i].OrderStatus) == this.eventFlag){
-      //     console.log(this.people3[i]);
-      //   }else{
-      //     console.log("out");
-      //   }
-      // }
-    // });
+
   }
 
   async presentToastWithOptions(msg) {
@@ -106,6 +110,7 @@ export class AboutPage {
     });
   }
 
+
   public cnl(person3) {
     debugger;
     this.presentAlertConfirm("Cancel Order","Are You Sure You want to cancel order");
@@ -130,7 +135,7 @@ export class AboutPage {
           console.log('Confirm Okay');
           debugger;
           this.restProvider.UpdateStatus(this.deletedBooking);
-          window.location.assign('http://localhost:8100/');
+          window.location.assign(config.URL);
          // this.deletedBooking.OrderStatus = 3;
          // console.log(this.deletedBooking);
           // let index = this.people3.indexOf(this.deletedBooking);

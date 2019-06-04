@@ -25,9 +25,16 @@ export class ResetPage {
     p_password: '',
     p_confirm_password: ''
   };
+  mobileNumber: any;
+  sendToken: any;
 
 
   constructor(private alertCtrl: AlertController,public formBuilder: FormBuilder,public  restProvider: RestProvider,public navCtrl: NavController, public navParams: NavParams) {
+
+    this.mobileNumber = navParams.get('number');
+    this.sendToken = navParams.get('token');
+
+
     this.NewPasswordForm = this.formBuilder.group({
       p_password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])],
       p_confirm_password: ['', Validators.compose([Validators.required])]
@@ -74,6 +81,21 @@ export class ResetPage {
     console.log('ionViewDidLoad ResetPage');
   }
 
+  OTPResend() {
+    debugger;
+    this.restProvider.Resendotp(this.mobileNumber)
+    .subscribe(data => {
+      debugger;
+      console.log(data);
+      this.showPopup("Success","otp sent");
+    }, error => {
+      debugger;
+    console.log(error);
+    this.showPopup("error","error");
+    });
+
+  }
+
   changePassword() {
     debugger;
     if(!this.NewPasswordForm.valid){
@@ -87,7 +109,17 @@ export class ResetPage {
     else {
      // this.createSuccess = true;
      debugger;
-     this.showPopup("Success","password changed");
+     this.restProvider.NewPassword(this.NewPasswordForm.controls.p_password.value,this.sendToken)
+     .subscribe(data => {
+      debugger;
+      console.log(data);
+      this.showPopup1("Success","password changed");
+    }, error => {
+      debugger;
+    console.log(error);
+    this.showPopup("error","error");
+    });
+    // this.showPopup("Success","password changed");
 
     }
 
@@ -107,18 +139,39 @@ export class ResetPage {
     });
     alert.present();
   }
+  showPopup1(title, text) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+              this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
 
-  OTPvarification() {
+
+  OTPverification() {
     debugger;
     console.log(this.OTP);
     console.log("varified");
-    this.restProvider.GenerateOTP(this.OTP)
+    this.restProvider.GenerateOTP(this.mobileNumber,this.OTP)
     .subscribe(
       data => {
         debugger;
         console.log(data);
-        this.otpVerification = true;
+        if(data.is_success == true){
+          this.otpVerification = true;
+        }else{
+          this.showPopup("failure", "Invalid User");
+
+        }
       },
       error => {
         debugger;
@@ -127,7 +180,7 @@ export class ResetPage {
         }
         );
 
-   // this.otpVerification = true;
+    //this.otpVerification = true;
   }
 
   // GO() {

@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 import { AuthService } from '../auth-service/auth-service';
+import { config } from '../../pages/variable';
 
 const options = {
   headers: new HttpHeaders({
@@ -25,6 +26,7 @@ const options = {
   OrderStatus:number
   category: string
   location: string
+  is_success: boolean
   }
 
 @Injectable()
@@ -39,7 +41,8 @@ export class RestProvider {
   constructor(public httpClient:HttpClient, public http: HttpClient,private auth: AuthService) {
    }
 
-  rootURL="http://192.168.32.75:1337/";
+  //rootURL="http://192.168.32.75:1337/";
+  rootURL=config.apiURL;
 
   LoginUser(loginuser)
   {
@@ -123,10 +126,25 @@ export class RestProvider {
             var usermail =	{
               "mobile": number
             };
-            return this.http.post<myData>(this.rootURL + 'SmsService/SendOTP', JSON.stringify(usermail),options);
+            return this.http.post<myData>(this.rootURL + 'ForgotPassword/SendOTP', JSON.stringify(usermail),options);
   }
 
-  GenerateOTP(otp)
+  Resendotp(number){
+
+     // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
+            debugger;
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            debugger;
+            var usernumber =	{
+              "mobile": number
+            };
+            return this.http.post<myData>(this.rootURL + 'SmsService/ResendOTP', JSON.stringify(usernumber),options);
+
+  }
+
+  GenerateOTP(number,otp)
   {
             // let headers = new Headers({ 'Content-Type': 'application/json' });
             // let options = new RequestOptions({ headers: headers });
@@ -141,10 +159,39 @@ export class RestProvider {
               }
             };
             var userotp =	{
+              "mobile":number,
               "OTP": otp
             };
-            return this.http.post<myData>(this.rootURL + 'SmsService/VerifyOTP', JSON.stringify(userotp),option3);
+            return this.http.post<myData>(this.rootURL + 'ForgotPassword/VerifyOTP', JSON.stringify(userotp));
   }
+  NewPassword(password,token)
+  {
+            // let headers = new Headers({ 'Content-Type': 'application/json' });
+            // let options = new RequestOptions({ headers: headers });
+            debugger;
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            debugger;
+            this.data1 = this.auth.getCookie("token");
+            const option4 = {
+              headers: {
+                'authorization': token,
+              }
+            };
+            var userpassword =	{
+              "password":password,
+
+            };
+
+            return this.http.put(this.rootURL + 'ForgotPassword/update/',JSON.stringify(userpassword), option4);
+            // .subscribe(data => {
+            //   debugger;
+            //   console.log(data);
+            // }, error => {
+            //   debugger;
+            // console.log(error);
+            // });
+          }
 
   UpdateStatus(deletedBooking)
   {
