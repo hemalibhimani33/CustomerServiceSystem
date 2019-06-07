@@ -1,14 +1,4 @@
 
-// export enum Status{
-//   0: "offline",
-//   1: "available",
-//   2: "busy",
-//   3: "away",
-
-
-//   Admin = "1",
-//   User = 2
-//   }
 
  export enum Status {
     Pending = -1,

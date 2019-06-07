@@ -7,12 +7,11 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <div>
     <ion-list>
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content></ion-refresher-content>
-          </ion-refresher>
-
         <!-- <button ion-item (click)="signup()" full>
             <h6><b>Sign UP</b></h6>
           </button> -->

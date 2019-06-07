@@ -41,6 +41,18 @@ export class ContactPage {
 
     }
 
+    ionViewWillEnter(){
+      this.data = this.auth.getCookie("token");
+      console.log("asad");
+      if(this.data != ""){
+        this.clicked = true;
+      }else{
+      this.clicked = false;
+
+      }
+
+    }
+
   private getUserAvailability():boolean{
     if(this.auth.getCookie("token")!=""){
       return true;
@@ -85,19 +97,42 @@ export class ContactPage {
     //this.router.navigate(['/contact']);
   }
 
-  doRefresh(refresher) {
-    //console.log('Begin async operation', refresher);
-    this.data = this.auth.getCookie("token");
-    console.log("asad");
-    if(this.data != ""){
-      this.clicked = true;
-    }else{
-    this.clicked = false;
+  // doRefresh(refresher) {
+  //   //console.log('Begin async operation', refresher);
+  //   // this.data = this.auth.getCookie("token");
+  //   // console.log("asad");
+  //   // if(this.data != ""){
+  //   //   this.clicked = true;
+  //   // }else{
+  //   // this.clicked = false;
 
-    }
+  //   // }
+  //   setTimeout(() => {
+  //     console.log('Async operation has ended');
+  //     this.data = this.auth.getCookie("token");
+  //     console.log("asad");
+  //     if(this.data != ""){
+  //       this.clicked = true;
+  //     }else{
+  //     this.clicked = false;
+
+  //     }
+  //     refresher.complete();
+  //   }, 2000);
+  // }
+  doRefresh(event) {
+    debugger;
+    console.log('Begin async operation');
+
     setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
+      this.data = this.auth.getCookie("token");
+      console.log("asad");
+      if(this.data != ""){
+        this.clicked = true;
+      }else{
+      this.clicked = false;
+      }
+      event.complete();
     }, 2000);
   }
 

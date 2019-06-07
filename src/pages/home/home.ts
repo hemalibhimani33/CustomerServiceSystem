@@ -1,6 +1,5 @@
 //import { FormPage } from './../form/form';
 import { Component } from '@angular/core';
-
 import { FormPage } from '../../pages/form/form';
 import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';

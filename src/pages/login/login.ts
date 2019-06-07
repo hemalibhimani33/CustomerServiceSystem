@@ -1,28 +1,27 @@
-import { HomePage } from './../home/home';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { AlertController, IonicPage, Loading, LoadingController, NavController, Navbar, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, LoadingController, NavController, Navbar, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { RestProvider } from  './../../providers/rest/rest';
-import { ServicePage } from '../service/service';
 import { ContactPage } from '../contact/contact';
 import { myData } from './../../providers/rest/rest'
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject } from 'rxjs';
 //import { myData } from '../../providers/rest/rest';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LocationPage } from '../location/location';
-import { ResetPage } from '../reset/reset';
 import { config } from '../variable';
 import { AboutPage } from '../about/about';
+import {  } from 'ionic-angular';
+
 
 
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  //providers:[AboutPage]
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
   public submitted: boolean = false;
 
   formdata = {
@@ -41,18 +40,15 @@ v : ContactPage;
 
 @ViewChild(Navbar) navBar: Navbar;
   public loginU : string = null;
-  ap: any;
-
+  private ap:AboutPage;
 
 //public loggedIn = new BehaviorSubject<boolean>(this.getUserAvailability());
 constructor(
-  public loadingController: LoadingController,private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
- , public navParams: NavParams, public formBuilder: FormBuilder , public  restProvider: RestProvider,    private cookieService:CookieService,
+  public loadingController: LoadingController,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
+ , public navParams: NavParams, public formBuilder: FormBuilder , public  restProvider: RestProvider,
 
 ) {
  // AboutPage ap : AboutPage;
-
-
   // this.MyForm = this.formBuilder.group({
   //   p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
   //   //password_ctrl: this.formBuilder.group({
@@ -76,7 +72,6 @@ ngOnInit() {
     email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
    //password: ['', [Validators.required, Validators.minLength(6)]]
     password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])]
-
     }
     );
   }
@@ -94,7 +89,7 @@ ngOnInit() {
     return await loading.present();
   }
 
-  login(event){
+  login(){
       debugger;
       this.submitted = true;
       if (this.MyForm.invalid) {
@@ -121,23 +116,28 @@ ngOnInit() {
         // this.showPopup("success", "login successfully");
         debugger;
       // window.location.assign(config.URL);
-      // document.location.href = 'this.nav.pop' ;
+      // document.location.href = 'this.nav.pop';
       //document.onkeydown = function() { window.location.reload; };
      // window.location.reload;
+     this.showPopup1("Success", "login successfully.");
 
-     if (this.loginU == (config.URL + "/#/search/service"))
-     {
-      this.showPopup1("Success", "login successfully.");
-     // this.ap.OnInit1();
 
-     }else{
-      setTimeout(() => {
-          this.presentLoadingWithOptions();
-          // this.put = true;
-        }, 1);
-      window.location.assign(config.URL);
+    //  if (this.loginU == (config.URL + "/#/search/service"))
+    //  {
 
-     }
+
+    //   this.showPopup1("Success", "login successfully.");
+    // //this.ap.OnInit1();
+    // //AboutPage.OnInit1();
+
+    //  }else{
+    //   setTimeout(() => {
+    //       this.presentLoadingWithOptions();
+    //       // this.put = true;
+    //     }, 1);
+    //   window.location.assign(config.URL);
+
+    //  }
    // this.showPopup1("Success", "login successfully.");
       },
       error => {
@@ -153,7 +153,7 @@ ngOnInit() {
       buttons: [
         {
           text: 'OK',
-          handler: data => {
+          handler: () => {
             if (this.createSuccess) {
               this.nav.pop();
             }
@@ -171,8 +171,11 @@ ngOnInit() {
       buttons: [
         {
           text: 'OK',
-          handler: data => {
-              this.nav.pop();
+          handler: () => {
+            debugger;
+           // window.location.assign(config.URL);
+          // window.location.assign(config.URL+ '/#/search/service');
+           this.nav.pop();
           }
         }
       ]

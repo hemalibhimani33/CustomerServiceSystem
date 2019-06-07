@@ -93,7 +93,7 @@ register(){
     }else if(!this.myForm.controls.p_email.valid){
       this.showPopup("failure", "Enter Valid email address.");
     }else if(!this.myForm.controls.p_password.valid){
-      this.showPopup("failure", "Password requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces.");
+      this.showPopup("failure", "Password requires one lower case letter, one upper case letter, one digit, 4-8 length, and no spaces,no special character.");
     }else if(!this.myForm.controls.p_number.valid){
       this.showPopup("failure", "Enter 10 digit mobile number.");
     }else{

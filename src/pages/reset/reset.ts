@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -147,7 +148,8 @@ export class ResetPage {
         {
           text: 'OK',
           handler: data => {
-              this.navCtrl.pop();
+              //this.navCtrl.pop();
+              this.navCtrl.popTo(LoginPage);
           }
         }
       ]
@@ -170,7 +172,6 @@ export class ResetPage {
           this.otpVerification = true;
         }else{
           this.showPopup("failure", "Invalid User");
-
         }
       },
       error => {

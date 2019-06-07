@@ -33,9 +33,15 @@ public data: any = {};
     this.service = navParams.get('name');
     console.log(this.service);
 
-
     this.loadPeople2();
   }
+
+  backEvent() {
+    window.location.reload();
+
+  }
+
+
 
 orderService(cid,category,price){
   this.data = this.auth.getCookie("token");

@@ -8,8 +8,8 @@
 
 
 
-<ion-content  class="mybooking" fullscreen=""  padding>
-  <div *ngIf="!booking">
+<ion-content  class="mybooking " fullscreen=""  padding>
+  <div *ngIf="!booking" class="user-required-bg">
     <button ion-button id="button" color="dark" (click)="forbooking()"  full><b>Login requires</b></button>
    <!-- <div class="image">
     <ion-img  src="../../assets/imgs/noBooking.png"></ion-img></div> -->
@@ -19,9 +19,9 @@
         </ion-col>
       </ion-row> -->
   </div>
-  <div *ngIf="booking" >
-
-                  <ion-label *ngIf="nobooking" id="noBooking">No Booking Available</ion-label>
+  <div *ngIf="booking" class="height-100">
+                  <div *ngIf="nobooking" class="no-booking-bg"></div>
+                  <!-- <ion-label *ngIf="nobooking" id="noBooking">No Booking Available</ion-label> -->
                   <div *ngIf="!nobooking">
                   <ion-item>
                       <ion-label>Bookings</ion-label>

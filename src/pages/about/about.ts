@@ -13,8 +13,8 @@ import { config } from '../variable';
   selector: 'page-about',
   templateUrl: 'about.html'
 })
-@Injectable()
-export class AboutPage {
+//@Injectable()
+export class AboutPage implements OnInit{
   booking: Boolean = false;
   nobooking : Boolean = false;
   public user1: any = {};
@@ -26,22 +26,21 @@ export class AboutPage {
   cnlOrder: boolean = false;
   found: boolean;
   deletedBooking: any;
+  static OnInit1: any;
 
   constructor(public navCtrl: NavController,public toastController: ToastController, public navParams: NavParams,public  restProvider: RestProvider ,public alertController: AlertController,private alertCtrl: AlertController,  private auth: AuthService,  private cookieService:CookieService) {
     debugger;
-
     this.user1 = this.auth.getCookie("token");
     if(this.user1 != ""){
       debugger;
       this.booking = true;
        this.loadStatus();
-
     }else{
       this.booking = false;
     }
   }
 
-OnInit1() {
+ ngOnInit() {
   this.user1 = this.auth.getCookie("token");
   if(this.user1 != ""){
     debugger;
@@ -53,7 +52,10 @@ OnInit1() {
   }
 
 }
-
+ionViewWillEnter()
+{
+  this.ngOnInit();
+}
   date1(start_date) {
     return  moment(start_date).format('DD MMM YYYY');
  }

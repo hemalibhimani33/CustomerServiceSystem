@@ -81,6 +81,23 @@ page-about {
       }
     }
 
+    .user-required-bg{
+      background-image: url(../../assets/imgs/login.svg);
+      background-repeat: no-repeat;
+      background-size: 200px;
+      background-position: center;
+      height: 100%;
+    }
+    .no-booking-bg{
+      background-image: url(../../assets/imgs/noBooking.png);
+      background-repeat: no-repeat;
+      background-size: 200px;
+      background-position: center;
+      height: 100%;
+    }
+    .height-100{
+      height: 100%;
+    }
   }
 
 
