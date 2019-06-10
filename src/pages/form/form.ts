@@ -67,12 +67,17 @@ orderService(cid,category,price){
  onClear(ev)
  {
      this.loadPeople2();
-     ev.stopPropagation();
+    // ev.stopPropagation();
  }
  get(ev: any){
 debugger;
   this.setFilteredItems2();
   let val = ev.target.value;
+
+  if(val=="")
+  {
+    this.onClear('');
+  }
 
   if (val && val.trim() != '') {
 

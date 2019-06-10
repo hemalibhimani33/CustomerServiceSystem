@@ -32,7 +32,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+//import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { ResetPage } from '../pages/reset/reset';
 import { DefaultLocationPage } from '../pages/default-location/default-location';
 import { IonicStorageModule } from '@ionic/storage';
@@ -81,7 +81,7 @@ import { IonicStorageModule } from '@ionic/storage';
     CookieService,
     Geolocation,
     NativeGeocoder,
-    EmailComposer,
+    //EmailComposer,
     Ng4LoadingSpinnerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,

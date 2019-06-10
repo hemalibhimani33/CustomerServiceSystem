@@ -120,46 +120,6 @@
                formControlName="location" [(ngModel)]="eventLocation" value="{{eventLocation}}" value="{{thing1}}"></ion-input>
          </ion-item>
 
-
-	     <!-- <div
-	        formArrayName="address"
-	        margin-bottom>
-            <section
-               [formGroupName]="i"
-               *ngFor="let tech of form.controls.address.controls; let i = index">
-               <ion-item-group>
-               	  <ion-item-divider color="light">Location #{{ i + 1 }}</ion-item-divider>
-                  <ion-item>
-                     <ion-label floating>Enter Address</ion-label>
-                     <ion-input
-                        type="text"
-                        maxlength="200"
-                        formControlName="name" value="{{eventLocation}}"></ion-input>
-                  </ion-item>
-
-                  <span
-                     float-right
-                     ion-button
-                     icon-left
-                     clear
-                     *ngIf="form.controls.address.length > 1"
-                     (click)="removeInputField(i)">
-                     <ion-icon name="close"></ion-icon>
-                     Remove
-                  </span>
-               </ion-item-group>
-            </section>
-         </div> -->
-
-         <!-- <span
-            ion-button
-            float-left
-            icon-left
-            clear
-            (click)="addNewInputField()">
-               <ion-icon name="add"></ion-icon>
-               Add a new location
-         </span> -->
          <span
          ion-button
          float-left
@@ -169,13 +129,23 @@
             <ion-icon name="add"></ion-icon>
             Choose location
       </span>
+      <span
+      ion-button
+      float-right
+      icon-left
+      clear
+      (click)="addressSave()"  [class.button-disabled]="myCondition">
+      Add Address </span>
+
+
    	 </ion-list>
          <button
    	      ion-button
    	      block
    	      margin-top
           id="button"
-   	      text-center
+           text-center
+           [attr.disabled]="myCondition ? '' : null"
    	     ><b>Order Service</b></button>
    </form>
 

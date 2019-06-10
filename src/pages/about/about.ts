@@ -137,7 +137,8 @@ ionViewWillEnter()
           console.log('Confirm Okay');
           debugger;
           this.restProvider.UpdateStatus(this.deletedBooking);
-          window.location.assign(config.URL);
+          this.navCtrl.popToRoot();
+         // window.location.assign(config.URL);
          // this.deletedBooking.OrderStatus = 3;
          // console.log(this.deletedBooking);
           // let index = this.people3.indexOf(this.deletedBooking);

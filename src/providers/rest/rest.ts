@@ -27,6 +27,8 @@ const options = {
   category: string
   location: string
   is_success: boolean
+  addressId:number
+  OrderAddress:string
   }
 
 @Injectable()
@@ -77,6 +79,8 @@ export class RestProvider {
       });
   }
 
+
+
   orderS(services)
   {
         var headers = new Headers();
@@ -96,6 +100,37 @@ export class RestProvider {
 
        debugger;
        return this.http.post<myData>(this.rootURL + 'OrderService/PlaceOrder', JSON.stringify(services),option);
+                         //.map(this.extractData)
+                         //.catch(this.handleErrorObservable);
+                                //   .subscribe(data => {
+                                //    console.log(data['_body']);
+                                //   }, error => {
+                                //   console.log(error);// Error getting the data
+                                //  });
+  }
+
+  SaveAddress(address)
+  {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Access-Control-Allow-Origin' , '*');
+        headers.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+        headers.append('Access-Control-Allow-Headers', 'Content-Type, authorization');
+        headers.append('Accept','application/json');
+        headers.append('content-type','application/json');
+        debugger;
+        this.data1 = this.auth.getCookie("token");
+        const option = {
+          headers: {
+            'authorization': this.data1,
+          }
+        };
+        var UserLocation =	{
+          "location":address
+        };
+
+       debugger;
+       return this.http.post<myData>(this.rootURL + 'OrderService/address', JSON.stringify(UserLocation),option);
                          //.map(this.extractData)
                          //.catch(this.handleErrorObservable);
                                 //   .subscribe(data => {
@@ -236,6 +271,7 @@ export class RestProvider {
 
   loadAddress()
   {
+    debugger;
          var headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
          headers.append('Access-Control-Allow-Origin' , '*');
@@ -243,14 +279,21 @@ export class RestProvider {
          headers.append('Accept','application/json');
          headers.append('content-type','application/json');
 
+
+         this.data1 = this.auth.getCookie("token");
+         const option7 = {
+           headers: {
+             'authorization': this.data1,
+           }
+         };
         if(this.data) {
           return Promise.resolve(this.data);
         }
         return new Promise(resolve => {
-        this.httpClient.get<myData>(this.rootURL + 'OrderService/orderlist')
+        this.httpClient.get<myData>(this.rootURL + 'OrderService/findById',option7)
           .subscribe(data => {
             debugger;
-            console.log(data.location);
+            console.log(data.OrderAddress);
             resolve(data);
             });
       });

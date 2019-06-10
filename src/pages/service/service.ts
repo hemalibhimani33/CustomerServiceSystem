@@ -50,8 +50,10 @@ export class ServicePage {
   thing1: any;
   data: string;
   public loginURL : string = null;
+  AddressId:number;
 
-
+  //myCondition : any;
+  myCondition: Boolean = true;
 
   constructor(public navCtrl 		: NavController,
               public navParams 	: NavParams,
@@ -98,7 +100,10 @@ console.log(this.price);
         icon: 'pin',
         handler: () => {
           debugger;
+          console.log();
           console.log('Delete clicked');
+          this.myCondition = true;
+
           navigator.geolocation.getCurrentPosition((resp) => {
 
             this.responseObj = resp.coords;
@@ -121,13 +126,23 @@ console.log(this.price);
     });
 
     for (let i = 0; i < this.people5.length; i++) {
-      actionSheet.addButton({
-          text: this.people5[i].location,
+      actionSheet.addButton(
+
+        {
+          text: this.people5[i].OrderAddress,
           icon: 'pin',
+
           handler: () => {
             debugger;
-            this.eventLocation = this.people5[i].location;
+
+            console.log("inside handler");
+           // console.log(this.people5[i].OrderAddress);
+            this.eventLocation = this.people5[i].OrderAddress;
+            this.AddressId = this.people5[i].id
+            this.myCondition = false;
           }
+
+
       })
   }
 
@@ -151,6 +166,24 @@ console.log(this.price);
   {
      const control = <FormArray>this.form.controls.address;
      control.removeAt(i);
+  }
+  addressSave() {
+    debugger;
+    console.log(this.eventLocation);
+    this.restProvider.SaveAddress(this.eventLocation)
+    .subscribe(data => {
+      debugger;
+      console.log(data.addressId);
+      this.AddressId = data.addressId;
+       this.myCondition = false;
+      this.showPopup1("Success","address added");
+    }, error => {
+      debugger;
+    console.log(error);
+    this.showPopup1("error","address already added.");
+    });
+  //  this.myCondition = false;
+
   }
 
 
@@ -324,7 +357,7 @@ console.log(this.price);
               "start_date":this.start_date,
               "start_time":this.start_time,
               "end_date":this.end_date,
-              "location":this.eventLocation,
+              "addressid":this.AddressId,
               "categoryid":this.id ,
               "serviceid":this.cid,
               "totalamount":this.TotalPrice,

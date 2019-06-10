@@ -67,14 +67,19 @@ public shouldShowCancel: any = [];
  onClear(ev)
  {
      this.loadPeople();
-     ev.stopPropagation();
+    // ev.stopPropagation();
  }
 
  getPeople(ev: any){
-   debugger;
+  //  debugger;
    this.setFilteredItems();
    let val = ev.target.value;
-
+   console.log("ev"+ev.data);
+   console.log("value"+val);
+    if(val=="")
+    {
+      this.onClear('');
+    }
    if (val && val.trim() != '') {
 
       //var list1:any = [];
