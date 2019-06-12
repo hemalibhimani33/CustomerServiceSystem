@@ -149,7 +149,7 @@ export class ResetPage {
           text: 'OK',
           handler: data => {
               //this.navCtrl.pop();
-              this.navCtrl.popTo(LoginPage);
+              this.navCtrl.popToRoot();
           }
         }
       ]

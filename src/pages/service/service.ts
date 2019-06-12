@@ -169,6 +169,18 @@ console.log(this.price);
   }
   addressSave() {
     debugger;
+    this.data = this.auth.getCookie("token");
+
+    if(this.data != "")
+
+    {
+      debugger;
+      console.log(this.form.controls.location.value);
+      console.log(this.eventLocation);
+      if(!this.form.controls.location.valid){
+        this.showPopup1("Empty","please enter address");
+
+      }else{
     console.log(this.eventLocation);
     this.restProvider.SaveAddress(this.eventLocation)
     .subscribe(data => {
@@ -181,7 +193,11 @@ console.log(this.price);
       debugger;
     console.log(error);
     this.showPopup1("error","address already added.");
-    });
+    });}
+  }else{
+    this.presentAlertConfirm1("Anonymous","login requires for order service");
+
+  }
   //  this.myCondition = false;
 
   }
@@ -378,7 +394,7 @@ console.log(this.price);
       }, error => {
         debugger;
         console.log(error);
-      this.showPopup("error","no order placed");
+      this.showPopup1("error","no order placed");
       });
           }
         }

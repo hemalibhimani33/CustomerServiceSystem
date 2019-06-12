@@ -69,6 +69,8 @@ public createAccount() {
 ngOnInit() {
   this.MyForm = this.formBuilder.group(
     {
+     // email:['', Validators.compose([Validators.required])],
+    //  password: ['', Validators.compose([Validators.required])]
     email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
    //password: ['', [Validators.required, Validators.minLength(6)]]
     password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])]
@@ -115,20 +117,9 @@ ngOnInit() {
         this.data = this.auth.getCookie("token");
         // this.showPopup("success", "login successfully");
         debugger;
-      // window.location.assign(config.URL);
-      // document.location.href = 'this.nav.pop';
-      //document.onkeydown = function() { window.location.reload; };
-     // window.location.reload;
+
      this.showPopup1("Success", "login successfully.");
 
-
-    //  if (this.loginU == (config.URL + "/#/search/service"))
-    //  {
-
-
-    //   this.showPopup1("Success", "login successfully.");
-    // //this.ap.OnInit1();
-    // //AboutPage.OnInit1();
 
     //  }else{
     //   setTimeout(() => {
